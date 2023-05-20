@@ -1,0 +1,16 @@
+{
+    "name": "3wa/dev_quiz_app",
+    "authors": [
+        {
+            "name": "Aurélie Gilet",
+            "email": "aur.gilet@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Router\\": "routes/",
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
