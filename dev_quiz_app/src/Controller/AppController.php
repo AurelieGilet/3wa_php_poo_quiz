@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
-class AppController {
+use App\Controller\AbstractController;
+
+class AppController extends AbstractController {
     public function index() 
     {
-        echo 'Je suis la homepage';
+        return $this->render('app/index');
     }
 
     public function show(int $id) 
     {
-        echo 'Voici l\'id n°' . $id;
+        return $this->render('app/show', compact('id'));
     }
 }
