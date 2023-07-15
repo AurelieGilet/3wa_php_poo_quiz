@@ -2,16 +2,17 @@
 
 namespace Router;
 
-class Router {
+class Router
+{
     public $url;
     public $routes = array();
 
-    public function __construct($url) 
+    public function __construct($url)
     {
         $this->url = trim($url, '/');
     }
 
-    public function get(string $path, string $action) 
+    public function get(string $path, string $action)
     {
         $this->routes['GET'][] = new Route($path, $action);
     }
@@ -26,5 +27,4 @@ class Router {
 
         return header('HTTP/1.0 404 Not Found');
     }
-
 }
