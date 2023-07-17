@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="<?= SCRIPTS . 'style' . DIRECTORY_SEPARATOR . 'style.min.css' ?>">
 </head>
 <body>
-    <?= $content ?>
+    <div class="page-container">
+        <?php include('../views/partials/navbar.php'); ?>
+        
+        <?= $content ?>
+
+        <?php include('../views/partials/footer.php'); ?>
+    </div>
 </body>
 </html>

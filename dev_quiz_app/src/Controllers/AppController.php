@@ -12,16 +12,9 @@ class AppController extends AbstractController
         return $this->render('app/home');
     }
 
-    public function index()
+    public function newGame()
     {
-        $user = new User($this->getDB());
-        $users = $user->getAll();
-
-        foreach ($users as $user) {
-            echo $user->alias;
-        }
-
-        return $this->render('app/index');
+        return $this->render('app/new_game');
     }
 
     public function show(int $id)

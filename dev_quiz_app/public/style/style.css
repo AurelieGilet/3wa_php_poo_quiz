@@ -11,6 +11,7 @@
 /* Remove default margin */
 * {
   margin: 0;
+  padding: 0;
 }
 html, body {
   height: 100%;
@@ -63,7 +64,6 @@ p, h1, h2, h3, h4, h5, h6 {
 html, body {
   height: 100%;
   font-size: 20px;
-  color: aqua;
   box-sizing: border-box;
 }
 h1 {
@@ -71,4 +71,20 @@ h1 {
 }
 p {
   font-family: "Exo2", "Trebuchet MS", sans-serif;
+}
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+main {
+  padding-bottom: 3.75rem;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3.75rem;
+}
+footer > ul {
+  display: flex;
 }

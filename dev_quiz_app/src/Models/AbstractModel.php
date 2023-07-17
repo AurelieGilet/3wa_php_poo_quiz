@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Database\DBConnection;
-use stdClass;
+use PDO;
 
 abstract class AbstractModel
 {
@@ -15,17 +15,36 @@ abstract class AbstractModel
         $this->db = $db;
     }
 
+    public function query(string $sql, $param = null, bool $single = false)
+    {
+        // If $param is null, it's a general query otherwise it's a prepared request
+        $method = is_null($param) ? 'query' : 'prepare';
+        // If $single is true, we fetch a single row from DB
+        $fetch = $single ? 'fetch' : 'fetchAll';
+
+        $pdoStatement = $this->db->getPDO()->$method($sql);
+        $pdoStatement->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
+
+        if ($method === 'query') {
+            return $pdoStatement->$fetch();
+        } else {
+            $pdoStatement->execute([$param]);
+
+            return $pdoStatement->$fetch();
+        }
+    }
+
     public function getAll(): array
     {
-        $pdoStatement = $this->db->getPDO()->query("SELECT * FROM {$this->table} ORDER BY id DESC");
-        return $pdoStatement->fetchAll();
+        $sql = "SELECT * FROM {$this->table} ORDER BY id DESC";
+
+        return $this->query($sql);
     }
     
-    public function findById(int $id): stdClass
+    public function findById(int $id): AbstractModel
     {
-        $pdoStatement = $this->db->getPDO()->prepare("SELECT * FROM {$this->table} WHERE id = ?");
-        $pdoStatement->execute([$id]);
+        $sql = "SELECT * FROM {$this->table} WHERE id = ?";
 
-        return $pdoStatement->fetch();
+        return $this->query($sql, $id, true);
     }
 }
