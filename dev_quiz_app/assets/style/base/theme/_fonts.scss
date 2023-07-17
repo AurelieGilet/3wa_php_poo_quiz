@@ -1,0 +1,14 @@
+@font-face {
+    src: url("/public/fonts/Orbitron-VariableFont_wght.ttf") format("truetype");
+    font-family: "Orbitron";
+    font-display: swap;
+}
+
+@font-face {
+    src: url("/public/fonts/Exo2-VariableFont_wght.ttf") format("truetype");
+    font-family: "Exo2";
+    font-display: swap;
+}
+
+$family-orbitron: "Orbitron", "Verdana", sans-serif;
+$family-exo2: "Exo2", "Trebuchet MS", sans-serif;

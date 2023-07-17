@@ -50,9 +50,25 @@ p, h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto !important;
   }
 }
+@font-face {
+  src: url("/public/fonts/Orbitron-VariableFont_wght.ttf") format("truetype");
+  font-family: "Orbitron";
+  font-display: swap;
+}
+@font-face {
+  src: url("/public/fonts/Exo2-VariableFont_wght.ttf") format("truetype");
+  font-family: "Exo2";
+  font-display: swap;
+}
 html, body {
   height: 100%;
   font-size: 20px;
   color: aqua;
   box-sizing: border-box;
+}
+h1 {
+  font-family: "Orbitron", "Verdana", sans-serif;
+}
+p {
+  font-family: "Exo2", "Trebuchet MS", sans-serif;
 }

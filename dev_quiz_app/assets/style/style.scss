@@ -3,6 +3,10 @@
 
 // Theme
 @import "base/theme/colors.scss";
+@import "base/theme/fonts";
+
+// Mixins
+@import "base/mixins/breakpoints.scss";
 
 // Templates
-@import "templates/base.scss"
+@import "templates/base.scss";
