@@ -1,6 +1,6 @@
 <footer>
     <ul>
-        <li><a href="">admin</a></li>
+        <li><a href="/connexion">admin</a></li>
         <li><a href="">mentions légales</a></li>
         <li><a href="">contact</a></li>
     </ul>

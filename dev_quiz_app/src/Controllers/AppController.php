@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
 use App\Controllers\AbstractController;
 
 class AppController extends AbstractController
@@ -14,14 +13,13 @@ class AppController extends AbstractController
 
     public function newGame()
     {
-        return $this->render('app/new_game');
-    }
+        // Check if session with authenticated user exists and redirect accordingly
+        if ($this->isAuth()) {
+            $userId = $_SESSION['user'];
 
-    public function show(int $id)
-    {
-        $user = new User($this->getDB());
-        $user = $user->findById($id);
+            return header("Location: /espace-utilisateur/$userId");
+        }
 
-        return $this->render('app/show', compact('user'));
+        return $this->render('app/new-game');
     }
 }
