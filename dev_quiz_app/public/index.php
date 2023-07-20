@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\NotFoundException;
 use Router\Router;
 
 require '../vendor/autoload.php';
@@ -23,4 +24,8 @@ $router->get('/connexion', 'App\Controllers\Security\SecurityController@login');
 $router->post('/connexion', 'App\Controllers\Security\SecurityController@loginPost');
 $router->get('/deconnexion', 'App\Controllers\Security\SecurityController@logout');
 
-$router->run();
+try {
+    $router->run();
+} catch (NotFoundException $e) {
+    return $e->error404();
+}
