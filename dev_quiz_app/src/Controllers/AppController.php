@@ -15,9 +15,7 @@ class AppController extends AbstractController
     {
         // Check if session with authenticated user exists and redirect accordingly
         if ($this->isAuth()) {
-            $userId = $_SESSION['user'];
-
-            return header("Location: /espace-utilisateur/$userId");
+            return header('Location: /espace-utilisateur');
         }
 
         return $this->render('app/new-game');

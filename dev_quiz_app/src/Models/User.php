@@ -10,7 +10,7 @@ class User extends AbstractModel
 
     public function getByEmail(string $email): User
     {
-        $sql = "SELECT * FROM {$this->table} WHERE email = ?";
+        $sql = 'SELECT * FROM ' . $this->table . ' WHERE email = ?';
 
         return $this->query($sql, [$email], true);
     }

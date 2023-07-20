@@ -10,7 +10,7 @@ class SecurityController extends AbstractController
     public function register()
     {
         if ($this->isAuth()) {
-            return header('Location : /');
+            return header('Location: /');
         }
 
         // hash password : password_hash('password', PASSWORD_BCRYPT)
@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
     public function login()
     {
         if ($this->isAuth()) {
-            return header('Location : /');
+            return header('Location: /');
         }
 
         return $this->render('security/login');
@@ -28,6 +28,10 @@ class SecurityController extends AbstractController
 
     public function loginPost()
     {
+        if ($this->isAuth()) {
+            return header('Location: /');
+        }
+
         $user = (new User($this->getDB()))->getByEmail($_POST['email']);
 
         if (password_verify($_POST['password'], $user->password)) {
@@ -35,14 +39,14 @@ class SecurityController extends AbstractController
             $_SESSION['user'] = $user->id;
 
             if ($user->role === 'user') {
-                return header("Location: /espace-utilisateur");
+                return header('Location: /espace-utilisateur');
             }
             
             if ($user->role === 'admin') {
-                return header("Location: /espace-admin");
+                return header('Location: /espace-admin');
             }
 
-            return header("Location: /");
+            return header('Location: /');
         } else {
             return header('Location: /connexion');
         }

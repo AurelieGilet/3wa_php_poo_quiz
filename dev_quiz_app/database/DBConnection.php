@@ -27,7 +27,7 @@ class DBConnection
     {
         if ($this->pdo === null) {
             $this->pdo = new PDO(
-                "mysql:dbname={$this->dbname};host={$this->host}",
+                'mysql:dbname=' . $this->dbname .';host=' . $this->host,
                 $this->username,
                 $this->password,
                 array(
