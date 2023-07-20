@@ -1,6 +1,8 @@
 <main>
     <h1>Gestion des catégories</h1>
 
+    <a href="/admin/categorie/ajouter">Ajouter une catégorie</a>
+
     <div>
         <ul>
             <?php foreach ($params['categories'] as $category) : ?>

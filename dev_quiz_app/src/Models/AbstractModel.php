@@ -15,7 +15,7 @@ abstract class AbstractModel
         $this->db = $db;
     }
 
-    public function query(string $sql, array $param = null, bool $single = false)
+    public function query(string $request, array $param = null, bool $single = false)
     {
         //TODO : refactor this function
 
@@ -23,11 +23,11 @@ abstract class AbstractModel
         $method = is_null($param) ? 'query' : 'prepare';
 
         // If the query is CRUD, we do not fetch data, we execute the request
-        if (strpos($sql, 'CREATE') === 0
-            || strpos($sql, 'UPDATE') === 0
-            || strpos($sql, 'DELETE') === 0
+        if (strpos($request, 'CREATE') === 0
+            || strpos($request, 'UPDATE') === 0
+            || strpos($request, 'DELETE') === 0
         ) {
-            $pdoStatement = $this->db->getPDO()->$method($sql);
+            $pdoStatement = $this->db->getPDO()->$method($request);
             $pdoStatement->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
 
             return $pdoStatement->execute($param);
@@ -36,7 +36,7 @@ abstract class AbstractModel
         // If $single is true, we fetch a single row from DB
         $fetch = $single ? 'fetch' : 'fetchAll';
 
-        $pdoStatement = $this->db->getPDO()->$method($sql);
+        $pdoStatement = $this->db->getPDO()->$method($request);
         $pdoStatement->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
 
         if ($method === 'query') {
@@ -50,40 +50,58 @@ abstract class AbstractModel
 
     public function getAll(): array
     {
-        $sql = 'SELECT * FROM ' . $this->table . ' ORDER BY id ASC';
+        $request = 'SELECT * FROM ' . $this->table . ' ORDER BY id ASC';
 
-        return $this->query($sql);
+        return $this->query($request);
     }
     
     public function findById(int $id): AbstractModel
     {
-        $sql = 'SELECT * FROM ' . $this->table . ' WHERE id = ?';
+        $request = 'SELECT * FROM ' . $this->table . ' WHERE id = ?';
 
-        return $this->query($sql, [$id], true);
+        return $this->query($request, [$id], true);
+    }
+
+    public function create(array $data, ?array $relations = null)
+    {
+        $requestArgs = '';
+        $requestValues = '';
+        $i = 1;
+
+        foreach ($data as $key => $value) {
+            $separator = $i === count($data) ? '' : ', ';
+            $requestArgs .= $key . $separator;
+            $requestValues .= ':' . $key . $separator;
+            $i++;
+        }
+
+        $request = 'INSERT INTO ' . $this->table . ' (' . $requestArgs . ') VALUES(' . $requestValues . ')';
+
+        return $this->query($request, $data);
     }
 
     public function update(int $id, array $data)
     {
-        $sqlArgs = '';
+        $requestArgs = '';
         $i = 1;
 
         foreach ($data as $key => $value) {
-            $separator = $i === count($data) ? ' ' : ', ';
-            $sqlArgs .= $key . ' = :' . $key . $separator;
+            $separator = $i === count($data) ? '' : ', ';
+            $requestArgs .= $key . ' = :' . $key . $separator;
             $i++;
         }
 
         $data['id'] = $id;
 
-        $sql = 'UPDATE ' . $this->table . ' SET ' . $sqlArgs . ' WHERE id = :id';
+        $request = 'UPDATE ' . $this->table . ' SET ' . $requestArgs . ' WHERE id = :id';
 
-        return $this->query($sql, $data);
+        return $this->query($request, $data);
     }
 
     public function delete(int $id): bool
     {
-        $sql = 'DELETE FROM ' . $this->table . ' WHERE id = ?';
+        $request = 'DELETE FROM ' . $this->table . ' WHERE id = ?';
 
-        return $this->query($sql, [$id]);
+        return $this->query($request, [$id]);
     }
 }

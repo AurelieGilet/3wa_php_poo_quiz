@@ -14,19 +14,34 @@ class CategoryController extends AbstractController
         return $this->render('admin/category/index', compact('categories'));
     }
 
-    public function editCategory(int $id)
+    public function createCategory()
     {
-        $category = (new Category($this->getDB()))->findById($id);
+        return $this->render('admin/category/form');
+    }
 
-        return $this->render('admin/category/edit', compact('category'));
+    public function createCategoryPost()
+    {
+        $category = (new Category($this->getDB()))->create($_POST);
+
+        // TODO: find a way to get a return value on insert
+
+        if ($category) {
+            return header('Location: /admin/categories');
+        }
     }
 
     public function updateCategory(int $id)
     {
-        $category = new Category($this->getDB());
-        $result = $category->update($id, $_POST);
+        $category = (new Category($this->getDB()))->findById($id);
 
-        if ($result) {
+        return $this->render('admin/category/form', compact('category'));
+    }
+
+    public function updateCategoryPost(int $id)
+    {
+        $category = (new Category($this->getDB()))->update($id, $_POST);
+
+        if ($category) {
             return header('Location: /admin/categories');
         }
     }

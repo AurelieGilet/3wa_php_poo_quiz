@@ -26,8 +26,10 @@ $router->get('/espace-utilisateur', 'App\Controllers\User\UserController@userHom
 $router->get('/espace-admin', 'App\Controllers\Admin\AdminController@adminHomepage');
 
 $router->get('/admin/categories', 'App\Controllers\Admin\CategoryController@index');
-$router->get('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@editCategory');
-$router->post('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategory');
+$router->get('/admin/categorie/ajouter', 'App\Controllers\Admin\CategoryController@createCategory');
+$router->post('/admin/categorie/ajouter', 'App\Controllers\Admin\CategoryController@createCategoryPost');
+$router->get('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategory');
+$router->post('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategoryPost');
 $router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
 
 
