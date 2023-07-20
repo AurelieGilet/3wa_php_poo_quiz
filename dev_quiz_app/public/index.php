@@ -16,13 +16,18 @@ $router = new Router($_GET['url']);
 $router->get('/', 'App\Controllers\AppController@home');
 $router->get('/nouveau-jeu', 'App\Controllers\AppController@newGame');
 
-$router->get('/espace-utilisateur', 'App\Controllers\User\UserController@userHomepage');
-$router->get('/espace-admin', 'App\Controllers\Admin\AdminController@adminHomepage');
-
 $router->get('/inscription', 'App\Controllers\Security\SecurityController@register');
 $router->get('/connexion', 'App\Controllers\Security\SecurityController@login');
 $router->post('/connexion', 'App\Controllers\Security\SecurityController@loginPost');
 $router->get('/deconnexion', 'App\Controllers\Security\SecurityController@logout');
+
+$router->get('/espace-utilisateur', 'App\Controllers\User\UserController@userHomepage');
+
+$router->get('/espace-admin', 'App\Controllers\Admin\AdminController@adminHomepage');
+
+$router->get('/admin/categories', 'App\Controllers\Admin\CategoryController@index');
+$router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
+
 
 try {
     $router->run();

@@ -3,7 +3,7 @@
 
     <div>
         <a href="">Gestion des utilisateurs</a>
-        <a href="">Gestion des catégories</a>
+        <a href="/admin/categories">Gestion des catégories</a>
         <a href="">Gestion des questions</a>
     </div>
 </main>
