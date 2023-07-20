@@ -26,6 +26,8 @@ $router->get('/espace-utilisateur', 'App\Controllers\User\UserController@userHom
 $router->get('/espace-admin', 'App\Controllers\Admin\AdminController@adminHomepage');
 
 $router->get('/admin/categories', 'App\Controllers\Admin\CategoryController@index');
+$router->get('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@editCategory');
+$router->post('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategory');
 $router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
 
 

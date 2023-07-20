@@ -15,7 +15,7 @@ abstract class AbstractModel
         $this->db = $db;
     }
 
-    public function query(string $sql, $param = null, bool $single = false)
+    public function query(string $sql, array $param = null, bool $single = false)
     {
         //TODO : refactor this function
 
@@ -30,7 +30,7 @@ abstract class AbstractModel
             $pdoStatement = $this->db->getPDO()->$method($sql);
             $pdoStatement->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
 
-            return $pdoStatement->execute([$param]);
+            return $pdoStatement->execute($param);
         }
 
         // If $single is true, we fetch a single row from DB
@@ -42,7 +42,7 @@ abstract class AbstractModel
         if ($method === 'query') {
             return $pdoStatement->$fetch();
         } else {
-            $pdoStatement->execute([$param]);
+            $pdoStatement->execute($param);
 
             return $pdoStatement->$fetch();
         }
@@ -50,22 +50,40 @@ abstract class AbstractModel
 
     public function getAll(): array
     {
-        $sql = "SELECT * FROM {$this->table} ORDER BY id ASC";
+        $sql = 'SELECT * FROM ' . $this->table . ' ORDER BY id ASC';
 
         return $this->query($sql);
     }
     
     public function findById(int $id): AbstractModel
     {
-        $sql = "SELECT * FROM {$this->table} WHERE id = ?";
+        $sql = 'SELECT * FROM ' . $this->table . ' WHERE id = ?';
 
-        return $this->query($sql, $id, true);
+        return $this->query($sql, [$id], true);
+    }
+
+    public function update(int $id, array $data)
+    {
+        $sqlArgs = '';
+        $i = 1;
+
+        foreach ($data as $key => $value) {
+            $separator = $i === count($data) ? ' ' : ', ';
+            $sqlArgs .= $key . ' = :' . $key . $separator;
+            $i++;
+        }
+
+        $data['id'] = $id;
+
+        $sql = 'UPDATE ' . $this->table . ' SET ' . $sqlArgs . ' WHERE id = :id';
+
+        return $this->query($sql, $data);
     }
 
     public function delete(int $id): bool
     {
-        $sql = "DELETE FROM {$this->table} WHERE id = ?";
+        $sql = 'DELETE FROM ' . $this->table . ' WHERE id = ?';
 
-        return $this->query($sql, $id);
+        return $this->query($sql, [$id]);
     }
 }

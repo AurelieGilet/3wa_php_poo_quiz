@@ -12,6 +12,6 @@ class User extends AbstractModel
     {
         $sql = "SELECT * FROM {$this->table} WHERE email = ?";
 
-        return $this->query($sql, $email, true);
+        return $this->query($sql, [$email], true);
     }
 }
