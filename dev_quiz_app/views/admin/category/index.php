@@ -6,7 +6,7 @@
     <div>
         <ul>
             <?php foreach ($params['categories'] as $category) : ?>
-                <li><?= $category->name ?></li>
+                <li><?= htmlspecialchars($category->name) ?></li>
                 <li><a href="/admin/categorie/modifier/<?= $category->id ?>">Modifier</a></li>
                 <li>
                     <form action="/admin/categorie/supprimer/<?= $category->id ?>" method="POST">

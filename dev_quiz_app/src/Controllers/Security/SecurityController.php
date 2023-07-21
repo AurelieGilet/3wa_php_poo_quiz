@@ -3,6 +3,7 @@
 namespace App\Controllers\Security;
 
 use App\Models\User;
+use App\Validation\Validator;
 use App\Controllers\AbstractController;
 
 class SecurityController extends AbstractController
@@ -17,6 +18,42 @@ class SecurityController extends AbstractController
         return $this->render('security/register');
     }
 
+    public function registerPost()
+    {
+        $validator = new Validator($_POST);
+
+        // Front end validation
+        $errors = $validator->validate([
+            'email' => ['required', 'emailValidation'],
+            'password' => ['required', 'passwordValidation'],
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /inscription');
+            exit;
+        }
+
+        $user = (new User($this->getDB()));
+
+        // Backend validation
+        $emailExists = $user->isUnique('email', $_POST['email']);
+
+        if (!empty($emailExists)) {
+            $errors['email'][] = 'Cet email existe déjà';
+            $_SESSION['errors'][] = $errors;
+            header('Location: /inscription');
+            exit;
+        }
+
+        $user->create($_POST);
+
+        // TODO : validation message when redirect to login page
+
+        return header('Location: /connexion');
+        
+    }
+
     public function login()
     {
         if ($this->isAuth()) {
@@ -28,8 +65,17 @@ class SecurityController extends AbstractController
 
     public function loginPost()
     {
-        if ($this->isAuth()) {
-            return header('Location: /');
+        $validator = new Validator($_POST);
+
+        $errors = $validator->validate([
+            'email' => ['required', 'emailValidation'],
+            'password' => ['required'],
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /connexion');
+            exit;
         }
 
         $user = (new User($this->getDB()))->getByEmail($_POST['email']);

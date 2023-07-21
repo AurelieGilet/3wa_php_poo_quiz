@@ -17,6 +17,7 @@ $router->get('/', 'App\Controllers\AppController@home');
 $router->get('/nouveau-jeu', 'App\Controllers\AppController@newGame');
 
 $router->get('/inscription', 'App\Controllers\Security\SecurityController@register');
+$router->post('/inscription', 'App\Controllers\Security\SecurityController@registerPost');
 $router->get('/connexion', 'App\Controllers\Security\SecurityController@login');
 $router->post('/connexion', 'App\Controllers\Security\SecurityController@loginPost');
 $router->get('/deconnexion', 'App\Controllers\Security\SecurityController@logout');

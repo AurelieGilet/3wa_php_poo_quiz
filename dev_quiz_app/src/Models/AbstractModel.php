@@ -62,6 +62,13 @@ abstract class AbstractModel
         return $this->query($request, [$id], true);
     }
 
+    public function isUnique(string $column, string $value)
+    {
+        $request = 'SELECT * FROM ' . $this->table . ' WHERE ' . $column . ' = ?';
+
+        return $this->query($request, [$value], true);
+    }
+
     public function create(array $data, ?array $relations = null)
     {
         $requestArgs = '';

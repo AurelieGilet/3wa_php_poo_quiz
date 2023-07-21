@@ -21,13 +21,25 @@ class CategoryController extends AbstractController
 
     public function createCategoryPost()
     {
-        $category = (new Category($this->getDB()))->create($_POST);
+        // TODO : length validation
+        
+        $category = (new Category($this->getDB()));
 
-        // TODO: find a way to get a return value on insert
+        $categoryExists = $category->isUnique('name', $_POST['name']);
 
-        if ($category) {
-            return header('Location: /admin/categories');
+        if (!empty($categoryExists)) {
+            $errors['name'][] = 'Cette catégorie existe déjà';
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/categorie/ajouter');
+            exit;
         }
+
+        $category->create($_POST);
+
+        // TODO: no return value on insert ??? Why ???
+        // if ($category) {
+            return header('Location: /admin/categories');
+        // }
     }
 
     public function updateCategory(int $id)
@@ -40,6 +52,8 @@ class CategoryController extends AbstractController
     public function updateCategoryPost(int $id)
     {
         $category = (new Category($this->getDB()))->update($id, $_POST);
+
+        //TODO : isUnique + length validation for update category
 
         if ($category) {
             return header('Location: /admin/categories');
