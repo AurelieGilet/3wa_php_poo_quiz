@@ -7,13 +7,21 @@ use App\Controllers\AbstractController;
 
 class CategoryController extends AbstractController
 {
+    /**
+     * Route: /admin/categories
+     */
     public function index()
     {
         $categories = (new Category($this->getDB()))->getAll();
 
-        return $this->render('admin/category/index', compact('categories'));
+        $flashes = $this->flashMessage->getFlashMessages('category');
+
+        return $this->render('admin/category/index', compact('categories', 'flashes'));
     }
 
+    /**
+     * Route: /admin/categorie/ajouter
+     */
     public function createCategory()
     {
         return $this->render('admin/category/form');
@@ -21,7 +29,7 @@ class CategoryController extends AbstractController
 
     public function createCategoryPost()
     {
-        // TODO : length validation
+        //TODO: isUnique + length validation for create category
         
         $category = (new Category($this->getDB()));
 
@@ -36,12 +44,21 @@ class CategoryController extends AbstractController
 
         $category->create($_POST);
 
-        // TODO: no return value on insert ??? Why ???
+        $this->flashMessage->createFlashMessage(
+            'category',
+            'La catégorie ' . $_POST['name'] . ' a bien été créée',
+            $this->flashMessagesConstants::FLASH_SUCCESS,
+        );
+
+        // FIXME: no return value on insert ??? Why ???
         // if ($category) {
             return header('Location: /admin/categories');
         // }
     }
 
+    /**
+     * Route: /admin/categorie/modifier/:id
+     */
     public function updateCategory(int $id)
     {
         $category = (new Category($this->getDB()))->findById($id);
@@ -53,19 +70,51 @@ class CategoryController extends AbstractController
     {
         $category = (new Category($this->getDB()))->update($id, $_POST);
 
-        //TODO : isUnique + length validation for update category
+        //TODO: isUnique + length validation for update category
 
         if ($category) {
+            $this->flashMessage->createFlashMessage(
+                'category',
+                'La catégorie a bien été modifiée',
+                $this->flashMessagesConstants::FLASH_SUCCESS,
+            );
+
+            return header('Location: /admin/categories');
+        } else {
+            $this->flashMessage->createFlashMessage(
+                'category',
+                'La catégorie n\'a pas été modifiée, une erreur s\'est produite',
+                $this->flashMessagesConstants::FLASH_ERROR,
+            );
+
             return header('Location: /admin/categories');
         }
     }
 
+    /**
+     * Route: /admin/categorie/supprimer/:id
+     */
     public function deleteCategory(int $id)
     {
         // TODO: prevent delete if questions associated to category
+        // TODO: add delete confirmation procedure
         $category = (new Category($this->getDB()))->delete($id);
 
         if ($category) {
+            $this->flashMessage->createFlashMessage(
+                'category',
+                'La catégorie a bien été supprimée',
+                $this->flashMessagesConstants::FLASH_SUCCESS,
+            );
+
+            return header('Location: /admin/categories');
+        } else {
+            $this->flashMessage->createFlashMessage(
+                'category',
+                'La catégorie n\'a pas été supprimée, une erreur s\'est produite',
+                $this->flashMessagesConstants::FLASH_ERROR,
+            );
+
             return header('Location: /admin/categories');
         }
     }

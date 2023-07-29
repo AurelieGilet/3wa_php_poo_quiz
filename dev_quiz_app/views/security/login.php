@@ -16,6 +16,14 @@ if (isset($_SESSION['errors'])) {
 
 <main>
     <h1>Connexion</h1>
+
+    <?php if (isset($params['flashes'])) : ?>
+        <ul>
+        <?php foreach ($params['flashes'] as $flash) : ?>
+            <?= $flash ?>
+        <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
     
     <form action="/connexion" method="post">
         <div>
@@ -31,7 +39,8 @@ if (isset($_SESSION['errors'])) {
         </div>
         <div>
             <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password">
+            <?php /*TODO: don't forget to change back input type to password*/ ?>
+            <input type="text" name="password" id="password">
             <?php if (isset($formErrors['password'])) : ?>
                 <ul>
                 <?php foreach ($formErrors['password'] as $error) : ?>

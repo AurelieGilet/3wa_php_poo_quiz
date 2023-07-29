@@ -2,11 +2,15 @@
 
 namespace App\Controllers;
 
+use App\Services\FlashMessages\FlashMessage;
+use App\Services\FlashMessages\FlashMessagesConstants;
 use Database\DBConnection;
 
 abstract class AbstractController
 {
     protected $db;
+    protected $flashMessage;
+    protected $flashMessagesConstants;
 
     /**
      * Instantiate the DB connection so that it is available in all controllers
@@ -18,6 +22,8 @@ abstract class AbstractController
         }
 
         $this->db = $db;
+        $this->flashMessage = new FlashMessage();
+        $this->flashMessagesConstants = new FlashMessagesConstants();
     }
 
     protected function getDB()

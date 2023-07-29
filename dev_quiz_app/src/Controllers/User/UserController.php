@@ -7,6 +7,9 @@ use App\Controllers\AbstractController;
 
 class UserController extends AbstractController
 {
+    /**
+     * Route: /espace-utilisateur
+     */
     public function userHomepage()
     {
         if ($this->isAuth()) {

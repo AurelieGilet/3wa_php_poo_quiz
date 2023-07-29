@@ -1,6 +1,11 @@
 <?php
 
-define('DB_NAME', 'dev_quiz');
-define('DB_HOST', '127.0.0.1');
-define('DB_USER', 'root');
-define('DB_PWD', '');
+namespace Database;
+
+class DBConstants
+{
+    const DB_NAME = 'dev_quiz';
+    const DB_HOST = '127.0.0.1';
+    const DB_USER = 'root';
+    const DB_PWD = '';
+}

@@ -3,18 +3,20 @@
 namespace App\Controllers\Security;
 
 use App\Models\User;
-use App\Validation\Validator;
+use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * Route: /inscription
+     */
     public function register()
     {
         if ($this->isAuth()) {
             return header('Location: /');
         }
 
-        // hash password : password_hash('password', PASSWORD_BCRYPT)
         return $this->render('security/register');
     }
 
@@ -46,21 +48,39 @@ class SecurityController extends AbstractController
             exit;
         }
 
+        // Hash password
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $_POST['password'] = $hashedPassword;
+
+        // Assign default alias
+        $randomNumber = rand(0, 9999);
+        $userAlias = 'User' . $randomNumber;
+        $_POST['alias'] = $userAlias;
+
+        // Register User
         $user->create($_POST);
 
-        // TODO : validation message when redirect to login page
+        $this->flashMessage->createFlashMessage(
+            'registration',
+            'Votre compte a bien été créé, merci de vous authentifier',
+            $this->flashMessagesConstants::FLASH_SUCCESS,
+        );
 
         return header('Location: /connexion');
-        
     }
 
+    /**
+     * Route: /connexion
+     */
     public function login()
     {
         if ($this->isAuth()) {
             return header('Location: /');
         }
 
-        return $this->render('security/login');
+        $flashes = $this->flashMessage->getFlashMessages('registration');
+
+        return $this->render('security/login', compact('flashes'));
     }
 
     public function loginPost()
@@ -94,10 +114,19 @@ class SecurityController extends AbstractController
 
             return header('Location: /');
         } else {
+            $this->flashMessage->createFlashMessage(
+                'login',
+                'Identifiants incorrects',
+                $this->flashMessagesConstants::FLASH_ERROR,
+            );
+
             return header('Location: /connexion');
         }
     }
 
+    /**
+     * Route: /deconnexion
+     */
     public function logout()
     {
         session_destroy();

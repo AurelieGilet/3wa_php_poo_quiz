@@ -3,8 +3,7 @@
 namespace Router;
 
 use Database\DBConnection;
-
-require '../database/DBConstants.php';
+use Database\DBConstants;
 
 class Route
 {
@@ -40,7 +39,12 @@ class Route
         // and the action (function) called in the second
         $params = explode('@', $this->action);
         // create a new object of the controller class and init db connection
-        $controller = new $params[0](new DBConnection(DB_NAME, DB_HOST, DB_USER, DB_PWD));
+        $controller = new $params[0](new DBConnection(
+            DBConstants::DB_NAME,
+            DBConstants::DB_HOST,
+            DBConstants::DB_USER,
+            DBConstants::DB_PWD
+        ));
         // stock the function name (action)
         $method = $params[1];
 

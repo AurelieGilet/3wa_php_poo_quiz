@@ -8,7 +8,7 @@ class User extends AbstractModel
 {
     protected $table = 'user';
 
-    public function getByEmail(string $email): User
+    public function getByEmail(string $email): bool|User
     {
         $request = 'SELECT * FROM ' . $this->table . ' WHERE email = ?';
 

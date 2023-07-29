@@ -15,7 +15,7 @@ abstract class AbstractModel
         $this->db = $db;
     }
 
-    public function query(string $request, array $param = null, bool $single = false)
+    public function query(string $request, array $param = null, bool $single = false): bool|array|AbstractModel
     {
         //TODO : refactor this function
 
@@ -55,14 +55,14 @@ abstract class AbstractModel
         return $this->query($request);
     }
     
-    public function findById(int $id): AbstractModel
+    public function findById(int $id): bool|AbstractModel
     {
         $request = 'SELECT * FROM ' . $this->table . ' WHERE id = ?';
 
         return $this->query($request, [$id], true);
     }
 
-    public function isUnique(string $column, string $value)
+    public function isUnique(string $column, string $value): bool|AbstractModel
     {
         $request = 'SELECT * FROM ' . $this->table . ' WHERE ' . $column . ' = ?';
 
@@ -87,7 +87,7 @@ abstract class AbstractModel
         return $this->query($request, $data);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): bool
     {
         $requestArgs = '';
         $i = 1;

@@ -31,6 +31,7 @@ if (isset($_SESSION['errors'])) {
         </div>
         <div>
             <label for="password">Mot de passe</label>
+            <?php /*TODO: don't forget to change back input type to password*/ ?>
             <input type="text" name="password" id="password">
             <?php if (isset($formErrors['password'])) : ?>
                 <ul>

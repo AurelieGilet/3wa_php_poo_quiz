@@ -7,6 +7,9 @@ use App\Controllers\AbstractController;
 
 class AdminController extends AbstractController
 {
+    /**
+     * Route: /espace-admin
+     */
     public function adminHomepage()
     {
         if ($this->isAuth()) {
