@@ -39,13 +39,11 @@ abstract class AbstractModel
         $pdoStatement = $this->db->getPDO()->$method($request);
         $pdoStatement->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
 
-        if ($method === 'query') {
-            return $pdoStatement->$fetch();
-        } else {
+        if ($method === 'prepare') {
             $pdoStatement->execute($param);
-
-            return $pdoStatement->$fetch();
         }
+
+        return $pdoStatement->$fetch();
     }
 
     public function getAll(): array

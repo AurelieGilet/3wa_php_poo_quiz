@@ -55,7 +55,7 @@ abstract class AbstractController
 
     protected function isAdmin($user): bool|string
     {
-        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 'admin' && $_SESSION['user'] === $user->id) {
+        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 'admin' && $_SESSION['user'] === $user->getId()) {
             return true;
         } else {
             return header('Location: /');
@@ -64,7 +64,7 @@ abstract class AbstractController
 
     protected function isUser($user): bool|string
     {
-        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 'user' && $_SESSION['user'] === $user->id) {
+        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 'user' && $_SESSION['user'] === $user->getId()) {
             return true;
         } else {
             return header('Location: /');

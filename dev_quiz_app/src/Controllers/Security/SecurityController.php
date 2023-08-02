@@ -41,7 +41,7 @@ class SecurityController extends AbstractController
         // Backend validation
         $emailExists = $user->isUnique('email', $_POST['email']);
 
-        if (!empty($emailExists)) {
+        if ($emailExists) {
             $errors['email'][] = 'Cet email existe déjà';
             $_SESSION['errors'][] = $errors;
             header('Location: /inscription');
@@ -100,15 +100,15 @@ class SecurityController extends AbstractController
 
         $user = (new User($this->getDB()))->getByEmail($_POST['email']);
 
-        if (password_verify($_POST['password'], $user->password)) {
-            $_SESSION['auth'] = $user->role;
-            $_SESSION['user'] = $user->id;
+        if (password_verify($_POST['password'], $user->getPassword())) {
+            $_SESSION['auth'] = $user->getRole();
+            $_SESSION['user'] = $user->getId();
 
-            if ($user->role === 'user') {
+            if ($user->getRole() === 'user') {
                 return header('Location: /espace-utilisateur');
             }
             
-            if ($user->role === 'admin') {
+            if ($user->getRole() === 'admin') {
                 return header('Location: /espace-admin');
             }
 

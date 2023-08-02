@@ -23,4 +23,18 @@ class UserController extends AbstractController
         
         return $this->render('user/user-homepage', compact('user'));
     }
+
+    public function userProfile()
+    {
+        if ($this->isAuth()) {
+            $user = new User($this->getDB());
+            $user = $user->findById($_SESSION['user']);
+        } else {
+            return header('Location: /connexion');
+        }
+
+        $this->isUser($user);
+        
+        return $this->render('user/user-profil', compact('user'));
+    }
 }

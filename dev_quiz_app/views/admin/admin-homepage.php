@@ -1,5 +1,5 @@
 <main>
-    <h1>Bienvenue <?=  $params['user']->alias ?></h1>
+    <h1>Bienvenue <?=  $params['user']->getAlias() ?></h1>
 
     <div>
         <a href="">Gestion des utilisateurs</a>

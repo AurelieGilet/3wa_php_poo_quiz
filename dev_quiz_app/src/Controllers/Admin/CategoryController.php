@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Models\Category;
+use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
 
 class CategoryController extends AbstractController
@@ -29,19 +30,32 @@ class CategoryController extends AbstractController
 
     public function createCategoryPost()
     {
-        //TODO: isUnique + length validation for create category
+        $validator = new Validator($_POST);
+
+        // Front end validation
+        $errors = $validator->validate([
+            'name' => ['required', 'min:2'],
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/categorie/ajouter');
+            exit;
+        }
         
         $category = (new Category($this->getDB()));
 
+        // Back end validation
         $categoryExists = $category->isUnique('name', $_POST['name']);
 
-        if (!empty($categoryExists)) {
+        if ($categoryExists) {
             $errors['name'][] = 'Cette catégorie existe déjà';
             $_SESSION['errors'][] = $errors;
             header('Location: /admin/categorie/ajouter');
             exit;
         }
 
+        // Category create
         $category->create($_POST);
 
         $this->flashMessage->createFlashMessage(
@@ -68,9 +82,35 @@ class CategoryController extends AbstractController
 
     public function updateCategoryPost(int $id)
     {
-        $category = (new Category($this->getDB()))->update($id, $_POST);
+        $validator = new Validator($_POST);
 
-        //TODO: isUnique + length validation for update category
+        // Front end validation
+        $errors = $validator->validate([
+            'name' => ['required', 'min:2'],
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/categorie/ajouter');
+            exit;
+        }
+
+        $category = (new Category($this->getDB()));
+
+        // Back end validation
+        $categoryExists = $category->isUnique('name', $_POST['name']);
+
+        if ($categoryExists) {
+            $errors['name'][] = 'Cette catégorie existe déjà';
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/categorie/modifier/' . $id);
+            exit;
+        }
+
+        // TODO: add warning if category has associated questions as it will change the category of the questions too
+
+        // Category update
+        $category = (new Category($this->getDB()))->update($id, $_POST);
 
         if ($category) {
             $this->flashMessage->createFlashMessage(

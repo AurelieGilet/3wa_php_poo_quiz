@@ -14,10 +14,10 @@
     <div>
         <ul>
             <?php foreach ($params['categories'] as $category) : ?>
-                <li><?= htmlspecialchars($category->name) ?></li>
-                <li><a href="/admin/categorie/modifier/<?= $category->id ?>">Modifier</a></li>
+                <li><?= htmlspecialchars($category->getName()) ?></li>
+                <li><a href="/admin/categorie/modifier/<?= $category->getId() ?>">Modifier</a></li>
                 <li>
-                    <form action="/admin/categorie/supprimer/<?= $category->id ?>" method="POST">
+                    <form action="/admin/categorie/supprimer/<?= $category->getId() ?>" method="POST">
                         <button type="submit">Supprimer</button>
                     </form>
                 </li>

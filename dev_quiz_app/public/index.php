@@ -8,7 +8,6 @@ require '../vendor/autoload.php';
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
 define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
 
-
 $router = new Router($_GET['url']);
 
 // URLs
@@ -23,6 +22,7 @@ $router->post('/connexion', 'App\Controllers\Security\SecurityController@loginPo
 $router->get('/deconnexion', 'App\Controllers\Security\SecurityController@logout');
 
 $router->get('/espace-utilisateur', 'App\Controllers\User\UserController@userHomepage');
+$router->get('/profil-utilisateur', 'App\Controllers\User\UserController@userProfile');
 
 $router->get('/espace-admin', 'App\Controllers\Admin\AdminController@adminHomepage');
 
@@ -32,7 +32,6 @@ $router->post('/admin/categorie/ajouter', 'App\Controllers\Admin\CategoryControl
 $router->get('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategory');
 $router->post('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategoryPost');
 $router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
-
 
 try {
     $router->run();

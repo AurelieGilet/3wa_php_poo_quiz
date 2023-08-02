@@ -16,18 +16,19 @@ if (isset($_SESSION['errors'])) {
 
 <main>
     <h1>
-        <?= isset($params['category']->name)
-            ? 'Modifier la catégorie ' . $params['category']->name
+        <?= isset($params['category']) && $params['category']->getName() !== null
+            ? 'Modifier la catégorie ' . $params['category']->getName()
             : 'Ajouter une catégorie' ?>
     </h1>
 
     <form method="POST"
         action="<?= isset($params['category'])
-            ? '/admin/categorie/modifier/' . $params['category']->id
+            ? '/admin/categorie/modifier/' . $params['category']->getId()
             : '/admin/categorie/ajouter'?>">
         <div>
             <label for="name">Nom de la catégorie</label>
-            <input type="text" name="name" id="name" value="<?= $params['category']->name ?? '' ?>">
+            <input type="text" name="name" id="name" 
+                value="<?= isset($params['category']) ? $params['category']->getName() : '' ?>">
             <?php if (isset($formErrors['name'])) : ?>
                 <ul>
                 <?php foreach ($formErrors['name'] as $error) : ?>
