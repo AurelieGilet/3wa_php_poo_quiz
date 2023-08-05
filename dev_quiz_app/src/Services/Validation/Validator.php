@@ -27,6 +27,14 @@ class Validator
                         case 'passwordValidation':
                             $this->passwordValidation($name, $this->data[$name]);
                             break;
+                        case 'updatePassword':
+                            $this->updatePassword(
+                                $name,
+                                $this->data[$name],
+                                $this->data[$name . 'Old'],
+                                $this->data[$name . 'Repeat']
+                            );
+                            break;
                         case substr($rule, 0, 3) === 'min':
                             $this->min($name, $this->data[$name], $rule);
                             break;
@@ -72,6 +80,26 @@ class Validator
             $this->errors[$name][] = 'Votre mot de passe doit faire au minimum 8 caractères 
             et contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial';
         }
+    }
+
+    private function updatePassword(string $name, string $value, string $oldValue, string $repeatValue)
+    {
+        // If none of the password fields contains value, the user doesn't wish to change it
+        // No need to go through the verifications
+        if (!trim($value)) {
+            return;
+        }
+
+        if (trim($value) && (!trim($oldValue) || !trim($repeatValue))) {
+            $this->errors[$name][] = 'Pour modifier votre mot de passe, les 3 champs doivent être remplis';
+        }
+
+        if (trim($value) !== trim($repeatValue)) {
+            $this->errors[$name][] = 'Votre nouveau mot de passe ne correspond pas, 
+            veuillez entrer 2 fois la même valeur';
+        }
+
+        $this->passwordValidation($name, $value);
     }
 
     private function min(string $name, string $value, string $rule): void

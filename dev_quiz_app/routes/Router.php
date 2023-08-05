@@ -28,10 +28,36 @@ class Router
     {
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
             if ($route->matches($this->url)) {
+                $this->requestPath();
                 return $route->execute();
             }
         }
 
         throw new NotFoundException("La page demandée est introuvable");
+    }
+
+    public function requestPath(): void
+    {
+        $requestUri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+        $scriptName = explode('/', trim($_SERVER['SCRIPT_NAME'], '/'));
+
+        $parts = array_diff_assoc($requestUri, $scriptName);
+
+        // FIXME: Check if this early return is useful
+        // if (empty($parts)) {
+        //     return '/';
+        // }
+
+        $path = implode('/', $parts);
+
+        if (($position = strpos($path, '?')) !== false) {
+            $path = substr($path, 0, $position);
+        }
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION['path'] = $path;
     }
 }

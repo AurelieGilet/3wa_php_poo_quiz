@@ -43,10 +43,10 @@ class CategoryController extends AbstractController
             exit;
         }
         
-        $category = (new Category($this->getDB()));
+        $categoryModel = (new Category($this->getDB()));
 
         // Back end validation
-        $categoryExists = $category->isUnique('name', $_POST['name']);
+        $categoryExists = $categoryModel->isUnique('name', $_POST['name']);
 
         if ($categoryExists) {
             $errors['name'][] = 'Cette catégorie existe déjà';
@@ -56,7 +56,7 @@ class CategoryController extends AbstractController
         }
 
         // Category create
-        $category->create($_POST);
+        $categoryModel->create($_POST);
 
         $this->flashMessage->createFlashMessage(
             'category',
@@ -95,10 +95,10 @@ class CategoryController extends AbstractController
             exit;
         }
 
-        $category = (new Category($this->getDB()));
+        $categoryModel = (new Category($this->getDB()));
 
         // Back end validation
-        $categoryExists = $category->isUnique('name', $_POST['name']);
+        $categoryExists = $categoryModel->isUnique('name', $_POST['name']);
 
         if ($categoryExists) {
             $errors['name'][] = 'Cette catégorie existe déjà';
@@ -110,7 +110,7 @@ class CategoryController extends AbstractController
         // TODO: add warning if category has associated questions as it will change the category of the questions too
 
         // Category update
-        $category = (new Category($this->getDB()))->update($id, $_POST);
+        $category = $categoryModel->update($id, $_POST);
 
         if ($category) {
             $this->flashMessage->createFlashMessage(

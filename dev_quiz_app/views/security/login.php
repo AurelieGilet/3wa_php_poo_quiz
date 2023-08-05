@@ -9,7 +9,7 @@ if (isset($_SESSION['errors'])) {
     }
 
     // Delete errors to avoid stacking them if the page is recharged
-    session_destroy();
+    unset($_SESSION["errors"]);
 }
 
 ?>

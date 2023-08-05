@@ -17,7 +17,7 @@ class Route
         $this->action = $action;
     }
 
-    public function matches(string $url)
+    public function matches(string $url): bool
     {
         // pattern : we seek to replace anything that starts with ":"
         // and is followed by one or several alphanumerical characters
@@ -33,7 +33,7 @@ class Route
         }
     }
 
-    public function execute()
+    public function execute(): ?object
     {
         // create an array with the controller name in first index,
         // and the action (function) called in the second
