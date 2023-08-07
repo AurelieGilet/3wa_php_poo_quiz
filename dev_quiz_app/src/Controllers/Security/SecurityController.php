@@ -132,8 +132,6 @@ class SecurityController extends AbstractController
         );
 
         return header('Location: /connexion');
-
-        
     }
 
     /**

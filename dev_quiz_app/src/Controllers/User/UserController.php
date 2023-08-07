@@ -185,7 +185,7 @@ class UserController extends AbstractController
             exit;
         }
 
-        // Password ckeck
+        // Password check
         if (!password_verify($_POST['password'], $user->getPassword())) {
             $errors['password'][] = 'Vous n\'avez pas indiqué le bon mot de passe';
             $_SESSION['errors'][] = $errors;

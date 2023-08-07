@@ -37,6 +37,13 @@ $router->get('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryCon
 $router->post('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategoryPost');
 $router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
 
+$router->get('/admin/questions', 'App\Controllers\Admin\QuestionController@index');
+$router->get('/admin/question/ajouter', 'App\Controllers\Admin\QuestionController@createQuestion');
+$router->post('/admin/question/ajouter', 'App\Controllers\Admin\QuestionController@createQuestionPost');
+$router->get('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionController@updateQuestion');
+$router->post('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionController@updateQuestionPost');
+$router->post('/admin/question/supprimer/:id', 'App\Controllers\Admin\QuestionController@deleteQuestion');
+
 try {
     $router->run();
 } catch (NotFoundException $e) {
