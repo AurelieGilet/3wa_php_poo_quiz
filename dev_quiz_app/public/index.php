@@ -24,7 +24,9 @@ $router->get('/deconnexion', 'App\Controllers\Security\SecurityController@logout
 $router->get('/espace-utilisateur', 'App\Controllers\User\UserController@userHomepage');
 $router->get('/profil-utilisateur', 'App\Controllers\User\UserController@userProfile');
 $router->get('/profil-utilisateur/modifier', 'App\Controllers\User\UserController@updateUser');
-$router->post('/profil-utilisateur/modifier', 'App\Controllers\User\UserController@updateUserPost');
+$router->get('/profil-utilisateur/modifier', 'App\Controllers\User\UserController@updateUser');
+$router->get('/profil-utilisateur/supprimer', 'App\Controllers\User\UserController@deleteUser');
+$router->post('/profil-utilisateur/supprimer', 'App\Controllers\User\UserController@deleteUserPost');
 
 $router->get('/espace-admin', 'App\Controllers\Admin\AdminController@adminHomepage');
 

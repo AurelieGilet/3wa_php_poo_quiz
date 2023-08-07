@@ -19,8 +19,6 @@ if (isset($_SESSION['errors'])) {
         Modifier mes informations
     </h1>
 
-
-
     <form method="POST" action="/profil-utilisateur/modifier">
         <div>
             <label for="alias">Modifier mon pseudo</label>
@@ -50,8 +48,6 @@ if (isset($_SESSION['errors'])) {
             <p>Modifier mon mot de passe</p>
             <p>Ne remplissez ces champs que si vous souhaitez modifier votre mot de passe</p>
             <?php /*TODO: don't forget to change back input type to password*/ ?>
-            <label for="passwordOld">Ancien mot de passe</label>
-            <input type="text" name="passwordOld" id="passwordOld">
             <label for="password">Nouveau mot de passe</label>
             <input type="text" name="password" id="password">
             <label for="passwordRepeat">Confirmez le nouveau mot de passe</label>
@@ -59,6 +55,17 @@ if (isset($_SESSION['errors'])) {
             <?php if (isset($formErrors['password'])) : ?>
                 <ul>
                 <?php foreach ($formErrors['password'] as $error) : ?>
+                    <li><?= $error ?></li>
+                <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+        <div>
+            <label for="passwordOld">Confirmez les modifications avec votre mot de passe actuel</label>
+            <input type="text" name="passwordOld" id="passwordOld">
+            <?php if (isset($formErrors['passwordOld'])) : ?>
+                <ul>
+                <?php foreach ($formErrors['passwordOld'] as $error) : ?>
                     <li><?= $error ?></li>
                 <?php endforeach; ?>
                 </ul>

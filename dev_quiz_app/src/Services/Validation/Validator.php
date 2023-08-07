@@ -90,8 +90,8 @@ class Validator
             return;
         }
 
-        if (trim($value) && (!trim($oldValue) || !trim($repeatValue))) {
-            $this->errors[$name][] = 'Pour modifier votre mot de passe, les 3 champs doivent être remplis';
+        if (trim($value) && !trim($repeatValue) || !trim($value) && trim($repeatValue)) {
+            $this->errors[$name][] = 'Pour modifier votre mot de passe, les 2 champs doivent être remplis';
         }
 
         if (trim($value) !== trim($repeatValue)) {

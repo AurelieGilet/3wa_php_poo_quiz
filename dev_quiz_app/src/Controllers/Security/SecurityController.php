@@ -100,28 +100,40 @@ class SecurityController extends AbstractController
 
         $user = (new User($this->getDB()))->getByEmail($_POST['email']);
 
-        if (password_verify($_POST['password'], $user->getPassword())) {
-            $_SESSION['auth'] = $user->getRole();
-            $_SESSION['user'] = $user->getId();
-
-            if ($user->getRole() === 'user') {
-                return header('Location: /espace-utilisateur');
+        if ($user) {
+            if (password_verify($_POST['password'], $user->getPassword())) {
+                $_SESSION['auth'] = $user->getRole();
+                $_SESSION['user'] = $user->getId();
+    
+                if ($user->getRole() === 'user') {
+                    return header('Location: /espace-utilisateur');
+                }
+                
+                if ($user->getRole() === 'admin') {
+                    return header('Location: /espace-admin');
+                }
+    
+                return header('Location: /');
+            } else {
+                $this->flashMessage->createFlashMessage(
+                    'login',
+                    'Identifiants incorrects',
+                    $this->flashMessagesConstants::FLASH_ERROR,
+                );
+    
+                return header('Location: /connexion');
             }
-            
-            if ($user->getRole() === 'admin') {
-                return header('Location: /espace-admin');
-            }
-
-            return header('Location: /');
-        } else {
-            $this->flashMessage->createFlashMessage(
-                'login',
-                'Identifiants incorrects',
-                $this->flashMessagesConstants::FLASH_ERROR,
-            );
-
-            return header('Location: /connexion');
         }
+
+        $this->flashMessage->createFlashMessage(
+            'login',
+            'Identifiants incorrects',
+            $this->flashMessagesConstants::FLASH_ERROR,
+        );
+
+        return header('Location: /connexion');
+
+        
     }
 
     /**

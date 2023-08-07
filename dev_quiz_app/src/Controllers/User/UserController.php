@@ -56,7 +56,7 @@ class UserController extends AbstractController
         }
 
 
-        return $this->render('user/form', compact('user'));
+        return $this->render('user/update-user-form', compact('user'));
     }
 
     public function updateUserPost()
@@ -75,9 +75,18 @@ class UserController extends AbstractController
             'alias' => ['required', 'min:2'],
             'email' => ['required', 'emailValidation'],
             'password' => ['updatePassword'],
+            'passwordOld' => ['required'],
         ]);
 
         if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /profil-utilisateur/modifier');
+            exit;
+        }
+
+        // Before doing any modifications we check if the user entered the right password
+        if (!password_verify($_POST['passwordOld'], $user->getPassword())) {
+            $errors['passwordOld'][] = 'Votre mot de passe actuel ne correspond pas à celui enregistré';
             $_SESSION['errors'][] = $errors;
             header('Location: /profil-utilisateur/modifier');
             exit;
@@ -103,16 +112,8 @@ class UserController extends AbstractController
             exit;
         }
 
-        // Back end password verification
+        // Hash new password
         if ($_POST['password']) {
-            if (!password_verify($_POST['passwordOld'], $user->getPassword())) {
-                $errors['password'][] = 'L\'ancien mot de passe ne correspond pas à celui enregistré';
-                $_SESSION['errors'][] = $errors;
-                header('Location: /profil-utilisateur/modifier');
-                exit;
-            }
-    
-            // Hash new password
             $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $_POST['password'] = $hashedPassword;
         }
@@ -143,6 +144,75 @@ class UserController extends AbstractController
             );
 
             return header('Location: /profil-utilisateur');
+        }
+    }
+
+    /**
+     * Route: /profil-utilisateur/supprimer
+     */
+    public function deleteUser()
+    {
+        if ($this->isAuth()) {
+            $userModel = new User($this->getDB());
+            $user = $userModel->findById($_SESSION['user']);
+        } else {
+            return header('Location: /connexion');
+        }
+
+
+        return $this->render('user/delete-user-form', compact('user'));
+    }
+
+    public function deleteUserPost()
+    {
+        if ($this->isAuth()) {
+            $userModel = new User($this->getDB());
+            $user = $userModel->findById($_SESSION['user']);
+        } else {
+            return header('Location: /connexion');
+        }
+
+        $validator = new Validator($_POST);
+
+        // Front end validation
+        $errors = $validator->validate([
+            'password' => ['required'],
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /profil-utilisateur/supprimer');
+            exit;
+        }
+
+        // Password ckeck
+        if (!password_verify($_POST['password'], $user->getPassword())) {
+            $errors['password'][] = 'Vous n\'avez pas indiqué le bon mot de passe';
+            $_SESSION['errors'][] = $errors;
+            header('Location: /profil-utilisateur/supprimer');
+            exit;
+        }
+
+        $user = $userModel->delete($user->getId());
+
+        if ($user) {
+            $this->flashMessage->createFlashMessage(
+                'deleteUser',
+                'Votre compte et toutes les données associées ont bien été supprimés',
+                $this->flashMessagesConstants::FLASH_SUCCESS,
+            );
+
+            unset($_SESSION['auth'], $_SESSION['user']);
+
+            return header('Location: /connexion');
+        } else {
+            $this->flashMessage->createFlashMessage(
+                'deleteUser',
+                'Votre compte n\'a pas été supprimé, une erreur s\'est produite',
+                $this->flashMessagesConstants::FLASH_ERROR,
+            );
+
+            return header('Location: /profil-utilisateur/supprimer');
         }
     }
 }

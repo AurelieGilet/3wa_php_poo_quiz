@@ -23,5 +23,5 @@
     </div>
 
     <a href="/profil-utilisateur/modifier">Modifier mes infos</a>
-    <a href="">Supprimer mon compte</a>
+    <a href="/profil-utilisateur/supprimer">Supprimer mon compte</a>
 </main>
