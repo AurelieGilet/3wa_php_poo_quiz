@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dev Quiz !</title>
     <link rel="stylesheet" href="<?= SCRIPTS . 'style' . DIRECTORY_SEPARATOR . 'style.min.css' ?>">
+    <script type="text/javascript" src="<?= SCRIPTS . 'js' . DIRECTORY_SEPARATOR . 'main.min.js' ?>"></script>
 </head>
 <body>
     <div class="page-container">

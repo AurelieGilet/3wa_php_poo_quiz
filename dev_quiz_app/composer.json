@@ -13,13 +13,17 @@
             "Database\\": "database/"
         }
     },
+    "minimum-stability": "dev",
     "require": {
-        "scssphp/scssphp": "^1.11"
+        "scssphp/scssphp": "^1.11",
+        "symfony/console": "6.4.x-dev",
+        "matthiasmullie/minify": "dev-master"
     },
     "scripts" : {
         "build": [
             "vendor/bin/pscss --style=expanded assets/style/style.scss public/style/style.css",
-            "vendor/bin/pscss --style=compressed assets/style/style.scss public/style/style.min.css"
+            "vendor/bin/pscss --style=compressed assets/style/style.scss public/style/style.min.css",
+            "bin/console build:js"
         ]
     }
 }
