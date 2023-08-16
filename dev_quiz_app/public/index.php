@@ -33,7 +33,8 @@ $router->get('/espace-admin', 'App\Controllers\Admin\AdminController@adminHomepa
 $router->get('/admin/utilisateurs', 'App\Controllers\Admin\AdminUserController@index');
 $router->get('/admin/utilisateur/modifier/:id', 'App\Controllers\Admin\AdminUserController@updateUser');
 $router->post('/admin/utilisateur/modifier/:id', 'App\Controllers\Admin\AdminUserController@updateUserPost');
-$router->post('/admin/utilisateur/supprimer/:id', 'App\Controllers\Admin\AdminUserController@deleteUser');
+$router->get('/admin/utilisateur/supprimer/:id', 'App\Controllers\Admin\AdminUserController@deleteUser');
+$router->post('/admin/utilisateur/supprimer/:id', 'App\Controllers\Admin\AdminUserController@deleteUserPost');
 
 $router->get('/admin/categories', 'App\Controllers\Admin\CategoryController@index');
 $router->get('/admin/categorie/ajouter', 'App\Controllers\Admin\CategoryController@createCategory');
