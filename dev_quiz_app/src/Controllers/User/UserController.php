@@ -95,7 +95,7 @@ class UserController extends AbstractController
         }
 
         // Back end Email validation
-        $emailExists = $this->user->isUnique('email', $_POST['email']);
+        $emailExists = $this->userModel->isUnique('email', $_POST['email']);
 
         if ($emailExists && $emailExists->getId() !== $this->user->getId()) {
             $errors['email'][] = 'Cet email existe déjà';
@@ -135,7 +135,7 @@ class UserController extends AbstractController
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /profil-utilisateur');
+            return header('Location: /profil-utilisateur/modifier');
         }
     }
 
@@ -172,6 +172,7 @@ class UserController extends AbstractController
             exit;
         }
 
+        //TODO: When implemented, delete scores
         $user = $this->userModel->delete($this->user->getId());
 
         if ($user) {

@@ -29,9 +29,11 @@ if (isset($_SESSION['errors'])) {
 
     <p>
         Mise en garde : <br>
-        Su vous décidez de supprimer votre compte, toutes vos informations seront supprimées dans leur totalité. <br>
+        Si vous décidez de supprimer votre compte, toutes vos informations seront supprimées dans leur totalité. <br>
         Cela inclus vos informations personnelles (alias, email, mot de passe) mais également tous vos scores. <br>
-        <strong>Cette action est irréversible, il ne nous sera pas possible de récupérer les données supprimées !</strong>
+        <strong>
+            Cette action est irréversible, il ne nous sera pas possible de récupérer les données supprimées !
+        </strong>
     </p>
 
     <form method="POST" action="/profil-utilisateur/supprimer">

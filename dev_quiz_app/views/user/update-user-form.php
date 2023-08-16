@@ -19,6 +19,14 @@ if (isset($_SESSION['errors'])) {
         Modifier mes informations
     </h1>
 
+    <?php if (isset($params['flashes'])) : ?>
+        <ul>
+        <?php foreach ($params['flashes'] as $flash) : ?>
+            <?= $flash ?>
+        <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
     <form method="POST" action="/profil-utilisateur/modifier">
         <div>
             <label for="alias">Modifier mon pseudo</label>
