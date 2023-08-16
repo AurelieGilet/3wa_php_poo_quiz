@@ -1,3 +1,8 @@
+<?php
+//TODO: change button style for active category being displayed
+var_dump('catégorie active', $params['activeCategory']);
+?>
+
 <main>
     <h1>Gestion des questions</h1>
 
@@ -13,15 +18,19 @@
 
     <div>
         <ul>
-            <?php foreach ($params['questions'] as $question) : ?>
-                <li><?= htmlspecialchars($question->getTitle()) ?></li>
-                <li><a href="/admin/question/modifier/<?= $question->getId() ?>">Modifier</a></li>
-                <li>
-                    <form action="/admin/question/supprimer/<?= $question->getId() ?>" method="POST">
-                        <button type="submit">Supprimer</button>
-                    </form>
-                </li>
-            <?php endforeach; ?>
+        <?php foreach ($params['categories'] as $category) : ?>
+            <li>
+                <button data-controls="category-filter" data-category-id="<?= $category->getId() ?>"
+                    class="<?= $params['activeCategory'] === $category->getId() ? 'active' :'' ?>">
+                    <?= htmlspecialchars($category->getName()) ?>
+                </button>
+            </li>
+        <?php endforeach; ?>
         </ul>
     </div>
+
+    <div id="category-questions">
+        <?php include('_category-questions.php'); ?>
+    </div>
+
 </main>
