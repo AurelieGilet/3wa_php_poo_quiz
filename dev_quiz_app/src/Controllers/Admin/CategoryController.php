@@ -2,12 +2,31 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Category;
+use Database\DBConnection;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
 
 class CategoryController extends AbstractController
 {
+    protected $user;
+    protected $userModel;
+
+    public function __construct(DBConnection $db)
+    {
+        parent::__construct($db);
+
+        if ($this->isAuth()) {
+            $this->userModel = new User($this->getDB());
+            $this->user = $this->userModel->findById($_SESSION['user']);
+        } else {
+            return header('Location: /connexion');
+        }
+
+        $this->isAdmin($this->user);
+    }
+    
     /**
      * Route: /admin/categories
      */

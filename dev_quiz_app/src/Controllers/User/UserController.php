@@ -3,25 +3,35 @@
 namespace App\Controllers\User;
 
 use App\Models\User;
+use Database\DBConnection;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
 
 class UserController extends AbstractController
 {
+    protected $user;
+    protected $userModel;
+
+    public function __construct(DBConnection $db)
+    {
+        parent::__construct($db);
+
+        if ($this->isAuth()) {
+            $this->userModel = new User($this->getDB());
+            $this->user = $this->userModel->findById($_SESSION['user']);
+        } else {
+            return header('Location: /connexion');
+        }
+
+        $this->isUser($this->user);
+    }
+
     /**
      * Route: /espace-utilisateur
      */
     public function userHomepage()
     {
-        // TODO: extract the auth check in outside function in new class Validation/Authentification
-        if ($this->isAuth()) {
-            $userModel = new User($this->getDB());
-            $user = $userModel->findById($_SESSION['user']);
-        } else {
-            return header('Location: /connexion');
-        }
-
-        $this->isUser($user);
+        $user = $this->user;
         
         return $this->render('user/user-homepage', compact('user'));
     }
@@ -31,12 +41,7 @@ class UserController extends AbstractController
      */
     public function userProfile()
     {
-        if ($this->isAuth()) {
-            $userModel = new User($this->getDB());
-            $user = $userModel->findById($_SESSION['user']);
-        } else {
-            return header('Location: /connexion');
-        }
+        $user = $this->user;
 
         $flashes = $this->flashMessage->getFlashMessages('updateUser');
 
@@ -48,26 +53,13 @@ class UserController extends AbstractController
      */
     public function updateUser()
     {
-        if ($this->isAuth()) {
-            $userModel = new User($this->getDB());
-            $user = $userModel->findById($_SESSION['user']);
-        } else {
-            return header('Location: /connexion');
-        }
-
+        $user = $this->user;
 
         return $this->render('user/update-user-form', compact('user'));
     }
 
     public function updateUserPost()
     {
-        if ($this->isAuth()) {
-            $userModel = new User($this->getDB());
-            $user = $userModel->findById($_SESSION['user']);
-        } else {
-            return header('Location: /connexion');
-        }
-
         $validator = new Validator($_POST);
 
         // Front end validation
@@ -85,7 +77,7 @@ class UserController extends AbstractController
         }
 
         // Before doing any modifications we check if the user entered the right password
-        if (!password_verify($_POST['passwordOld'], $user->getPassword())) {
+        if (!password_verify($_POST['passwordOld'], $this->user->getPassword())) {
             $errors['passwordOld'][] = 'Votre mot de passe actuel ne correspond pas à celui enregistré';
             $_SESSION['errors'][] = $errors;
             header('Location: /profil-utilisateur/modifier');
@@ -93,9 +85,9 @@ class UserController extends AbstractController
         }
 
         // Back end Alias validation
-        $aliasExists = $userModel->isUnique('alias', $_POST['alias']);
+        $aliasExists = $this->userModel->isUnique('alias', $_POST['alias']);
 
-        if ($aliasExists && $aliasExists->getId() !== $user->getId()) {
+        if ($aliasExists && $aliasExists->getId() !== $this->user->getId()) {
             $errors['alias'][] = 'Ce pseudo est pris';
             $_SESSION['errors'][] = $errors;
             header('Location: /profil-utilisateur/modifier');
@@ -103,9 +95,9 @@ class UserController extends AbstractController
         }
 
         // Back end Email validation
-        $emailExists = $user->isUnique('email', $_POST['email']);
+        $emailExists = $this->user->isUnique('email', $_POST['email']);
 
-        if ($emailExists && $emailExists->getId() !== $user->getId()) {
+        if ($emailExists && $emailExists->getId() !== $this->user->getId()) {
             $errors['email'][] = 'Cet email existe déjà';
             $_SESSION['errors'][] = $errors;
             header('Location: /profil-utilisateur/modifier');
@@ -126,7 +118,7 @@ class UserController extends AbstractController
         }
         
         // Update User
-        $user = $userModel->update($user->getId(), $_POST);
+        $user = $this->userModel->update($this->user->getId(), $_POST);
 
         if ($user) {
             $this->flashMessage->createFlashMessage(
@@ -152,26 +144,13 @@ class UserController extends AbstractController
      */
     public function deleteUser()
     {
-        if ($this->isAuth()) {
-            $userModel = new User($this->getDB());
-            $user = $userModel->findById($_SESSION['user']);
-        } else {
-            return header('Location: /connexion');
-        }
-
+        $user = $this->user;
 
         return $this->render('user/delete-user-form', compact('user'));
     }
 
     public function deleteUserPost()
     {
-        if ($this->isAuth()) {
-            $userModel = new User($this->getDB());
-            $user = $userModel->findById($_SESSION['user']);
-        } else {
-            return header('Location: /connexion');
-        }
-
         $validator = new Validator($_POST);
 
         // Front end validation
@@ -186,14 +165,14 @@ class UserController extends AbstractController
         }
 
         // Password check
-        if (!password_verify($_POST['password'], $user->getPassword())) {
+        if (!password_verify($_POST['password'], $this->user->getPassword())) {
             $errors['password'][] = 'Vous n\'avez pas indiqué le bon mot de passe';
             $_SESSION['errors'][] = $errors;
             header('Location: /profil-utilisateur/supprimer');
             exit;
         }
 
-        $user = $userModel->delete($user->getId());
+        $user = $this->userModel->delete($this->user->getId());
 
         if ($user) {
             $this->flashMessage->createFlashMessage(

@@ -24,7 +24,7 @@ $router->get('/deconnexion', 'App\Controllers\Security\SecurityController@logout
 $router->get('/espace-utilisateur', 'App\Controllers\User\UserController@userHomepage');
 $router->get('/profil-utilisateur', 'App\Controllers\User\UserController@userProfile');
 $router->get('/profil-utilisateur/modifier', 'App\Controllers\User\UserController@updateUser');
-$router->get('/profil-utilisateur/modifier', 'App\Controllers\User\UserController@updateUser');
+$router->post('/profil-utilisateur/modifier', 'App\Controllers\User\UserController@updateUserPost');
 $router->get('/profil-utilisateur/supprimer', 'App\Controllers\User\UserController@deleteUser');
 $router->post('/profil-utilisateur/supprimer', 'App\Controllers\User\UserController@deleteUserPost');
 
@@ -37,12 +37,12 @@ $router->get('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryCon
 $router->post('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategoryPost');
 $router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
 
-$router->get('/admin/questions', 'App\Controllers\Admin\QuestionController@index');
-$router->get('/admin/question/ajouter', 'App\Controllers\Admin\QuestionController@createQuestion');
-$router->post('/admin/question/ajouter', 'App\Controllers\Admin\QuestionController@createQuestionPost');
-$router->get('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionController@updateQuestion');
-$router->post('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionController@updateQuestionPost');
-$router->post('/admin/question/supprimer/:id', 'App\Controllers\Admin\QuestionController@deleteQuestion');
+$router->get('/admin/questions', 'App\Controllers\Admin\QuestionAnswerController@index');
+$router->get('/admin/question/ajouter', 'App\Controllers\Admin\QuestionAnswerController@createQuestion');
+$router->post('/admin/question/ajouter', 'App\Controllers\Admin\QuestionAnswerController@createQuestionPost');
+$router->get('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionAnswerController@updateQuestion');
+$router->post('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionAnswerController@updateQuestionPost');
+$router->post('/admin/question/supprimer/:id', 'App\Controllers\Admin\QuestionAnswerController@deleteQuestion');
 
 try {
     $router->run();
