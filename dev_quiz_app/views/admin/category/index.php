@@ -12,16 +12,16 @@
     <a href="/admin/categorie/ajouter">Ajouter une catégorie</a>
 
     <div>
+        <?php foreach ($params['categories'] as $category) : ?>
         <ul>
-            <?php foreach ($params['categories'] as $category) : ?>
-                <li><?= htmlspecialchars($category->getName()) ?></li>
-                <li><a href="/admin/categorie/modifier/<?= $category->getId() ?>">Modifier</a></li>
-                <li>
-                    <form action="/admin/categorie/supprimer/<?= $category->getId() ?>" method="POST">
-                        <button type="submit">Supprimer</button>
-                    </form>
-                </li>
-            <?php endforeach; ?>
+            <li><?= htmlspecialchars($category->getName()) ?></li>
+            <li><a href="/admin/categorie/modifier/<?= $category->getId() ?>">Modifier</a></li>
+            <li>
+                <form action="/admin/categorie/supprimer/<?= $category->getId() ?>" method="POST">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
         </ul>
+        <?php endforeach; ?>
     </div>
 </main>

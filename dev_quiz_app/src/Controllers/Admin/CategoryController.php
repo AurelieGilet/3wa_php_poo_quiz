@@ -12,10 +12,13 @@ class CategoryController extends AbstractController
 {
     protected $user;
     protected $userModel;
+    protected $categoryModel;
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
+
+        $this->categoryModel = new Category($this->getDB());
 
         if ($this->isAuth()) {
             $this->userModel = new User($this->getDB());
@@ -32,7 +35,7 @@ class CategoryController extends AbstractController
      */
     public function index()
     {
-        $categories = (new Category($this->getDB()))->getAll();
+        $categories = $this->categoryModel->getAll();
 
         $flashes = $this->flashMessage->getFlashMessages('category');
 
@@ -62,10 +65,8 @@ class CategoryController extends AbstractController
             exit;
         }
         
-        $categoryModel = (new Category($this->getDB()));
-
         // Back end validation
-        $categoryExists = $categoryModel->isUnique('name', $_POST['name']);
+        $categoryExists = $this->categoryModel->isUnique('name', $_POST['name']);
 
         if ($categoryExists) {
             $errors['name'][] = 'Cette catégorie existe déjà';
@@ -75,7 +76,7 @@ class CategoryController extends AbstractController
         }
 
         // Category create
-        $categoryModel->create($_POST);
+        $this->categoryModel->create($_POST);
 
         $this->flashMessage->createFlashMessage(
             'category',
@@ -94,7 +95,7 @@ class CategoryController extends AbstractController
      */
     public function updateCategory(int $id)
     {
-        $category = (new Category($this->getDB()))->findById($id);
+        $category = $this->categoryModel->findById($id);
 
         return $this->render('admin/category/form', compact('category'));
     }
@@ -114,10 +115,8 @@ class CategoryController extends AbstractController
             exit;
         }
 
-        $categoryModel = (new Category($this->getDB()));
-
         // Back end validation
-        $categoryExists = $categoryModel->isUnique('name', $_POST['name']);
+        $categoryExists = $this->categoryModel->isUnique('name', $_POST['name']);
 
         if ($categoryExists) {
             $errors['name'][] = 'Cette catégorie existe déjà';
@@ -127,9 +126,8 @@ class CategoryController extends AbstractController
         }
 
         // TODO: add warning if category has associated questions as it will change the category of the questions too
-
         // Category update
-        $category = $categoryModel->update($id, $_POST);
+        $category = $this->categoryModel->update($id, $_POST);
 
         if ($category) {
             $this->flashMessage->createFlashMessage(
@@ -157,7 +155,7 @@ class CategoryController extends AbstractController
     {
         // TODO: prevent delete if questions associated to category
         // TODO: add delete confirmation procedure
-        $category = (new Category($this->getDB()))->delete($id);
+        $category = $this->categoryModel->delete($id);
 
         if ($category) {
             $this->flashMessage->createFlashMessage(
