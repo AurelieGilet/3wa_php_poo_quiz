@@ -43,6 +43,7 @@ $router->post('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryCo
 $router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
 
 $router->get('/admin/questions', 'App\Controllers\Admin\QuestionAnswerController@index');
+$router->get('/admin/questions/:id', 'App\Controllers\Admin\QuestionAnswerController@ajaxIndex');
 $router->get('/admin/question/ajouter', 'App\Controllers\Admin\QuestionAnswerController@createQuestion');
 $router->post('/admin/question/ajouter', 'App\Controllers\Admin\QuestionAnswerController@createQuestionPost');
 $router->get('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionAnswerController@updateQuestion');
