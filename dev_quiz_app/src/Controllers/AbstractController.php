@@ -44,6 +44,19 @@ abstract class AbstractController
         require VIEWS . 'base.php';
     }
 
+    protected function renderFragment(string $view, array $params = null)
+    {
+        ob_start();
+
+        $view = str_replace('/', DIRECTORY_SEPARATOR, $view);
+
+        require VIEWS . $view . '.php';
+
+        $content = ob_get_clean();
+
+        echo $content;
+    }
+
     protected function isAuth(): bool
     {
         if (session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['user'])) {
