@@ -10,7 +10,8 @@
         "psr-4": {
             "Router\\": "routes/",
             "App\\": "src/",
-            "Database\\": "database/"
+            "Database\\": "database/",
+            "Console\\": "console/"
         }
     },
     "minimum-stability": "dev",

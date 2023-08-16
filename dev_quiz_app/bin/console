@@ -3,7 +3,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Command\BuildJsCommand;
+use Console\Commands\BuildJsCommand;
 use Symfony\Component\Console\Application;
 
 $app = new Application();
