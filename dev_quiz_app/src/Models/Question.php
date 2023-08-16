@@ -24,4 +24,11 @@ class Question extends AbstractModel
     {
         return $this->category;
     }
+
+    public function getByCategory(int $categoryId)
+    {
+        $request = 'SELECT * FROM ' . $this->table . ' WHERE category_id = ?';
+
+        return $this->query($request, [$categoryId]);
+    }
 }
