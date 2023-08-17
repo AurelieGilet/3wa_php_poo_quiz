@@ -17,7 +17,7 @@ if (isset($_SESSION['errors'])) {
 <main>
     <h1>
         <?= isset($params['category']) && $params['category']->getName() !== null
-            ? 'Modifier la catégorie ' . $params['category']->getName()
+            ? 'Modifier la catégorie ' . htmlspecialchars($params['category']->getName())
             : 'Ajouter une catégorie' ?>
     </h1>
 
@@ -28,7 +28,7 @@ if (isset($_SESSION['errors'])) {
         <div>
             <label for="name">Nom de la catégorie</label>
             <input type="text" name="name" id="name" 
-                value="<?= isset($params['category']) ? $params['category']->getName() : '' ?>">
+                value="<?= isset($params['category']) ? htmlspecialchars($params['category']->getName()) : '' ?>">
             <?php if (isset($formErrors['name'])) : ?>
                 <ul>
                 <?php foreach ($formErrors['name'] as $error) : ?>

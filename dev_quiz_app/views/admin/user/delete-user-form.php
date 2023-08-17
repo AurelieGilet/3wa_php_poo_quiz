@@ -30,7 +30,7 @@ if (isset($_SESSION['errors'])) {
     <p>
         Mise en garde : <br>
         Vous vous apprêtez à supprimer le compte de l'utilisateur 
-        <strong><?= $params['user']->getAlias() ?></strong> <br>
+        <strong><?= htmlspecialchars($params['user']->getAlias()) ?></strong> <br>
         Si vous décidez de supprimer ce compte, 
         toutes les informations de l'utilisateur seront supprimées dans leur totalité. <br>
         Cela inclus les informations personnelles (alias, email, mot de passe) mais également tous les scores. <br>

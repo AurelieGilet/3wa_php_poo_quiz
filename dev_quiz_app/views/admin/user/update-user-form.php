@@ -31,7 +31,7 @@ if (isset($_SESSION['errors'])) {
         <div>
             <label for="alias">Modifier le pseudo</label>
             <input type="text" name="alias" id="alias" 
-                value="<?= isset($params['user']) ? $params['user']->getAlias() : '' ?>">
+                value="<?= isset($params['user']) ? htmlspecialchars($params['user']->getAlias()) : '' ?>">
             <?php if (isset($formErrors['alias'])) : ?>
             <ul>
                 <?php foreach ($formErrors['alias'] as $error) : ?>
@@ -43,7 +43,7 @@ if (isset($_SESSION['errors'])) {
         <div>
             <label for="email">Modifier l'email</label>
             <input type="text" name="email" id="email" 
-                value="<?= isset($params['user']) ? $params['user']->getEmail() : '' ?>">
+                value="<?= isset($params['user']) ? htmlspecialchars($params['user']->getEmail()) : '' ?>">
             <?php if (isset($formErrors['email'])) : ?>
             <ul>
                 <?php foreach ($formErrors['email'] as $error) : ?>

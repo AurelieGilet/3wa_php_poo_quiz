@@ -11,11 +11,11 @@
 
     <div>
         <p>Mon pseudo</p>
-        <p><?=  $params['user']->getAlias() ?></p>
+        <p><?= htmlspecialchars($params['user']->getAlias()) ?></p>
     </div>
     <div>
         <p>Mon email</p>
-        <p><?=  $params['user']->getEmail() ?></p>
+        <p><?= htmlspecialchars($params['user']->getEmail()) ?></p>
     </div>
     <div>
         <p>Mon mot de passe</p>
