@@ -21,7 +21,6 @@ const questionAjaxCall = () => {
     const categoriesFilters = document.querySelectorAll('[data-controls="category-filter"]');
 
     categoriesFilters.forEach((button) =>  {
-        console.log(button);
         button.addEventListener('click', () => filterQuestionsByCategory(button));
     });
 }
