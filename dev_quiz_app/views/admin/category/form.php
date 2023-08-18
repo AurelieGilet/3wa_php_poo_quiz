@@ -39,4 +39,5 @@ if (isset($_SESSION['errors'])) {
         </div>
         <button type="submit">Valider</button>
     </form>
+    <a href="/admin/categories">retour</a>
 </main>
