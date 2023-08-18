@@ -8,7 +8,7 @@ class Question extends AbstractModel
 
     private ?int $id = null;
     private ?string $title = null;
-    private ?Category $category = null;
+    private ?int $category_id = null;
 
     public function getId(): ?int
     {
@@ -20,12 +20,12 @@ class Question extends AbstractModel
         return $this->title;
     }
 
-    public function getCategory(): ?Category
+    public function getCategoryId(): ?int
     {
-        return $this->category;
+        return $this->category_id;
     }
 
-    public function getByCategory(int $categoryId)
+    public function findByCategory(int $categoryId)
     {
         $request = 'SELECT * FROM ' . $this->table . ' WHERE category_id = ?';
 

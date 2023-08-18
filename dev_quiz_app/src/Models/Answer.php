@@ -8,8 +8,8 @@ class Answer extends AbstractModel
 
     private ?int $id = null;
     private ?string $content = null;
-    private ?bool $isGoodAnswer = null;
-    private ?Question $question = null;
+    private ?bool $is_good_answer = null;
+    private ?int $question_id = null;
 
     public function getId(): ?int
     {
@@ -23,11 +23,18 @@ class Answer extends AbstractModel
 
     public function getIsGoodAnswer(): ?bool
     {
-        return $this->isGoodAnswer;
+        return $this->is_good_answer;
     }
 
-    public function getQuestion(): ?Question
+    public function getQuestion(): ?int
     {
-        return $this->question;
+        return $this->question_id;
+    }
+
+    public function findByQuestion(int $questionID)
+    {
+        $request = 'SELECT * FROM ' . $this->table . ' WHERE question_id = ?';
+
+        return $this->query($request, [$questionID]);
     }
 }
