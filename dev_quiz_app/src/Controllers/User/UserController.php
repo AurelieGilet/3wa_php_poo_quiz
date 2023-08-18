@@ -22,8 +22,6 @@ class UserController extends AbstractController
         } else {
             return header('Location: /connexion');
         }
-
-        $this->isUser($this->user);
     }
 
     /**
@@ -32,7 +30,9 @@ class UserController extends AbstractController
     public function userHomepage()
     {
         $user = $this->user;
-        
+
+        $this->isUser($this->user);
+
         return $this->render('user/user-homepage', compact('user'));
     }
 
