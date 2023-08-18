@@ -46,6 +46,18 @@ abstract class AbstractModel
         return $pdoStatement->$fetch();
     }
 
+    public function getLastEntry()
+    {
+        $requestId = 'SELECT LAST_INSERT_ID()';
+
+        $pdoStatement = $this->db->getPDO()->query($requestId);
+        $resultId = $pdoStatement->fetch(PDO::FETCH_NUM);
+
+        $requestEntry = 'SELECT * FROM ' . $this->table . ' WHERE id = ?';
+
+        return $this->query($requestEntry, [$resultId[0]], true);
+    }
+
     public function getAll(): array
     {
         $request = 'SELECT * FROM ' . $this->table . ' ORDER BY id ASC';
@@ -67,7 +79,7 @@ abstract class AbstractModel
         return $this->query($request, [$value], true);
     }
 
-    public function create(array $data, ?array $relations = null)
+    public function create(array $data)
     {
         $requestArgs = '';
         $requestValues = '';
