@@ -22,71 +22,97 @@ if (isset($_SESSION['post'])) {
 <main>
     <h1>Modifier une question</h1>
 
-    <form method="POST"
-        action="/admin/question/modifier/<?= $params['question']->getId() ?>">
+    <?php if (isset($params['flashes'])) : ?>
+    <ul>
+        <?php foreach ($params['flashes'] as $flash) : ?>
+            <?= $flash ?>
+        <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
+
+    <form method="POST" action="/admin/question/modifier/<?= $params['question']->getId() ?>">
         <div>
             <label for="category">Catégorie de la question</label>
-            <select name="category" id="category">
+
+            <select id="category" name="category">
                 <?php foreach ($params['categories'] as $category) : ?>
                 <option value="<?= $category->getId() ?>" 
-                    <?= $params['question']->getCategoryId() === $category->getId() ? 'selected' : '' ?>>
+                    <?= $params['question']->getCategoryId() === $category->getId() ? 'selected' : '' ?>
+                >
                     <?= htmlspecialchars($category->getName()) ?>
                 </option>
                 <?php endforeach; ?>
             </select>
+
             <?php if (isset($formErrors['category'])) : ?>
-                <ul>
+            <ul>
                 <?php foreach ($formErrors['category'] as $error) : ?>
-                    <li><?= $error ?></li>
+                <li><?= $error ?></li>
                 <?php endforeach; ?>
-                </ul>
+            </ul>
             <?php endif; ?>
         </div>
         <div>
             <label for="title">Intitulé de la question</label>
-            <input type="text" name="title" id="title" 
+
+            <input type="text" id="title" name="title" 
                 value="<?= htmlspecialchars($params['question']->getTitle()) ?>">
+
             <?php if (isset($formErrors['title'])) : ?>
-                <ul>
+            <ul>
                 <?php foreach ($formErrors['title'] as $error) : ?>
-                    <li><?= $error ?></li>
+                <li><?= $error ?></li>
                 <?php endforeach; ?>
-                </ul>
+            </ul>
             <?php endif; ?>
         </div>
+
         <?php if (isset($formErrors['answer'])) : ?>
-            <ul>
+        <ul>
             <?php foreach ($formErrors['answer'] as $error) : ?>
-                <li><?= $error ?></li>
+            <li><?= $error ?></li>
             <?php endforeach; ?>
-            </ul>
+        </ul>
         <?php endif; ?>
+
         <?php if (isset($formErrors['goodAnswer'])) : ?>
-            <ul>
+        <ul>
             <?php foreach ($formErrors['goodAnswer'] as $error) : ?>
-                <li><?= $error ?></li>
+            <li><?= $error ?></li>
             <?php endforeach; ?>
-            </ul>
+        </ul>
         <?php endif; ?>
+
         <?php for ($i = 1; $i < 5; $i++) : ?>
         <div>
             <div>
                 <label for="answer<?= $i ?>">Réponse <?= $i ?></label>
-                <input type="text" name="answer[<?= $i ?>]" id="answer<?= $i ?>" 
+
+                <input type="text" id="answer<?= $i ?>" 
+                    name="<?= isset($params['answers'][$i - 1])
+                    ? 'answer[' . $params['answers'][$i - 1]->getId() . '][content]'
+                    : 'answer[newAnswer' . $i . '][content]' ?>"
                     value="<?= isset($params['answers'][$i - 1])
                     ? htmlspecialchars($params['answers'][$i - 1]->getContent())
                     : '' ?>">
             </div>
+
             <div>
                 <label for="goodAnswer<?= $i ?>">Est-ce la bonne réponse ?</label>
-                <input type="checkbox" name="goodAnswer[<?= $i ?>]" id="goodAnswer<?= $i ?>"
+
+                <input type="checkbox" id="goodAnswer<?= $i ?>"
+                    name="<?= isset($params['answers'][$i - 1])
+                    ? 'answer[' . $params['answers'][$i - 1]->getId() . '][goodAnswer]'
+                    : 'answer[newAnswer' . $i .'][goodAnswer]' ?>"
                     <?= isset($params['answers'][$i - 1]) && $params['answers'][$i - 1]->getIsGoodAnswer()
                     ? 'checked'
-                    : '' ?>/>
+                    : '' ?>>
             </div>
         </div>
         <?php endfor; ?>
+
         <button type="submit">Valider</button>
     </form>
+
     <a href="/admin/questions">retour</a>
 </main>

@@ -85,8 +85,7 @@ class QuestionAnswerController extends AbstractController
         $errors = $validator->validate([
             'category' => ['required'],
             'title' => ['required'],
-            'answer' => ['answersMin'],
-            'goodAnswer' => ['isGoodAnswer'],
+            'answer' => ['answersMin', 'isGoodAnswer'],
         ]);
 
         if ($errors) {
@@ -126,13 +125,19 @@ class QuestionAnswerController extends AbstractController
         $question = $this->questionModel->getLastEntry();
 
         // Create Answers
-        for ($i = 1; $i < 5; $i++) {
-            if (isset($_POST['answer'][$i]) && $_POST['answer'][$i] !== "") {
-                $answerData['content'] = $_POST['answer'][$i];
-                $answerData['is_good_answer'] = isset($_POST['goodAnswer'][$i]) && $_POST['goodAnswer'][$i] === 'on' ? true : false;
+        foreach ($_POST['answer'] as $answer) {
+            if (trim($answer['content'] !== '')) {
+                $answerData['content'] = trim($answer['content']);
+
+                $answerData['is_good_answer'] = isset($answer['goodAnswer'])
+                && $answer['goodAnswer'] === 'on'
+                ? true
+                : false;
+                
                 $answerData['question_id'] = $question->getId();
+
+                $this->answerModel->create($answerData);
             }
-            $this->answerModel->create($answerData);
         }
 
         $this->flashMessage->createFlashMessage(

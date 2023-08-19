@@ -46,8 +46,7 @@ class Validator
                         case 'isGoodAnswer':
                             $this->isGoodAnswer(
                                 $name,
-                                $this->data[$name],
-                                $this->data['answer'],
+                                $this->data[$name]
                             );
                             break;
                         default:
@@ -130,8 +129,8 @@ class Validator
     {
         $nbAnswers = 0;
 
-        for ($i = 1; $i < 5; $i++) {
-            if ($values[$i] !== '') {
+        foreach ($values as $value) {
+            if (trim($value['content']) !== '') {
                 $nbAnswers++;
             }
         }
@@ -141,18 +140,18 @@ class Validator
         }
     }
 
-    private function isGoodAnswer(string $name, array $values, array $values2): void
+    private function isGoodAnswer(string $name, array $values): void
     {
         $nbGoodAnswers = 0;
         $wrongGoodAnswer = false;
 
-        for ($i = 1; $i < 5; $i++) {
-            if (isset($values[$i]) && $values[$i] === 'on') {
+        foreach ($values as $value) {
+            if (isset($value['goodAnswer'])) {
                 $nbGoodAnswers++;
+            }
 
-                if ($values2[$i] === '') {
-                    $wrongGoodAnswer = true;
-                }
+            if (isset($value['goodAnswer']) && trim($value['content']) === '') {
+                $wrongGoodAnswer = true;
             }
         }
         
