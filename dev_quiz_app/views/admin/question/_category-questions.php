@@ -9,7 +9,7 @@
                 <a href="/admin/question/modifier/<?= $question->getId() ?>">Modifier</a>
             </td>
             <td>
-            <a href="/admin/question/supprimer/<?= $question->getId() ?>">Supprimer</a>
+                <a href="/admin/question/supprimer/<?= $question->getId() ?>">Supprimer</a>
             </td>
         </tr>
         <tr>

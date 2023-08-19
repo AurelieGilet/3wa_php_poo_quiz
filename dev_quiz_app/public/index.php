@@ -49,7 +49,8 @@ $router->get('/admin/question/ajouter', 'App\Controllers\Admin\QuestionAnswerCon
 $router->post('/admin/question/ajouter', 'App\Controllers\Admin\QuestionAnswerController@createQuestionPost');
 $router->get('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionAnswerController@updateQuestion');
 $router->post('/admin/question/modifier/:id', 'App\Controllers\Admin\QuestionAnswerController@updateQuestionPost');
-$router->post('/admin/question/supprimer/:id', 'App\Controllers\Admin\QuestionAnswerController@deleteQuestion');
+$router->get('/admin/question/supprimer/:id', 'App\Controllers\Admin\QuestionAnswerController@deleteQuestion');
+$router->post('/admin/question/supprimer/:id', 'App\Controllers\Admin\QuestionAnswerController@deleteQuestionPost');
 
 try {
     $router->run();

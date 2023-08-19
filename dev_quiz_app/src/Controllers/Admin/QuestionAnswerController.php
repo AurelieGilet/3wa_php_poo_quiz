@@ -160,12 +160,81 @@ class QuestionAnswerController extends AbstractController
 
     public function updateQuestionPost(int $id)
     {
+        echo'<pre>';var_dump($_POST);echo'</pre>';
+
+        $validator = new Validator($_POST);
+
+        // Front end validation
+        $errors = $validator->validate([
+            'category' => ['required'],
+            'title' => ['required'],
+            'answer' => ['answersMin'],
+            'goodAnswer' => ['isGoodAnswer'],
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            $_SESSION['post'] = $_POST;
+            header('Location: /admin/question/modifier/' . $id);
+            exit;
+        }
+
+        die();
     }
 
     /**
-     * Route: /admin/question/modifier/:id
+     * Route: /admin/question/supprimer/:id
      */
-    public function deleteQuestion()
+    public function deleteQuestion(int $id)
     {
+        $question = $this->questionModel->findById($id);
+        $answers = $this->answerModel->findByQuestion($id);
+
+        return $this->render('admin/question/delete-question-form', compact('question', 'answers'));
+    }
+
+    public function deleteQuestionPost(int $id)
+    {
+        $validator = new Validator($_POST);
+
+        // Front end validation
+        $errors = $validator->validate([
+            'adminPassword' => ['required'],
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/question/supprimer/' . $id);
+            exit;
+        }
+
+        // Password check
+        if (!password_verify($_POST['adminPassword'], $this->user->getPassword())) {
+            $errors['adminPassword'][] = 'Ce n\'est pas le bon mot de passe';
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/question/supprimer/' . $id);
+            exit;
+        }
+
+        // Delete question (delete answers by cascade)
+        $question = $this->questionModel->delete($id);
+
+        if ($question) {
+            $this->flashMessage->createFlashMessage(
+                'deleteQuestion',
+                'Cette question et toutes les réponses associées ont bien été supprimées',
+                $this->flashMessagesConstants::FLASH_SUCCESS,
+            );
+
+            return header('Location: /admin/questions');
+        } else {
+            $this->flashMessage->createFlashMessage(
+                'deleteQuestion',
+                'Cette question n\'a pas été supprimée, une erreur s\'est produite',
+                $this->flashMessagesConstants::FLASH_ERROR,
+            );
+
+            return header('Location: /admin/question/supprimer/' . $id);
+        }
     }
 }
