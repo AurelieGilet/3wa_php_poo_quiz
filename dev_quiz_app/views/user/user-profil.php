@@ -2,21 +2,23 @@
     <h1>Mon profil</h1>
 
     <?php if (isset($params['flashes'])) : ?>
-        <ul>
+    <ul>
         <?php foreach ($params['flashes'] as $flash) : ?>
             <?= $flash ?>
         <?php endforeach; ?>
-        </ul>
+    </ul>
     <?php endif; ?>
 
     <div>
         <p>Mon pseudo</p>
         <p><?= htmlspecialchars($params['user']->getAlias()) ?></p>
     </div>
+
     <div>
         <p>Mon email</p>
         <p><?= htmlspecialchars($params['user']->getEmail()) ?></p>
     </div>
+    
     <div>
         <p>Mon mot de passe</p>
         <p>********</p>

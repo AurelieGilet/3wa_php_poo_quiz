@@ -2,11 +2,11 @@
     <h1>Gestion des utilisateurs</h1>
 
     <?php if (isset($params['flashes'])) : ?>
-        <ul>
+    <ul>
         <?php foreach ($params['flashes'] as $flash) : ?>
             <?= $flash ?>
         <?php endforeach; ?>
-        </ul>
+    </ul>
     <?php endif; ?>
 
     <table>
@@ -20,6 +20,7 @@
                 <th></th>
             </tr>
         </thead>
+
         <tbody>
             <?php foreach ($params['users'] as $user) : ?>
             <tr>
@@ -31,7 +32,7 @@
                     <a href="/admin/utilisateur/modifier/<?= $user->getId() ?>">Modifier</a>
                 </td>
                 <td>
-                <a href="/admin/utilisateur/supprimer/<?= $user->getId() ?>">Supprimer</a>
+                    <a href="/admin/utilisateur/supprimer/<?= $user->getId() ?>">Supprimer</a>
                 </td>
             </tr>
             <?php endforeach; ?>

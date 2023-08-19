@@ -15,16 +15,14 @@ if (isset($_SESSION['errors'])) {
 ?>
 
 <main>
-    <h1>
-        Supprimer un utilisateur
-    </h1>
+    <h1>Supprimer un utilisateur</h1>
 
     <?php if (isset($params['flashes'])) : ?>
-        <ul>
+    <ul>
         <?php foreach ($params['flashes'] as $flash) : ?>
             <?= $flash ?>
         <?php endforeach; ?>
-        </ul>
+    </ul>
     <?php endif; ?>
 
     <p>
@@ -42,16 +40,20 @@ if (isset($_SESSION['errors'])) {
     <form method="POST" action="/admin/utilisateur/supprimer/<?= $params['user']->getId() ?>">
         <div>
             <label for="adminPassword">Validez la suppression avec le mot de passe administrateur</label>
-            <input type="text" name="adminPassword" id="adminPassword">
+
+            <input type="text" id="adminPassword" name="adminPassword">
+
             <?php if (isset($formErrors['adminPassword'])) : ?>
-                <ul>
+            <ul>
                 <?php foreach ($formErrors['adminPassword'] as $error) : ?>
-                    <li><?= $error ?></li>
+                <li><?= $error ?></li>
                 <?php endforeach; ?>
-                </ul>
+            </ul>
             <?php endif; ?>
         </div>
+
         <button type="submit">Valider</button>
     </form>
+    
     <a href="/profil-utilisateur">retour</a>
 </main>

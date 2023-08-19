@@ -16,14 +16,27 @@
             </a>
         </li>
     </ul>
+
     <?php if (isset($_SESSION['user'])) : ?>
     <ul>
         <?php if ($_SESSION['path'] === 'profil-utilisateur') :  ?>
-            <li><a href="<?= $_SESSION['auth'] === 'admin' ? '/espace-admin' : '/espace-utilisateur' ?>">Retour</a></li>
+        <li>
+            <a href="<?= $_SESSION['auth'] === 'admin' ? '/espace-admin' : '/espace-utilisateur' ?>">
+                Retour
+            </a>
+        </li>
         <?php else : ?>
-            <li><a href="/profil-utilisateur">Profil</a></li>
+        <li>
+            <a href="/profil-utilisateur">
+                Profil
+            </a>
+        </li>
         <?php endif; ?>
-        <li><a href="/deconnexion">Déconnexion</a></li>
+        <li>
+            <a href="/deconnexion">
+                Déconnexion
+            </a>
+        </li>
     </ul>
     <?php endif; ?>
 </nav>

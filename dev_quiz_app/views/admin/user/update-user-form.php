@@ -20,18 +20,20 @@ if (isset($_SESSION['errors'])) {
     </h1>
 
     <?php if (isset($params['flashes'])) : ?>
-        <ul>
+    <ul>
         <?php foreach ($params['flashes'] as $flash) : ?>
             <?= $flash ?>
         <?php endforeach; ?>
-        </ul>
+    </ul>
     <?php endif; ?>
 
     <form method="POST" action="/admin/utilisateur/modifier/<?= $params['user']->getId() ?>">
         <div>
             <label for="alias">Modifier le pseudo</label>
-            <input type="text" name="alias" id="alias" 
+
+            <input type="text" id="alias" name="alias"
                 value="<?= isset($params['user']) ? htmlspecialchars($params['user']->getAlias()) : '' ?>">
+
             <?php if (isset($formErrors['alias'])) : ?>
             <ul>
                 <?php foreach ($formErrors['alias'] as $error) : ?>
@@ -40,10 +42,13 @@ if (isset($_SESSION['errors'])) {
             </ul>
             <?php endif; ?>
         </div>
+
         <div>
             <label for="email">Modifier l'email</label>
-            <input type="text" name="email" id="email" 
+
+            <input type="text" id="email" name="email"
                 value="<?= isset($params['user']) ? htmlspecialchars($params['user']->getEmail()) : '' ?>">
+
             <?php if (isset($formErrors['email'])) : ?>
             <ul>
                 <?php foreach ($formErrors['email'] as $error) : ?>
@@ -52,20 +57,24 @@ if (isset($_SESSION['errors'])) {
             </ul>
             <?php endif; ?>
         </div>
+
         <div>
             <label for="email">Modifier le role</label>
+
             <p>
                 Attention, passer un utilisateur en administrateur lui donnera accès au back-office et 
                 l’empêchera de jouer aux quiz.
             </p>
-            <select name="role" id="role">
-                <option value="user" <?= $params['user']->getRole() === 'user' ? 'selected' : ''  ?> >
+
+            <select id="role"name="role">
+                <option value="user" <?= $params['user']->getRole() === 'user' ? 'selected' : ''  ?>>
                     Utilisateur
                 </option>
-                <option value="admin" <?= $params['user']->getRole() === 'admin' ? 'selected' : '' ?> >
+                <option value="admin" <?= $params['user']->getRole() === 'admin' ? 'selected' : '' ?>>
                     Administrateur
                 </option>
             </select>
+
             <?php if (isset($formErrors['role'])) : ?>
             <ul>
                 <?php foreach ($formErrors['role'] as $error) : ?>
@@ -74,10 +83,12 @@ if (isset($_SESSION['errors'])) {
             </ul>
             <?php endif; ?>
         </div>
+
         <div>
             <label for="adminPassword">Confirmez les modifications avec votre mot de passe administrateur</label>
             <?php /*TODO: don't forget to change back input type to password*/ ?>
-            <input type="text" name="adminPassword" id="adminPassword">
+            <input type="text" id="adminPassword" name="adminPassword">
+
             <?php if (isset($formErrors['adminPassword'])) : ?>
             <ul>
                 <?php foreach ($formErrors['adminPassword'] as $error) : ?>
@@ -86,7 +97,9 @@ if (isset($_SESSION['errors'])) {
             </ul>
             <?php endif; ?>
         </div>
+
         <button type="submit">Valider</button>
     </form>
+    
     <a href="/admin/utilisateurs">retour</a>
 </main>

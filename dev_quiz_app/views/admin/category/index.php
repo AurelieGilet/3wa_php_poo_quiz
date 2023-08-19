@@ -2,11 +2,11 @@
     <h1>Gestion des catégories</h1>
 
     <?php if (isset($params['flashes'])) : ?>
-        <ul>
+    <ul>
         <?php foreach ($params['flashes'] as $flash) : ?>
             <?= $flash ?>
         <?php endforeach; ?>
-        </ul>
+    </ul>
     <?php endif; ?>
 
     <a href="/admin/categorie/ajouter">Ajouter une catégorie</a>

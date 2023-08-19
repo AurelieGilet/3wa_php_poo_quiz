@@ -18,38 +18,43 @@ if (isset($_SESSION['errors'])) {
     <h1>Connexion</h1>
 
     <?php if (isset($params['flashes'])) : ?>
-        <ul>
+    <ul>
         <?php foreach ($params['flashes'] as $flash) : ?>
             <?= $flash ?>
         <?php endforeach; ?>
-        </ul>
+    </ul>
     <?php endif; ?>
     
-    <form action="/connexion" method="post">
+    <form method="POST" action="/connexion">
         <div>
             <label for="email">Email</label>
-            <input type="email" name="email" id="email">
+
+            <input type="email" id="email" name="email">
+
             <?php if (isset($formErrors['email'])) : ?>
-                <ul>
+            <ul>
                 <?php foreach ($formErrors['email'] as $error) : ?>
-                    <li><?= $error ?></li>
+                <li><?= $error ?></li>
                 <?php endforeach; ?>
-                </ul>
+            </ul>
             <?php endif; ?>
         </div>
+
         <div>
             <label for="password">Mot de passe</label>
+
             <?php /*TODO: don't forget to change back input type to password*/ ?>
-            <input type="text" name="password" id="password">
+            <input type="text" id="password" name="password">
+
             <?php if (isset($formErrors['password'])) : ?>
-                <ul>
+            <ul>
                 <?php foreach ($formErrors['password'] as $error) : ?>
-                    <li><?= $error ?></li>
+                <li><?= $error ?></li>
                 <?php endforeach; ?>
-                </ul>
+            </ul>
             <?php endif; ?>
         </div>
+        
         <button type="submit">Se connecter</button>
     </form>
-
 </main>

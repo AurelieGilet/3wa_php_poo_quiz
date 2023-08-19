@@ -27,17 +27,23 @@ if (isset($_SESSION['errors'])) {
             : '/admin/categorie/ajouter'?>">
         <div>
             <label for="name">Nom de la catégorie</label>
-            <input type="text" name="name" id="name" 
-                value="<?= isset($params['category']) ? htmlspecialchars($params['category']->getName()) : '' ?>">
+
+            <input type="text" id="name" name="name"
+                value="<?= isset($params['category'])
+                ? htmlspecialchars($params['category']->getName())
+                : '' ?>">
+
             <?php if (isset($formErrors['name'])) : ?>
-                <ul>
+            <ul>
                 <?php foreach ($formErrors['name'] as $error) : ?>
-                    <li><?= $error ?></li>
+                <li><?= $error ?></li>
                 <?php endforeach; ?>
-                </ul>
+            </ul>
             <?php endif; ?>
         </div>
+
         <button type="submit">Valider</button>
     </form>
+
     <a href="/admin/categories">retour</a>
 </main>
