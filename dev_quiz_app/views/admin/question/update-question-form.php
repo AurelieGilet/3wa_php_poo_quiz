@@ -35,11 +35,13 @@ if (isset($_SESSION['post'])) {
             <label for="category">Catégorie de la question</label>
 
             <select id="category" name="category">
-                <?php foreach ($params['categories'] as $category) : ?>
-                <option value="<?= $category->getId() ?>" 
-                    <?= $params['question']->getCategoryId() === $category->getId() ? 'selected' : '' ?>
-                >
-                    <?= htmlspecialchars($category->getName()) ?>
+                <?php foreach ($params['categories'] as $cat) : ?>
+                <option value="<?= $cat->getId() ?>" 
+                    <?= $params['question']->getCategoryId() === $cat->getId()
+                    || (isset($category) && $category == $cat->getId())
+                    ? 'selected'
+                    : '' ?>>
+                    <?= htmlspecialchars($cat->getName()) ?>
                 </option>
                 <?php endforeach; ?>
             </select>
@@ -87,7 +89,7 @@ if (isset($_SESSION['post'])) {
         <div>
             <div>
                 <label for="answer<?= $i ?>">Réponse <?= $i ?></label>
-
+                <?php //TODO: Add $_POST value to input in case of form error ?>
                 <input type="text" id="answer<?= $i ?>" 
                     name="<?= isset($params['answers'][$i - 1])
                     ? 'answer[' . $params['answers'][$i - 1]->getId() . '][content]'

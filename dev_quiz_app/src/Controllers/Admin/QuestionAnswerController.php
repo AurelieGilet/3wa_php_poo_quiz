@@ -96,7 +96,11 @@ class QuestionAnswerController extends AbstractController
         }
 
         // Back end validation
-        $categoryExists = $this->categoryModel->findById($_POST['category']);
+        $categoryExists = false;
+
+        if (is_numeric($_POST['category'])) {
+            $categoryExists = $this->categoryModel->findById($_POST['category']);
+        }
 
         if (!$categoryExists) {
             $errors['category'][] = 'Merci de choisir une catégorie';
@@ -165,16 +169,13 @@ class QuestionAnswerController extends AbstractController
 
     public function updateQuestionPost(int $id)
     {
-        echo'<pre>';var_dump($_POST);echo'</pre>';
-
         $validator = new Validator($_POST);
 
         // Front end validation
         $errors = $validator->validate([
             'category' => ['required'],
             'title' => ['required'],
-            'answer' => ['answersMin'],
-            'goodAnswer' => ['isGoodAnswer'],
+            'answer' => ['answersMin', 'isGoodAnswer'],
         ]);
 
         if ($errors) {
@@ -184,7 +185,113 @@ class QuestionAnswerController extends AbstractController
             exit;
         }
 
-        die();
+        // Back end validation
+        $categoryExists = false;
+
+        if (is_numeric($_POST['category'])) {
+            $categoryExists = $this->categoryModel->findById($_POST['category']);
+        }
+
+        if (!$categoryExists) {
+            $errors['category'][] = 'Merci de choisir une catégorie';
+            $_SESSION['errors'][] = $errors;
+            $_SESSION['post'] = $_POST;
+            header('Location: /admin/question/modifier/' . $id);
+            exit;
+        }
+
+        $questionExists = $this->questionModel->isUnique('title', $_POST['title']);
+
+        if ($questionExists && $questionExists->getId() !== $id) {
+            $errors['title'][] = 'Cette question existe déjà';
+            $_SESSION['errors'][] = $errors;
+            $_SESSION['post'] = $_POST;
+            header('Location: /admin/question/modifier/' . $id);
+            exit;
+        }
+
+        // Update Question
+        $questionData['title'] = $_POST['title'];
+        $questionData['category_id'] = $_POST['category'];
+
+        $question = $this->questionModel->update($id, $questionData);
+
+        if (!$question) {
+            $this->flashMessage->createFlashMessage(
+                'question',
+                'La question n\'a pas été modifiée, une erreur s\'est produite',
+                $this->flashMessagesConstants::FLASH_ERROR,
+            );
+
+            return header('Location: /admin/question/modifier/' . $id);
+        }
+
+        // Update Answers
+        foreach ($_POST['answer'] as $key => $answer) {
+            $currentAnswers = $this->answerModel->findByQuestion($id);
+            $currentAnswersId = array();
+        
+            foreach ($currentAnswers as $currentAnswer) {
+                $currentAnswersId[] = $currentAnswer->getId();
+            }
+
+            /**
+             * If the array key is an int, the answer already exists, it's an update
+             * We check if the key (id) match with one of the question current answers,
+             * as it could have been modified in the form by the user
+             * If not, we don't update that answer
+             */
+            if (is_int($key) && array_search($key, $currentAnswersId, true) !== false) {
+                // If there is no content then we delete the answer
+                if (trim($answer['content'] === '')) {
+                    $this->answerModel->delete($key);
+
+                // Otherwise, we update the answer
+                } else {
+                    $answerData['content'] = trim($answer['content']);
+
+                    $answerData['is_good_answer'] = isset($answer['goodAnswer'])
+                    && $answer['goodAnswer'] === 'on'
+                    ? true
+                    : false;
+                    
+                    $answerData['question_id'] = $id;
+
+                    $this->answerModel->update($key, $answerData);
+                }
+
+            /**
+             * If the array key is a string, the answer is new, it's a create
+             * We check if the question has currently less than 4 answers which is the maximum
+             * If not, we don't create the new answer, and inform the user of the error
+             */
+            } elseif (is_string($key) && count($currentAnswersId) < 4 && trim($answer['content'] !== '')) {
+                $answerData['content'] = trim($answer['content']);
+
+                $answerData['is_good_answer'] = isset($answer['goodAnswer'])
+                && $answer['goodAnswer'] === 'on'
+                ? true
+                : false;
+                
+                $answerData['question_id'] = $id;
+
+                $this->answerModel->create($answerData);
+            } else {
+                $errors['answer'][] = 'Une erreur s\'est produite et au moins une des questions n\'a pû être modifiée.
+                Assurez-vous de soumettre le formulaire sans modifier les paramètres des champs';
+                $_SESSION['errors'][] = $errors;
+                header('Location: /admin/question/modifier/' . $id);
+                exit;
+            }
+        }
+
+        $this->flashMessage->createFlashMessage(
+            'question',
+            'La question a bien été modifiée',
+            $this->flashMessagesConstants::FLASH_SUCCESS,
+        );
+
+        return header('Location: /admin/questions');
     }
 
     /**

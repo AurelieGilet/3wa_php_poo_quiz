@@ -118,7 +118,7 @@ class CategoryController extends AbstractController
         // Back end validation
         $categoryExists = $this->categoryModel->isUnique('name', $_POST['name']);
 
-        if ($categoryExists) {
+        if ($categoryExists && $categoryExists->getId() !== $id) {
             $errors['name'][] = 'Cette catégorie existe déjà';
             $_SESSION['errors'][] = $errors;
             header('Location: /admin/categorie/modifier/' . $id);
