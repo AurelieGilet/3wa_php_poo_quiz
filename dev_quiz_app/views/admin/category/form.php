@@ -26,6 +26,13 @@ if (isset($_SESSION['errors'])) {
             ? '/admin/categorie/modifier/' . $params['category']->getId()
             : '/admin/categorie/ajouter'?>">
         <div>
+            <?php if (isset($params['category'])) : ?>
+            <p>
+                Attention, la modification de cette catégorie sera appliquée à toutes
+                les questions qui lui sont associées.
+            </p>
+            <?php endif; ?>
+            
             <label for="name">Nom de la catégorie</label>
 
             <input type="text" id="name" name="name"

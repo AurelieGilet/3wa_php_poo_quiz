@@ -14,7 +14,8 @@
     <div>
         <?php foreach ($params['categories'] as $category) : ?>
         <ul>
-            <li><?= htmlspecialchars($category->getName()) ?></li>
+            <li>Nom de la catégorie : <?= htmlspecialchars($category->getName()) ?></li>
+            <li>Nombre de questions associées :<?= htmlspecialchars($category->getQuestions()) ?></li>
             <li><a href="/admin/categorie/modifier/<?= $category->getId() ?>">Modifier</a></li>
             <li>
                 <form action="/admin/categorie/supprimer/<?= $category->getId() ?>" method="POST">

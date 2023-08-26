@@ -36,7 +36,6 @@ class CategoryController extends AbstractController
     public function index()
     {
         $categories = $this->categoryModel->getAll();
-
         $flashes = $this->flashMessage->getFlashMessages('category');
 
         return $this->render('admin/category/index', compact('categories', 'flashes'));
@@ -125,7 +124,6 @@ class CategoryController extends AbstractController
             exit;
         }
 
-        // TODO: add warning if category has associated questions as it will change the category of the questions too
         // Category update
         $category = $this->categoryModel->update($id, $_POST);
 
