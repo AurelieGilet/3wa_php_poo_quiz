@@ -89,14 +89,23 @@ if (isset($_SESSION['post'])) {
         <div>
             <div>
                 <label for="answer<?= $i ?>">Réponse <?= $i ?></label>
-                <?php //TODO: Add $_POST value to input in case of form error ?>
                 <input type="text" id="answer<?= $i ?>" 
                     name="<?= isset($params['answers'][$i - 1])
                     ? 'answer[' . $params['answers'][$i - 1]->getId() . '][content]'
                     : 'answer[newAnswer' . $i . '][content]' ?>"
-                    value="<?= isset($params['answers'][$i - 1])
-                    ? htmlspecialchars($params['answers'][$i - 1]->getContent())
-                    : '' ?>">
+
+                    value="<?php
+                    if (isset($params['answers'][$i - 1])
+                        && isset($answer[$params['answers'][$i - 1]->getId()])) {
+                        echo htmlspecialchars($answer[$params['answers'][$i - 1]->getId()]['content']);
+                    } elseif (isset($answer['newAnswer' . $i]['content'])) {
+                        echo htmlspecialchars($answer['newAnswer' . $i]['content']);
+                    } elseif (isset($params['answers'][$i - 1])) {
+                        echo htmlspecialchars($params['answers'][$i - 1]->getContent());
+                    } else {
+                        echo '';
+                    }
+                    ?>">
             </div>
 
             <div>
@@ -106,9 +115,22 @@ if (isset($_SESSION['post'])) {
                     name="<?= isset($params['answers'][$i - 1])
                     ? 'answer[' . $params['answers'][$i - 1]->getId() . '][goodAnswer]'
                     : 'answer[newAnswer' . $i .'][goodAnswer]' ?>"
-                    <?= isset($params['answers'][$i - 1]) && $params['answers'][$i - 1]->getIsGoodAnswer()
-                    ? 'checked'
-                    : '' ?>>
+
+                    <?php
+                    if (isset($params['answers'][$i - 1])
+                        && isset($answer[$params['answers'][$i - 1]->getId()]['goodAnswer'])) {
+                        echo 'checked';
+                    } elseif (isset($answer['newAnswer' . $i]['goodAnswer'])) {
+                        echo 'checked';
+                    } elseif ((isset($params['answers'][$i - 1])
+                        && !isset($answer[$params['answers'][$i - 1]->getId()]))
+                        && isset($params['answers'][$i - 1])
+                        && $params['answers'][$i - 1]->getIsGoodAnswer()) {
+                        echo 'checked';
+                    } else {
+                        echo '';
+                    }
+                    ?>>
             </div>
         </div>
         <?php endfor; ?>

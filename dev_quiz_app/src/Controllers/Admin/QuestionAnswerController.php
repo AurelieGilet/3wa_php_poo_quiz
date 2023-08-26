@@ -265,21 +265,24 @@ class QuestionAnswerController extends AbstractController
              * We check if the question has currently less than 4 answers which is the maximum
              * If not, we don't create the new answer, and inform the user of the error
              */
-            } elseif (is_string($key) && count($currentAnswersId) < 4 && trim($answer['content'] !== '')) {
-                $answerData['content'] = trim($answer['content']);
+            } elseif (is_string($key) && count($currentAnswersId) < 4) {
+                if (trim($answer['content'] !== '')) {
+                    $answerData['content'] = trim($answer['content']);
 
-                $answerData['is_good_answer'] = isset($answer['goodAnswer'])
-                && $answer['goodAnswer'] === 'on'
-                ? true
-                : false;
-                
-                $answerData['question_id'] = $id;
+                    $answerData['is_good_answer'] = isset($answer['goodAnswer'])
+                    && $answer['goodAnswer'] === 'on'
+                    ? true
+                    : false;
+                    
+                    $answerData['question_id'] = $id;
 
-                $this->answerModel->create($answerData);
+                    $this->answerModel->create($answerData);
+                }
             } else {
                 $errors['answer'][] = 'Une erreur s\'est produite et au moins une des questions n\'a pû être modifiée.
                 Assurez-vous de soumettre le formulaire sans modifier les paramètres des champs';
                 $_SESSION['errors'][] = $errors;
+
                 header('Location: /admin/question/modifier/' . $id);
                 exit;
             }
