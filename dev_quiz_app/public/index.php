@@ -14,7 +14,8 @@ $router = new Router($_GET['url']);
 // Don't forget to add the namespace of the controller so that the Route->execute() can work properly
 $router->get('/', 'App\Controllers\AppController@home');
 $router->get('/nouveau-jeu', 'App\Controllers\AppController@newGame');
-$router->get('/choisir-jeu', 'App\Controllers\AppController@chooseGame');
+$router->get('/choisir-sujet', 'App\Controllers\AppController@chooseGameSubject');
+$router->get('/jeu/categorie/:id', 'App\Controllers\GameController@playGame');
 
 $router->get('/inscription', 'App\Controllers\Security\SecurityController@register');
 $router->post('/inscription', 'App\Controllers\Security\SecurityController@registerPost');
