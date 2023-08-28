@@ -14,6 +14,7 @@ $router = new Router($_GET['url']);
 // Don't forget to add the namespace of the controller so that the Route->execute() can work properly
 $router->get('/', 'App\Controllers\AppController@home');
 $router->get('/nouveau-jeu', 'App\Controllers\AppController@newGame');
+$router->get('/choisir-jeu', 'App\Controllers\AppController@chooseGame');
 
 $router->get('/inscription', 'App\Controllers\Security\SecurityController@register');
 $router->post('/inscription', 'App\Controllers\Security\SecurityController@registerPost');
@@ -41,7 +42,8 @@ $router->get('/admin/categorie/ajouter', 'App\Controllers\Admin\CategoryControll
 $router->post('/admin/categorie/ajouter', 'App\Controllers\Admin\CategoryController@createCategoryPost');
 $router->get('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategory');
 $router->post('/admin/categorie/modifier/:id', 'App\Controllers\Admin\CategoryController@updateCategoryPost');
-$router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
+$router->get('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategory');
+$router->post('/admin/categorie/supprimer/:id', 'App\Controllers\Admin\CategoryController@deleteCategoryPost');
 
 $router->get('/admin/questions', 'App\Controllers\Admin\QuestionAnswerController@index');
 $router->get('/admin/questions/:id', 'App\Controllers\Admin\QuestionAnswerController@ajaxIndex');

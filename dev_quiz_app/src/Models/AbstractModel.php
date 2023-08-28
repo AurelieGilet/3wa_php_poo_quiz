@@ -17,7 +17,7 @@ abstract class AbstractModel
 
     public function query(string $request, array $param = null, bool $single = false): bool|array|AbstractModel
     {
-        //TODO : refactor this function
+        //TODO: refactor this function ?
 
         // If $param is null, it's a general query otherwise it's a prepared request
         $method = is_null($param) ? 'query' : 'prepare';

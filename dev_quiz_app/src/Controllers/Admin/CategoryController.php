@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Question;
 use Database\DBConnection;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
@@ -13,12 +14,14 @@ class CategoryController extends AbstractController
     protected $user;
     protected $userModel;
     protected $categoryModel;
+    protected $questionModel;
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
 
         $this->categoryModel = new Category($this->getDB());
+        $this->questionModel = new Question($this->getDB());
 
         if ($this->isAuth()) {
             $this->userModel = new User($this->getDB());
@@ -151,8 +154,36 @@ class CategoryController extends AbstractController
      */
     public function deleteCategory(int $id)
     {
-        // TODO: prevent delete if questions associated to category
-        // TODO: add delete confirmation procedure
+        $category = $this->categoryModel->findById($id);
+        $questions = $this->questionModel->findByCategory($id);
+
+        return $this->render('admin/category/delete-category-form', compact('category', 'questions'));
+    }
+
+    public function deleteCategoryPost(int $id)
+    {
+        $validator = new Validator($_POST);
+
+        // Front end validation
+        $errors = $validator->validate([
+            'adminPassword' => ['required'],
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/categorie/supprimer/' . $id);
+            exit;
+        }
+
+        // Password check
+        if (!password_verify($_POST['adminPassword'], $this->user->getPassword())) {
+            $errors['adminPassword'][] = 'Ce n\'est pas le bon mot de passe';
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/categorie/supprimer/' . $id);
+            exit;
+        }
+
+        // Delete category (delete associated questions and answers by cascade)
         $category = $this->categoryModel->delete($id);
 
         if ($category) {

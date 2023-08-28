@@ -17,11 +17,7 @@
             <li>Nom de la catégorie : <?= htmlspecialchars($category->getName()) ?></li>
             <li>Nombre de questions associées :<?= htmlspecialchars($category->getQuestions()) ?></li>
             <li><a href="/admin/categorie/modifier/<?= $category->getId() ?>">Modifier</a></li>
-            <li>
-                <form action="/admin/categorie/supprimer/<?= $category->getId() ?>" method="POST">
-                    <button type="submit">Supprimer</button>
-                </form>
-            </li>
+            <li><a href="/admin/categorie/supprimer/<?= $category->getId() ?>">Supprimer</a></li>
         </ul>
         <?php endforeach; ?>
     </div>
