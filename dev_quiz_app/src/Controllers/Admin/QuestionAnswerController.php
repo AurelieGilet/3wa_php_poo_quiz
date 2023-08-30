@@ -41,6 +41,7 @@ class QuestionAnswerController extends AbstractController
      */
     public function index()
     {
+        //TODO: paginate the results
         // We erase any previous form data that had been stored in the session
         unset($_SESSION['post']);
 
