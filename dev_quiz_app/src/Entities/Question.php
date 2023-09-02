@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
-class Question extends AbstractModel
+use App\Entities\AbstractEntity;
+
+class Question extends AbstractEntity
 {
     protected $table = 'question';
 
@@ -23,12 +25,5 @@ class Question extends AbstractModel
     public function getCategoryId(): ?int
     {
         return $this->category_id;
-    }
-
-    public function findByCategory(int $categoryId)
-    {
-        $request = 'SELECT * FROM ' . $this->table . ' WHERE category_id = ?';
-
-        return $this->query($request, [$categoryId]);
     }
 }

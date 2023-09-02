@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Security;
 
-use App\Models\User;
+use App\Models\UserModel;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
 
@@ -36,7 +36,7 @@ class SecurityController extends AbstractController
             exit;
         }
 
-        $user = (new User($this->getDB()));
+        $user = (new UserModel($this->getDB()));
 
         // Backend validation
         $emailExists = $user->isUnique('email', $_POST['email']);
@@ -98,7 +98,7 @@ class SecurityController extends AbstractController
             exit;
         }
 
-        $user = (new User($this->getDB()))->getByEmail($_POST['email']);
+        $user = (new UserModel($this->getDB()))->getByEmail($_POST['email']);
 
         if ($user) {
             if (password_verify($_POST['password'], $user->getPassword())) {

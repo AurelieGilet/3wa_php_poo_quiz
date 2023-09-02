@@ -37,6 +37,8 @@ class DBConnection
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
                     // Avoid special characters and accents encoding errors
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET CHARACTER SET UTF8',
+                    // https://phpdelusions.net/pdo#emulation
+                    PDO::ATTR_EMULATE_PREPARES => false,
                 )
             );
         }

@@ -1,6 +1,6 @@
 <?php
 //TODO: change button style for active category being displayed
-var_dump('catégorie active', $params['activeCategory']);
+// var_dump('catégorie active', $params['activeCategory']);
 ?>
 
 <main>

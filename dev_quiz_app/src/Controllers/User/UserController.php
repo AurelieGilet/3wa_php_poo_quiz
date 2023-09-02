@@ -2,7 +2,7 @@
 
 namespace App\Controllers\User;
 
-use App\Models\User;
+use App\Models\UserModel;
 use Database\DBConnection;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
@@ -17,7 +17,7 @@ class UserController extends AbstractController
         parent::__construct($db);
 
         if ($this->isAuth()) {
-            $this->userModel = new User($this->getDB());
+            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
             return header('Location: /connexion');

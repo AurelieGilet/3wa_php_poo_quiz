@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
-use App\Models\Category;
+use App\Models\UserModel;
+use App\Models\CategoryModel;
 use Database\DBConnection;
 use App\Controllers\AbstractController;
 
@@ -17,7 +17,7 @@ class AppController extends AbstractController
     {
         parent::__construct($db);
 
-        $this->categoryModel = new Category($this->getDB());
+        $this->categoryModel = new CategoryModel($this->getDB());
     }
 
     /**
@@ -47,7 +47,7 @@ class AppController extends AbstractController
     public function chooseGameSubject()
     {
         if ($this->isAuth()) {
-            $this->userModel = new User($this->getDB());
+            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
             return header('Location: /connexion');

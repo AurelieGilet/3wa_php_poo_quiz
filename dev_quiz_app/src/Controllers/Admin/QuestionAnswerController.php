@@ -2,10 +2,10 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\User;
-use App\Models\Answer;
-use App\Models\Category;
-use App\Models\Question;
+use App\Models\UserModel;
+use App\Models\AnswerModel;
+use App\Models\CategoryModel;
+use App\Models\QuestionModel;
 use Database\DBConnection;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
@@ -22,12 +22,12 @@ class QuestionAnswerController extends AbstractController
     {
         parent::__construct($db);
 
-        $this->categoryModel = new Category($this->getDB());
-        $this->questionModel = new Question($this->getDB());
-        $this->answerModel = new Answer($this->getDB());
+        $this->categoryModel = new CategoryModel($this->getDB());
+        $this->questionModel = new QuestionModel($this->getDB());
+        $this->answerModel = new AnswerModel($this->getDB());
 
         if ($this->isAuth()) {
-            $this->userModel = new User($this->getDB());
+            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
             return header('Location: /connexion');

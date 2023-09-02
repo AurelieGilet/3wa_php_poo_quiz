@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Entities\AbstractEntity;
 use Database\DBConnection;
 use PDO;
 
@@ -9,13 +10,21 @@ abstract class AbstractModel
 {
     protected $db;
     protected $table;
+    protected $entityClass;
 
-    public function __construct(DBConnection $db)
+    public function __construct(DBConnection $db, string $entityClass)
     {
         $this->db = $db;
+
+        $this->entityClass = $entityClass;
     }
 
-    public function query(string $request, array $param = null, bool $single = false): bool|array|AbstractModel
+    protected function modelQuery($entity)
+    {
+        // Virtual function replaced by equivalent in model Classes
+    }
+
+    public function query(string $request, array $param = null, bool $single = false): bool|array|AbstractEntity
     {
         //TODO: refactor this function ?
 
@@ -28,8 +37,8 @@ abstract class AbstractModel
             || strpos($request, 'DELETE') === 0
         ) {
             $pdoStatement = $this->db->getPDO()->$method($request);
-            $pdoStatement->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
-
+            $pdoStatement->setFetchMode(PDO::FETCH_CLASS, $this->entityClass);
+            var_dump('coucou');
             return $pdoStatement->execute($param);
         }
 
@@ -37,13 +46,26 @@ abstract class AbstractModel
         $fetch = $single ? 'fetch' : 'fetchAll';
 
         $pdoStatement = $this->db->getPDO()->$method($request);
-        $pdoStatement->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
+        $pdoStatement->setFetchMode(PDO::FETCH_CLASS, $this->entityClass);
 
         if ($method === 'prepare') {
             $pdoStatement->execute($param);
         }
 
-        return $pdoStatement->$fetch();
+        $results = $pdoStatement->$fetch();
+
+        if (is_bool($results)) {
+            return $results;
+        } elseif (is_array($results)) {
+            foreach ($results as $result) {
+                $this->modelQuery($result);
+            }
+        } else {
+            $this->modelQuery($results);
+        }
+
+
+        return $results;
     }
 
     public function getLastEntry()
@@ -65,14 +87,14 @@ abstract class AbstractModel
         return $this->query($request);
     }
     
-    public function findById(int $id): bool|AbstractModel
+    public function findById(int $id): bool|AbstractEntity
     {
         $request = 'SELECT * FROM ' . $this->table . ' WHERE id = ?';
 
         return $this->query($request, [$id], true);
     }
 
-    public function isUnique(string $column, string $value): bool|AbstractModel
+    public function isUnique(string $column, string $value): bool|AbstractEntity
     {
         $request = 'SELECT * FROM ' . $this->table . ' WHERE ' . $column . ' = ?';
 

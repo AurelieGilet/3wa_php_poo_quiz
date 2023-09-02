@@ -9,7 +9,7 @@
 <body>
     <div class="page-container">
         <?php include('../views/partials/navbar.php'); ?>
-        
+
         <?= $content ?>
 
         <?php include('../views/partials/footer.php'); ?>

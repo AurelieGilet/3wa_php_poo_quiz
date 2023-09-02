@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
-use App\Models\AbstractModel;
-
-class User extends AbstractModel
+class User extends AbstractEntity
 {
     protected $table = 'user';
 
@@ -37,12 +35,5 @@ class User extends AbstractModel
     public function getRole(): ?string
     {
         return $this->role;
-    }
-
-    public function getByEmail(string $email): bool|User
-    {
-        $request = 'SELECT * FROM ' . $this->table . ' WHERE email = ?';
-
-        return $this->query($request, [$email], true);
     }
 }

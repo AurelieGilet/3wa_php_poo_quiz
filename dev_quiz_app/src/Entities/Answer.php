@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
-class Answer extends AbstractModel
+class Answer extends AbstractEntity
 {
     protected $table = 'answer';
 
@@ -29,12 +29,5 @@ class Answer extends AbstractModel
     public function getQuestion(): ?int
     {
         return $this->question_id;
-    }
-
-    public function findByQuestion(int $questionID)
-    {
-        $request = 'SELECT * FROM ' . $this->table . ' WHERE question_id = ?';
-
-        return $this->query($request, [$questionID]);
     }
 }
