@@ -5,7 +5,5 @@
         <?php include('_game-question.php'); ?>
     </div>
 
-    <div id="game-progress"></div>
-    
-    <button>Valider</button>
+    <button id="validate-answer">Valider</button>
 </main>

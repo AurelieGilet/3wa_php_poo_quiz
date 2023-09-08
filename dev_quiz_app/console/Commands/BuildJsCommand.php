@@ -20,6 +20,7 @@ class BuildJsCommand extends Command
     {
         $sourceFiles = [
             'assets/js/ajax/question/question-ajax.js',
+            'assets/js/ajax/game/answer-questions-ajax.js',
         ];
         
         $minifier = new JS();
