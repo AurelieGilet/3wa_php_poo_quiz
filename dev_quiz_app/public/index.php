@@ -16,7 +16,7 @@ $router->get('/nouveau-jeu', 'App\Controllers\AppController@newGame');
 $router->get('/choisir-sujet', 'App\Controllers\AppController@chooseGameSubject');
 $router->get('/jeu/categorie/:id', 'App\Controllers\GameController@playGame');
 $router->get('/jeu/categorie/reponse/:id', 'App\Controllers\GameController@ajaxNextQuestion');
-$router->get('/jeu/score', 'App\Controllers\GameController@calculateScore');
+$router->get('/jeu/score', 'App\Controllers\GameController@gameResult');
 
 $router->get('/inscription', 'App\Controllers\Security\SecurityController@register');
 $router->post('/inscription', 'App\Controllers\Security\SecurityController@registerPost');

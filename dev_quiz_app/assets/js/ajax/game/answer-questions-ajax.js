@@ -49,7 +49,6 @@ const answerQuestionsAjaxCall = () => {
         const gameProgress = document.getElementById("game-progress");
 
         if (gameProgress.dataset.progress <= 9) {
-            console.log(gameProgress);
             displayNextQuestion(gameProgress.dataset.progress);
         }
     });

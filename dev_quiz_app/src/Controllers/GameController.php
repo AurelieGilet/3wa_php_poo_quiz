@@ -8,6 +8,7 @@ use App\Models\CategoryModel;
 use App\Models\QuestionModel;
 use Database\DBConnection;
 use App\Controllers\AbstractController;
+use App\Models\ScoreModel;
 
 class GameController extends AbstractController
 {
@@ -16,6 +17,7 @@ class GameController extends AbstractController
     protected $categoryModel;
     protected $questionModel;
     protected $answerModel;
+    protected $scoreModel;
 
     public function __construct(DBConnection $db)
     {
@@ -24,7 +26,7 @@ class GameController extends AbstractController
         $this->categoryModel = new CategoryModel($this->getDB());
         $this->questionModel = new QuestionModel($this->getDB());
         $this->answerModel = new AnswerModel($this->getDB());
-
+        $this->scoreModel = new ScoreModel($this->getDB());
 
         if ($this->isAuth()) {
             $this->userModel = new UserModel($this->getDB());
@@ -44,9 +46,11 @@ class GameController extends AbstractController
         $category = $this->categoryModel->findById($id);
         $questions = $this->questionModel->getRandomQuestions($id, 10);
 
+        $_SESSION['gameCategory'] = $id;
         $_SESSION['gameQuestions'] = $questions;
         $_SESSION['gameAnswers'] = array();
         $_SESSION['questionIndex'] = 0;
+        $_SESSION['scoreSaved'] = false;
 
         $question = $questions[0];
         $answers = $this->answerModel->findByQuestion($question->getId());
@@ -78,7 +82,14 @@ class GameController extends AbstractController
     /**
      * Route: /jeu/score
      */
-    public function calculateScore()
+    public function gameResult()
+    {
+        $score = $this->calculateScore();
+
+        return $this->render('game/game-score', compact('score'));
+    }
+    
+    private function calculateScore()
     {
         $answers = $_SESSION['gameAnswers'];
 
@@ -94,12 +105,19 @@ class GameController extends AbstractController
         }
 
         $score['percentage'] = $score['total'] / 10 * 100;
-
         $score['mention'] = $this->getScoreMention($score['percentage']);
 
-        //TODO: save score in db;
+        // Save score in DB
+        if (!$_SESSION['scoreSaved']) {
+            $scoreData['result'] = $score['percentage'];
+            $scoreData['user_id'] = $this->user->getId();
+            $scoreData['category_id'] = $_SESSION['gameCategory'];
 
-        return $this->render('game/score', compact('score'));
+            $this->scoreModel->create($scoreData);
+            $_SESSION['scoreSaved'] = true;
+        }
+        
+        return $score;
     }
 
     private function getScoreMention(int $percentage): string
