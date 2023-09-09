@@ -57,6 +57,9 @@ abstract class AbstractController
         echo $content;
     }
 
+    /**
+     * Verify is the user is correctly authenticated
+     */
     protected function isAuth(): bool
     {
         if (session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['user'])) {
@@ -66,6 +69,9 @@ abstract class AbstractController
         return false;
     }
 
+    /**
+     * Verify is the connected user has the role admin
+     */
     protected function isAdmin($user): bool|string
     {
         if (isset($_SESSION['auth']) && $_SESSION['auth'] === 'admin' && $_SESSION['user'] === $user->getId()) {
@@ -75,6 +81,9 @@ abstract class AbstractController
         }
     }
 
+    /**
+     * Verify is the connected user has the role user
+     */
     protected function isUser($user): bool|string
     {
         if (isset($_SESSION['auth']) && $_SESSION['auth'] === 'user' && $_SESSION['user'] === $user->getId()) {

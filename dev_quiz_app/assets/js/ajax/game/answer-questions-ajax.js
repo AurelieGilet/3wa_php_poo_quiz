@@ -43,15 +43,17 @@ const answerQuestionsAjaxCall = () => {
 
     const validateAnswerButton = document.getElementById("validate-answer");
 
-    validateAnswerButton.addEventListener("click", (event) => {
-        event.preventDefault();
+    if (validateAnswerButton) {
+        validateAnswerButton.addEventListener("click", (event) => {
+            event.preventDefault();
 
-        const gameProgress = document.getElementById("game-progress");
+            const gameProgress = document.getElementById("game-progress");
 
-        if (gameProgress.dataset.progress <= 9) {
-            displayNextQuestion(gameProgress.dataset.progress);
-        }
-    });
+            if (gameProgress.dataset.progress <= 9) {
+                displayNextQuestion(gameProgress.dataset.progress);
+            }
+        });
+    }
 };
 
 answerQuestionsAjaxCall();

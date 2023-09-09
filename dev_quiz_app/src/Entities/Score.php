@@ -10,7 +10,7 @@ class Score extends AbstractEntity
     protected $table = 'score';
 
     private ?int $id = null;
-    private ?DateTime $created_at = null;
+    private ?string $created_at = null;
     private ?int $result = null;
     private ?int $user_id = null;
     private ?int $category_id = null;
@@ -20,7 +20,7 @@ class Score extends AbstractEntity
         return $this->id;
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }

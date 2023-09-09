@@ -6,6 +6,6 @@
         <p><?= $params['score']['mention'] ?></p>
     </div>
 
-    <a href="">Mes scores</a>
+    <a href="/espace-utilisateur/scores">Mes scores</a>
     <a href="/choisir-sujet">Nouveau Quiz</a>
 </main>

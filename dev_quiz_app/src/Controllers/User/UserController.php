@@ -4,17 +4,24 @@ namespace App\Controllers\User;
 
 use App\Models\UserModel;
 use Database\DBConnection;
+use App\Models\CategoryModel;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
+use App\Models\ScoreModel;
 
 class UserController extends AbstractController
 {
     protected $user;
     protected $userModel;
+    protected $categoryModel;
+    protected $scoreModel;
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
+
+        $this->categoryModel = new CategoryModel($this->getDB());
+        $this->scoreModel = new ScoreModel($this->getDB());
 
         if ($this->isAuth()) {
             $this->userModel = new UserModel($this->getDB());
@@ -34,6 +41,38 @@ class UserController extends AbstractController
         $this->isUser($this->user);
 
         return $this->render('user/user-homepage', compact('user'));
+    }
+
+    
+    /**
+     * Route: /espace-utilisateur/scores
+     */
+    public function userScores()
+    {
+        $user = $this->user;
+
+        $this->isUser($this->user);
+
+        $categories = $this->categoryModel->getAll();
+        $activeCategory = $categories[0]->getId();
+
+        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $activeCategory);
+
+        // echo'<pre>';
+        // var_dump($scores);
+        // echo'</pre>';
+        return $this->render('user/user-scores', compact('categories', 'activeCategory', 'scores'));
+    }
+
+    /**
+     * Route: /espace-utilisateur/scores/:id
+     */
+    public function ajaxUserScores(int $categoryId)
+    {
+        // User Ajax call (user-score-ajax.js) to render the scores filtered by category
+        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $categoryId);
+
+        return $this->renderFragment('user/_category-scores', compact('scores'));
     }
 
     /**

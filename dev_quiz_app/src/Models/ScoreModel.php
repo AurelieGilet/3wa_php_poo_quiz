@@ -13,4 +13,14 @@ class ScoreModel extends AbstractModel
     {
         parent::__construct($db, Score::class);
     }
+
+    public function findUserScoreByCategory(int $userId, int $categoryId)
+    {
+        $request = 'SELECT created_at, result, category_id
+        FROM score s INNER JOIN user u
+        ON s.user_id = u.id
+        WHERE u.id = ? AND s.category_id = ?';
+
+        return $this->query($request, [$userId, $categoryId]);
+    }
 }

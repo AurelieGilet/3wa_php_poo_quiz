@@ -3,7 +3,7 @@
 
     <div>
         <a href="/choisir-sujet">Choisir un sujet</a>
-        <a href="">Voir mes scores</a>
+        <a href="/espace-utilisateur/scores">Voir mes scores</a>
     </div>
 </main>
 

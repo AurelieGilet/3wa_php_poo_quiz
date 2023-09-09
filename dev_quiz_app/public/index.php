@@ -25,6 +25,8 @@ $router->post('/connexion', 'App\Controllers\Security\SecurityController@loginPo
 $router->get('/deconnexion', 'App\Controllers\Security\SecurityController@logout');
 
 $router->get('/espace-utilisateur', 'App\Controllers\User\UserController@userHomepage');
+$router->get('/espace-utilisateur/scores', 'App\Controllers\User\UserController@userScores');
+$router->get('/espace-utilisateur/scores/:id', 'App\Controllers\User\UserController@ajaxUserScores');
 $router->get('/profil-utilisateur', 'App\Controllers\User\UserController@userProfile');
 $router->get('/profil-utilisateur/modifier', 'App\Controllers\User\UserController@updateUser');
 $router->post('/profil-utilisateur/modifier', 'App\Controllers\User\UserController@updateUserPost');
