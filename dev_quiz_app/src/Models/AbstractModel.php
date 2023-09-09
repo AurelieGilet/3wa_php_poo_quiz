@@ -80,6 +80,7 @@ abstract class AbstractModel
         return $this->query($requestEntry, [$resultId[0]], true);
     }
 
+    //TODO: replace all SELECT * requests
     public function getAll(): array
     {
         $request = 'SELECT * FROM ' . $this->table . ' ORDER BY id ASC';

@@ -14,10 +14,10 @@ class QuestionModel extends AbstractModel
         parent::__construct($db, Question::class);
     }
 
-    //TODO: replace all SELECT * functions
+    
     public function findByCategory(int $categoryId)
     {
-        $request = 'SELECT * FROM ' . $this->table . ' WHERE category_id = ?';
+        $request = 'SELECT id, title, category_id FROM ' . $this->table . ' WHERE category_id = ?';
 
         return $this->query($request, [$categoryId]);
     }

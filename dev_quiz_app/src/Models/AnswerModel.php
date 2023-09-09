@@ -16,7 +16,7 @@ class AnswerModel extends AbstractModel
 
     public function findByQuestion(int $questionID)
     {
-        $request = 'SELECT * FROM ' . $this->table . ' WHERE question_id = ?';
+        $request = 'SELECT id, content, is_good_answer, question_id FROM ' . $this->table . ' WHERE question_id = ?';
 
         return $this->query($request, [$questionID]);
     }

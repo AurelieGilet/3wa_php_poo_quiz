@@ -17,7 +17,7 @@ class UserModel extends AbstractModel
 
     public function getByEmail(string $email): bool|User
     {
-        $request = 'SELECT * FROM ' . $this->table . ' WHERE email = ?';
+        $request = 'SELECT id, email, password, alias, role FROM ' . $this->table . ' WHERE email = ?';
 
         return $this->query($request, [$email], true);
     }
