@@ -1,3 +1,4 @@
+// Handle the display in the BO of the questions, filterer by category
 const questionAjaxCall = () => {
     function filterQuestionsByCategory(button) {
         const categoryId = button.dataset.categoryId;
@@ -20,7 +21,7 @@ const questionAjaxCall = () => {
 
     const categoriesFilters = document.querySelectorAll('[data-controls="category-filter"]');
 
-    if (categoriesFilters) {
+    if (categoriesFilters.length) {
         categoriesFilters.forEach((button) => {
             button.addEventListener("click", () => filterQuestionsByCategory(button));
         });

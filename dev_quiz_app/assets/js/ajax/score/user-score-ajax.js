@@ -1,3 +1,4 @@
+// Handle the display of the user's game scores, filtered by category
 const userScoreAjaxCall = () => {
     function filterUserScoresByCategory(button) {
         const categoryId = button.dataset.categoryId;
@@ -20,7 +21,7 @@ const userScoreAjaxCall = () => {
 
     const scoreFilters = document.querySelectorAll('[data-controls="user-score-filter"]');
 
-    if (scoreFilters) {
+    if (scoreFilters.length) {
         scoreFilters.forEach((button) => {
             button.addEventListener("click", () => filterUserScoresByCategory(button));
         });
