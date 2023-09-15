@@ -27,14 +27,14 @@ Du côté back office du site, l'administrateur aura accès à un tableau de com
 - JavaScript (+ Ajax)
 - Composer
 
-Souhaitant développer un projet en pur PHP, il me semblait illogique de devoir installer **NPM** uniquement pour compiler le scss et le js.
+Souhaitant développer un projet en pur PHP, il me semblait illogique de devoir installer **NPM** uniquement pour compiler le SCSS et le JS.
 
-J'ai contourné ce problème en ayant recours à **scssphp** pour compiler le scss et en créant un script Composer qui permette de build le css rapidement avec la commande 
+J'ai contourné ce problème en ayant recours à [**scssphp**](https://scssphp.github.io/scssphp/) pour compiler le scss et en créant un script Composer qui permette de build le css rapidement avec la commande 
 ```
 composer build
 ```
 
-Pour le JavaScript, j'ai utilisé le Symfony Console Component pour créer une commande qui permette d'unifier et minimiser tous les script JS avec la commande 
+Pour le JavaScript, j'ai utilisé le [Symfony Console Component](https://symfony.com/doc/current/components/console.html) pour créer une commande qui permette d'unifier et minimiser tous les script JS avec la commande 
 ```
 bin/console build:js
 ```
