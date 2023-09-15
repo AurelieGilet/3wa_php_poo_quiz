@@ -23,8 +23,7 @@
     "scripts" : {
         "build": [
             "vendor/bin/pscss --style=expanded assets/style/style.scss public/style/style.css",
-            "vendor/bin/pscss --style=compressed assets/style/style.scss public/style/style.min.css",
-            "bin/console build:js"
+            "vendor/bin/pscss --style=compressed assets/style/style.scss public/style/style.min.css"
         ]
     }
 }

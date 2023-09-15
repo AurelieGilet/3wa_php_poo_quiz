@@ -1,3 +1,4 @@
+// Fonts Family
 @font-face {
     src: url("/public/fonts/Orbitron-VariableFont_wght.ttf") format("truetype");
     font-family: "Orbitron";
@@ -10,5 +11,38 @@
     font-display: swap;
 }
 
+// Fonts Variables
 $family-orbitron: "Orbitron", "Verdana", sans-serif;
 $family-exo2: "Exo2", "Trebuchet MS", sans-serif;
+
+$family-primary: $family-orbitron;
+$family-secondary: $family-exo2;
+
+body {
+    font-family: $family-secondary;
+    font-size: 1rem;
+
+    @include md {
+        font-size: 1.125rem; //18px
+    }
+}
+
+h1 {
+    font-family: $family-primary;
+    font-size: 2rem; //32px
+    text-transform: uppercase;
+
+    @include md {
+        font-size: 2.375rem; //38px
+    }
+}
+
+h2 {
+    font-family: $family-primary;
+    font-size: 1.5rem; //24px
+    text-transform: uppercase;
+
+    @include md {
+        font-size: 2.125rem; //34px
+    }
+}

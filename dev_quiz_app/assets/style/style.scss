@@ -1,15 +1,15 @@
 // Reset
-@import "base/overrides/reset.scss";
-
-// Theme
-@import "base/theme/colors.scss";
-@import "base/theme/fonts";
+@import "base/overrides/reset";
 
 // Mixins
-@import "base/mixins/breakpoints.scss";
+@import "base/mixins/breakpoints";
+
+// Theme
+@import "base/theme/colors";
+@import "base/theme/fonts";
 
 // Templates
-@import "templates/base.scss";
+@import "templates/base";
 
 // Partials
-@import "templates/partials/footer.scss";
+@import "templates/partials/footer";
