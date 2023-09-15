@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2023 at 10:47 PM
+-- Generation Time: Sep 15, 2023 at 03:51 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -677,6 +677,33 @@ INSERT INTO `question` (`id`, `title`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `score`
+--
+
+CREATE TABLE `score` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `result` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `score`
+--
+
+INSERT INTO `score` (`id`, `created_at`, `result`, `user_id`, `category_id`) VALUES
+(1, '2023-09-09 16:02:30', 100, 26, 1),
+(3, '2023-09-09 16:26:25', 70, 26, 1),
+(10, '2023-09-09 16:38:28', 50, 26, 1),
+(11, '2023-09-09 16:52:53', 80, 26, 2),
+(12, '2023-09-09 16:54:17', 90, 26, 3),
+(13, '2023-09-09 16:55:13', 90, 26, 4),
+(14, '2023-09-09 16:56:26', 80, 26, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -721,6 +748,14 @@ ALTER TABLE `question`
   ADD KEY `category_id` (`category_id`);
 
 --
+-- Indexes for table `score`
+--
+ALTER TABLE `score`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -734,25 +769,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=457;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=460;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+
+--
+-- AUTO_INCREMENT for table `score`
+--
+ALTER TABLE `score`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
@@ -769,6 +810,13 @@ ALTER TABLE `answer`
 --
 ALTER TABLE `question`
   ADD CONSTRAINT `FK_question_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `score`
+--
+ALTER TABLE `score`
+  ADD CONSTRAINT `FK_score_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_score_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
