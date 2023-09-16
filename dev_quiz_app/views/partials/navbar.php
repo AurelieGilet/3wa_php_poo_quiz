@@ -1,9 +1,4 @@
-<?php
-    $path = $_SESSION['path'];
-
-    echo'<pre>'; var_dump($path); echo'</pre>';
-?>
-
+<?php if ($_SESSION['path'] !== "") : ?>
 <nav>
     <ul>
         <li>
@@ -40,3 +35,4 @@
     </ul>
     <?php endif; ?>
 </nav>
+<?php endif; ?>

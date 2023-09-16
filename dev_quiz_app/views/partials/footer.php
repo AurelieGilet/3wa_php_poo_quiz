@@ -1,8 +1,8 @@
-<footer>
+<footer class="is-flex-centered is-flex-column">
     <ul>
-        <li><a href="/connexion">admin</a></li>
-        <li><a href="">mentions légales</a></li>
-        <li><a href="">contact</a></li>
+        <li class="link"><a href="/connexion">admin</a></li>
+        <li class="link"><a href="">mentions légales</a></li>
+        <li class="link"><a href="">contact</a></li>
     </ul>
     
     <p>Copyright &copy; 2023 - Tous droits réservés</p>

@@ -1,0 +1,21 @@
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $footer-height; //60px
+    display: flex;
+
+    @include is-flex-centered;
+    @include is-flex-column;
+
+    & > ul {
+        display: flex;
+    }
+
+    & li:nth-child(-n+2)::after {
+        content: '-';
+        margin-inline: .3125rem; //5px
+        display: inline-block;
+        text-decoration: none;
+    }
+}

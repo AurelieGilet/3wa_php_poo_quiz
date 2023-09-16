@@ -10,5 +10,10 @@ body {
 }
 
 main {
-    padding-bottom: 3.75rem;
+    padding-top: $navbar-height;
+    padding-bottom: $footer-height;
+    height: 100vh;
+
+    @include is-flex-centered;
+    @include is-flex-column;
 }

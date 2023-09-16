@@ -1,0 +1,14 @@
+.button {
+    text-transform: uppercase;
+    padding-inline: 2.25rem; //36px
+    padding-block: .94rem; //15px
+    font-size: 1.375rem; //22px
+    line-height: 1;
+
+    @include two-corners-clipped;
+    @include two-corners-clipped-container;
+
+    @include md {
+        font-size: 1.75rem; //28px
+    }
+}

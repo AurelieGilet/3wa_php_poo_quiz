@@ -1,0 +1,11 @@
+// Flex box
+@mixin is-flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin is-flex-column {
+    display: flex;
+    flex-direction: column;
+}

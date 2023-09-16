@@ -3,13 +3,22 @@
 
 // Mixins
 @import "base/mixins/breakpoints";
+@import "base/mixins/clipped-container";
+@import "base/mixins/helpers";
 
 // Theme
 @import "base/theme/colors";
 @import "base/theme/fonts";
 
-// Templates
-@import "templates/base";
+// Base
+@import "base/variables";
+@import "base/utilities";
+
+// Components
+@import "components/button";
 
 // Partials
 @import "templates/partials/footer";
+
+// Templates
+@import "templates/base";

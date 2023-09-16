@@ -29,6 +29,10 @@ body {
 ol, ul {
   list-style: none;
 }
+/* Remove text decoration on links */
+a {
+  text-decoration: none;
+}
 /* Make images, video, svg, ... easier to work with */
 img, picture, video, canvas, svg {
   display: block;
@@ -97,6 +101,62 @@ h2 {
     font-size: 2.125rem;
   }
 }
+.link {
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+.button {
+  text-transform: uppercase;
+  padding-inline: 2.25rem;
+  padding-block: 0.94rem;
+  font-size: 1.375rem;
+  line-height: 1;
+  background-color: #00545c;
+  position: relative;
+  isolation: isolate;
+  border: 0;
+  clip-path: polygon(0% 1.25rem, 1.25rem 0%, 100% 0, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0 100%);
+}
+.button::before, .button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.button::before {
+  background: aqua;
+  z-index: -2;
+}
+.button::after {
+  background: #00545c;
+  z-index: -1;
+  clip-path: polygon(0.13rem calc(1.25rem + 0.13rem * 0.5), calc(1.25rem + 0.13rem * 0.5) 0.13rem, calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem), 0.13rem calc(100% - 0.13rem));
+}
+@media (min-width: 768px) {
+  .button {
+    font-size: 1.75rem;
+  }
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3.75rem;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+footer > ul {
+  display: flex;
+}
+footer li:nth-child(-n+2)::after {
+  content: "-";
+  margin-inline: 0.3125rem;
+  display: inline-block;
+  text-decoration: none;
+}
 html, body {
   height: 100%;
   box-sizing: border-box;
@@ -106,14 +166,12 @@ html, body {
   min-height: 100vh;
 }
 main {
+  padding-top: 1.875rem;
   padding-bottom: 3.75rem;
-}
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 3.75rem;
-}
-footer > ul {
+  height: 100vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }

@@ -39,6 +39,11 @@ ol, ul {
 	list-style: none;
 }
 
+/* Remove text decoration on links */
+a {
+    text-decoration: none;
+}
+
 /* Make images, video, svg, ... easier to work with */
 img,
 picture,
