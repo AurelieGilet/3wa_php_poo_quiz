@@ -28,6 +28,11 @@ body {
     color: $primary;
 }
 
-a {
+a, 
+button {
     color: $primary;
+}
+
+.error-message {
+    color: $error-message;
 }

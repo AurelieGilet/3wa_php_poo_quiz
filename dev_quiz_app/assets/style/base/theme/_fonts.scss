@@ -33,6 +33,7 @@ h1 {
     font-family: $family-primary;
     font-size: 2rem; //32px
     text-transform: uppercase;
+    margin-block: 1rem; //32px
 
     @include md {
         font-size: 2.375rem; //38px
@@ -46,5 +47,13 @@ h2 {
 
     @include md {
         font-size: 2.125rem; //34px
+    }
+}
+
+.error-message {
+    font-size: .875rem; //14px
+
+    @include md {
+        font-size: 1rem;
     }
 }

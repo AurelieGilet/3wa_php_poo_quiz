@@ -1,0 +1,57 @@
+form {
+    @include is-flex-column;
+    @include is-flex-centered;
+
+    width: 15.625rem; //250px
+
+    @include sm {
+        width: 21.875rem; //350px
+    }
+
+    @include md {
+        width: 31.25rem; //500px
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    .clipped-input {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        background-color: $card-background;
+
+        @include two-corners-clipped;
+        @include two-corners-clipped-border;
+    }
+
+    & input,
+    & textarea {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        margin: 0;
+        background-color: $card-background;
+        color: $primary;
+
+        &:focus-visible {
+            outline: 0;
+        }
+
+        &::placeholder {
+            color: $secondary;
+        }
+    }
+
+    & input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+        accent-color: $primary;
+    }
+
+
+}
