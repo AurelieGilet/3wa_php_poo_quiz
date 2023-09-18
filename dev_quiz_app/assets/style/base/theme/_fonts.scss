@@ -32,6 +32,7 @@ body {
 h1 {
     font-family: $family-primary;
     font-size: 2rem; //32px
+    font-weight: 700;
     text-transform: uppercase;
     margin-block: 1rem; //32px
 
@@ -43,6 +44,7 @@ h1 {
 h2 {
     font-family: $family-primary;
     font-size: 1.5rem; //24px
+    font-weight: 600;
     text-transform: uppercase;
 
     @include md {
@@ -52,6 +54,7 @@ h2 {
 
 .error-message {
     font-size: .875rem; //14px
+    font-weight: 300;
 
     @include md {
         font-size: 1rem;
