@@ -1,9 +1,6 @@
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    flex: 0 1 auto;
     height: $footer-height; //60px
-    display: flex;
 
     @include is-flex-centered;
     @include is-flex-column;

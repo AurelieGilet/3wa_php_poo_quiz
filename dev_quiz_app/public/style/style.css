@@ -105,43 +105,91 @@ h2 {
   text-decoration: underline;
   text-underline-offset: 0.25rem;
 }
-.button {
+.clipped-button {
   text-transform: uppercase;
+  text-align: center;
   padding-inline: 2.25rem;
   padding-block: 0.94rem;
+  margin-block: 2rem;
   font-size: 1.375rem;
   line-height: 1;
+  transition: color 250ms;
   background-color: #00545c;
   position: relative;
   isolation: isolate;
   border: 0;
-  clip-path: polygon(0% 1.25rem, 1.25rem 0%, 100% 0, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0 100%);
+  clip-path: polygon(0% 1.25rem, 1.25rem 0%, 100% 0%, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0% 100%);
 }
-.button::before, .button::after {
+.clipped-button::before, .clipped-button::after {
   content: "";
   position: absolute;
   inset: 0;
 }
-.button::before {
+.clipped-button::before {
   background: aqua;
   z-index: -2;
 }
-.button::after {
+.clipped-button::after {
   background: #00545c;
   z-index: -1;
   clip-path: polygon(0.13rem calc(1.25rem + 0.13rem * 0.5), calc(1.25rem + 0.13rem * 0.5) 0.13rem, calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem), 0.13rem calc(100% - 0.13rem));
+  transition: clip-path 500ms;
+}
+.clipped-button:hover::after {
+  clip-path: polygon(calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem));
 }
 @media (min-width: 768px) {
-  .button {
+  .clipped-button {
     font-size: 1.75rem;
   }
 }
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 3.75rem;
+.clipped-button:hover {
+  color: #072431;
+}
+.clipped-container {
+  width: max-content;
+  height: max-content;
+  padding-inline: 10%;
+  padding-block: 15%;
+  margin: 1.25rem;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #072431;
+  position: relative;
+  isolation: isolate;
+  border: 0;
+  clip-path: polygon(0% 3rem, 3rem 0%, calc(100% - 3rem) 0%, 100% 3rem, 100% calc(100% - 3rem), calc(100% - 3rem) 100%, 3rem 100%, 0% calc(100% - 3rem));
+}
+.clipped-container::before, .clipped-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.clipped-container::before {
+  background: aqua;
+  z-index: -2;
+}
+.clipped-container::after {
+  background: #072431;
+  z-index: -1;
+  clip-path: polygon(0.13rem calc(3rem + 0.13rem * 0.5), calc(3rem + 0.13rem * 0.5) 0.13rem, calc(100% - calc(3rem + 0.13rem * 0.5)) 0.13rem, calc(100% - 0.13rem) calc(3rem + 0.13rem * 0.5), calc(100% - 0.13rem) calc(100% - calc(3rem + 0.13rem * 0.5)), calc(100% - calc(3rem + 0.13rem * 0.5)) calc(100% - 0.13rem), calc(3rem + 0.13rem * 0.5) calc(100% - 0.13rem), 0.13rem calc(100% - calc(3rem + 0.13rem * 0.5)));
+}
+@media (min-width: 768px) {
+  .clipped-container {
+    padding-inline: 10%;
+    padding-block: 5%;
+  }
+}
+nav {
+  flex: 0 1 auto;
+  height: 2.5rem;
+}
+footer {
+  flex: 0 1 auto;
+  height: 3.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,15 +208,16 @@ footer li:nth-child(-n+2)::after {
 html, body {
   height: 100%;
   box-sizing: border-box;
+  min-width: 320px;
 }
 .page-container {
-  position: relative;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 main {
-  padding-top: 1.875rem;
-  padding-bottom: 3.75rem;
-  height: 100vh;
+  flex: 1 1 auto;
+  padding-block: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;

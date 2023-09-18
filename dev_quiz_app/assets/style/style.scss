@@ -3,7 +3,7 @@
 
 // Mixins
 @import "base/mixins/breakpoints";
-@import "base/mixins/clipped-container";
+@import "base/mixins/clipped-corners";
 @import "base/mixins/helpers";
 
 // Theme
@@ -15,9 +15,11 @@
 @import "base/utilities";
 
 // Components
-@import "components/button";
+@import "components/clipped-button";
+@import "components/clipped-containers";
 
 // Partials
+@import "templates/partials/navbar";
 @import "templates/partials/footer";
 
 // Templates
