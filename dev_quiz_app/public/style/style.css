@@ -89,6 +89,7 @@ h1 {
   font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase;
+  text-align: center;
   margin-block: 1rem;
 }
 @media (min-width: 768px) {
@@ -101,6 +102,7 @@ h2 {
   font-size: 1.5rem;
   font-weight: 600;
   text-transform: uppercase;
+  text-align: center;
 }
 @media (min-width: 768px) {
   h2 {
@@ -116,9 +118,65 @@ h2 {
     font-size: 1rem;
   }
 }
+.icon-home {
+  cursor: pointer;
+}
+.icon-home:before {
+  content: url("/public/icons/icon-home.svg");
+  zoom: 1.5;
+}
+.icon-home:hover::before, .icon-home:focus::before {
+  content: url("/public/icons/icon-home-hover.svg");
+}
+.icon-options {
+  cursor: pointer;
+}
+.icon-options:before {
+  content: url("/public/icons/icon-options.svg");
+  zoom: 1.5;
+}
+.icon-options:hover::before, .icon-options:focus::before {
+  content: url("/public/icons/icon-options-hover.svg");
+}
+.icon-options-hover {
+  cursor: pointer;
+}
+.icon-options-hover:before {
+  content: url("/public/icons/icon-options-hover.svg");
+  zoom: 1.5;
+}
 .link {
   text-decoration: underline;
   text-underline-offset: 0.25rem;
+}
+.has-link-border {
+  background-image: linear-gradient(aqua, aqua);
+  background-position: 0 bottom;
+  background-repeat: no-repeat;
+  background-size: 1.75rem 0.15rem;
+  display: inline-block;
+  transition: background-size 0.3s;
+}
+.has-link-border:hover {
+  background-size: 100% 0.15rem;
+}
+.flex-column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 576px) {
+  .is-hidden-tablet {
+    display: none !important;
+  }
+}
+.is-hidden-mobile {
+  display: none !important;
+}
+@media (min-width: 576px) {
+  .is-hidden-mobile {
+    display: flex !important;
+  }
 }
 .clipped-button {
   text-transform: uppercase;
@@ -137,6 +195,11 @@ h2 {
   border: 0;
   clip-path: polygon(0% 1.25rem, 1.25rem 0%, 100% 0%, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0% 100%);
 }
+@media (min-width: 768px) {
+  .clipped-button {
+    font-size: 1.75rem;
+  }
+}
 .clipped-button::before, .clipped-button::after {
   content: "";
   position: absolute;
@@ -154,11 +217,6 @@ h2 {
 }
 .clipped-button:hover::after {
   clip-path: polygon(calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem));
-}
-@media (min-width: 768px) {
-  .clipped-button {
-    font-size: 1.75rem;
-  }
 }
 .clipped-button:hover {
   color: #072431;
@@ -269,9 +327,59 @@ form input[type="radio"] {
   margin-right: 20px;
   accent-color: aqua;
 }
-nav {
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex: 0 1 auto;
   height: 2.5rem;
+  padding-top: 0.625rem;
+}
+@media (min-width: 576px) {
+  .nav {
+    padding-top: 0;
+  }
+}
+.nav__options {
+  display: none;
+  flex-direction: column;
+  gap: 0.625rem;
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  border: 0.13rem solid aqua;
+  padding: 1rem;
+}
+.nav__options a {
+  background-image: linear-gradient(aqua, aqua);
+  background-position: 0 bottom;
+  background-repeat: no-repeat;
+  background-size: 1.75rem 0.15rem;
+  display: inline-block;
+  transition: background-size 0.3s;
+}
+.nav__options a:hover {
+  background-size: 100% 0.15rem;
+}
+.nav__options.show {
+  display: flex;
+}
+.nav__options--desktop {
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+}
+.nav__options--desktop a {
+  background-image: linear-gradient(aqua, aqua);
+  background-position: 0 bottom;
+  background-repeat: no-repeat;
+  background-size: 1.75rem 0.15rem;
+  display: inline-block;
+  transition: background-size 0.3s;
+}
+.nav__options--desktop a:hover {
+  background-size: 100% 0.15rem;
 }
 footer {
   flex: 0 1 auto;
@@ -285,7 +393,7 @@ footer {
 footer > ul {
   display: flex;
 }
-footer li:nth-child(-n+2)::after {
+footer li:nth-child(-n + 2)::after {
   content: "-";
   margin-inline: 0.3125rem;
   display: inline-block;
@@ -298,6 +406,8 @@ html, body {
 }
 .page-container {
   min-height: 100vh;
+  padding-block: 0.3125rem;
+  padding-inline: 0.625rem;
   display: flex;
   flex-direction: column;
 }

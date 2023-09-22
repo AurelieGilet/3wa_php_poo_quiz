@@ -8,7 +8,6 @@ $aqua: hsla(180, 100%, 50%, 1);
 $radical-red: hsla(345, 100%, 60%, 1);
 $radical-red-transparent: hsla(345, 100%, 60%, 0.3);
 
-
 // Colors Variables
 $body-background: $firefly;
 $card-background: $deep-teal;
@@ -22,13 +21,12 @@ $error-message: $radical-red;
 $border: $aqua;
 $shadows: $cerulean-transparent;
 
-
 body {
     background-color: $body-background;
     color: $primary;
 }
 
-a, 
+a,
 button {
     color: $primary;
 }

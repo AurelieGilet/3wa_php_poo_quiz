@@ -1,9 +1,15 @@
 <main>
-    <h1>Bienvenue <?= htmlspecialchars($params['user']->getAlias()) ?></h1>
+    <div class="flex-column-container">
+        <h1>Bienvenue <?= htmlspecialchars($params['user']->getAlias()) ?></h1>
+    
 
-    <div>
-        <a href="/choisir-sujet">Choisir un sujet</a>
-        <a href="/espace-utilisateur/scores">Voir mes scores</a>
+        <a href="/choisir-sujet" class="clipped-button">
+            Choisir un sujet
+        </a>
+
+        <a href="/espace-utilisateur/scores" class="clipped-button">
+            Voir mes scores
+        </a>
     </div>
 </main>
 

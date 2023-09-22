@@ -1,0 +1,40 @@
+.icon-home {
+    cursor: pointer;
+    
+    &:before {
+        content: url("/public/icons/icon-home.svg");
+        zoom: 1.5;
+    }
+
+    &:hover, 
+    &:focus {
+        &::before{
+            content: url("/public/icons/icon-home-hover.svg");
+        }
+    }
+}
+
+.icon-options {
+    cursor: pointer;
+
+    &:before {
+        content: url("/public/icons/icon-options.svg");
+        zoom: 1.5;
+    }
+
+    &:hover, 
+    &:focus {
+        &::before{
+            content: url("/public/icons/icon-options-hover.svg");
+        }
+    }
+}
+
+.icon-options-hover {
+    cursor: pointer;
+
+    &:before {
+        content: url("/public/icons/icon-options-hover.svg");
+        zoom: 1.5;
+    }
+}

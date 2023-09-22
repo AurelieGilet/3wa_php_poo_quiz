@@ -48,7 +48,9 @@ if (isset($_SESSION['errors'])) {
                 <?php endif; ?>
             </div>
     
-            <button type="submit" class="clipped-button">S'inscrire</button>
+            <button type="submit" class="clipped-button">
+                S'inscrire
+            </button>
         </form>
     </div>
 </main>

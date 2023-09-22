@@ -1,5 +1,42 @@
-nav {
+.nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex: 0 1 auto;
     height: $navbar-height; //30px
+    padding-top: 0.625rem; //10px
 
+    @include sm {
+        padding-top: 0;
+    }
+
+    &__options {
+        display: none;
+        flex-direction: column;
+        gap: 0.625rem; //10px
+        position: absolute;
+        top: $navbar-height;
+        right: $navbar-height;
+        border: $border-width solid $border;
+        padding: 1rem;
+
+        & a {
+            @include has-link-border;
+        }
+
+        &.show {
+            display: flex;
+        }
+    }
+
+    &__options--desktop {
+        display: flex;
+        flex-direction: row;
+        gap: 1.25rem; //20px
+
+        & a {
+            @include has-link-border;
+        }
+    }
 }

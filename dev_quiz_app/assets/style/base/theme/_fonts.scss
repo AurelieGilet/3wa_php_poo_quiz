@@ -34,6 +34,7 @@ h1 {
     font-size: 2rem; //32px
     font-weight: 700;
     text-transform: uppercase;
+    text-align: center;
     margin-block: 1rem; //32px
 
     @include md {
@@ -46,6 +47,7 @@ h2 {
     font-size: 1.5rem; //24px
     font-weight: 600;
     text-transform: uppercase;
+    text-align: center;
 
     @include md {
         font-size: 2.125rem; //34px
@@ -53,7 +55,7 @@ h2 {
 }
 
 .error-message {
-    font-size: .875rem; //14px
+    font-size: 0.875rem; //14px
     font-weight: 300;
 
     @include md {

@@ -1,5 +1,5 @@
 $edge-size: 1.25rem; //20px
-$border-width: .13rem; //2px
+$border-width: 0.13rem; //2px
 $container-edge-size: 3rem; //48px
 
 @mixin two-corners-clipped {
@@ -27,7 +27,7 @@ $container-edge-size: 3rem; //48px
 @mixin two-corners-clipped-border {
     &::before,
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
     }
@@ -129,7 +129,7 @@ $container-edge-size: 3rem; //48px
 @mixin four-corners-clipped-border {
     &::before,
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
     }

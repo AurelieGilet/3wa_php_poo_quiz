@@ -14,3 +14,16 @@
 @mixin has-shadow {
     box-shadow: 4px 4px 2px 0px $shadows;
 }
+
+@mixin has-link-border {
+    background-image: linear-gradient($primary, $primary);
+    background-position: 0 bottom;
+    background-repeat: no-repeat;
+    background-size: 1.75rem 0.15rem;
+    display: inline-block;
+    transition: background-size 0.3s;
+
+    &:hover {
+        background-size: 100% 0.15rem;
+    }
+}

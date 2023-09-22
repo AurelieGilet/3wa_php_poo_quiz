@@ -9,9 +9,9 @@ footer {
         display: flex;
     }
 
-    & li:nth-child(-n+2)::after {
-        content: '-';
-        margin-inline: .3125rem; //5px
+    & li:nth-child(-n + 2)::after {
+        content: "-";
+        margin-inline: 0.3125rem; //5px
         display: inline-block;
         text-decoration: none;
     }

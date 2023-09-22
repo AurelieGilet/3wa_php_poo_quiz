@@ -1,5 +1,30 @@
 // Text utilities
 .link {
     text-decoration: underline;
-    text-underline-offset: .25rem; //4px
+    text-underline-offset: 0.25rem; //4px
+}
+
+.has-link-border {
+    @include has-link-border;
+}
+
+// Layout utilities
+.flex-column-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.is-hidden-tablet {
+    @include sm {
+        display: none !important;
+    }
+}
+
+.is-hidden-mobile {
+    display: none !important;
+
+    @include sm {
+        display: flex !important;
+    }
 }

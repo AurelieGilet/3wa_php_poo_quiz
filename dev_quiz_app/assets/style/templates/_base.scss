@@ -7,6 +7,8 @@ body {
 
 .page-container {
     min-height: 100vh;
+    padding-block: 0.3125rem; //5px
+    padding-inline: 0.625rem; //10px
 
     @include is-flex-column;
 }
