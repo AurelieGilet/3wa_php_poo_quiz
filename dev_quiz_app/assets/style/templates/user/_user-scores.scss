@@ -1,0 +1,25 @@
+.user-score {
+    justify-content: flex-start;
+
+    .score-billboard {
+        //TODO: fix width issue
+        width: 80%;
+        max-width: 25rem; //400px
+        font-family: $family-primary;
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        td {
+            padding-block: .625rem;
+        }
+
+        td:nth-child(2) {
+            text-align: right;
+        }
+    }
+}

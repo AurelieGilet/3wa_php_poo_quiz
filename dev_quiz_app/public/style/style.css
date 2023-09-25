@@ -145,6 +145,7 @@ h2 {
   content: url("/public/icons/icon-options-hover.svg");
   zoom: 1.5;
 }
+/*** Text utilities ***/
 .link {
   text-decoration: underline;
   text-underline-offset: 0.25rem;
@@ -160,6 +161,26 @@ h2 {
 .has-link-border:hover {
   background-size: 100% 0.15rem;
 }
+.stretched-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.stretched-link:hover {
+  color: #072431;
+}
+.stretched-link-above {
+  position: relative;
+  z-index: 1;
+}
+.stretched-link-above:hover {
+  color: #072431;
+}
+.stretched-link-container {
+  position: relative;
+}
+/*** Layout utilities ***/
 .flex-column-container {
   display: flex;
   flex-direction: column;
@@ -206,11 +227,11 @@ h2 {
   inset: 0;
 }
 .clipped-button::before {
-  background: aqua;
+  background-color: aqua;
   z-index: -2;
 }
 .clipped-button::after {
-  background: #00545c;
+  background-color: #00545c;
   z-index: -1;
   clip-path: polygon(0.13rem calc(1.25rem + 0.13rem * 0.5), calc(1.25rem + 0.13rem * 0.5) 0.13rem, calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem), 0.13rem calc(100% - 0.13rem));
   transition: clip-path 500ms;
@@ -221,11 +242,18 @@ h2 {
 .clipped-button:hover {
   color: #072431;
 }
+.clipped-button.active {
+  color: #072431;
+}
+.clipped-button.active::after {
+  background-color: aqua;
+}
 .clipped-container {
-  width: max-content;
+  width: 80%;
+  min-width: max-content;
   height: max-content;
-  padding-inline: 10%;
-  padding-block: 15%;
+  padding-inline: 3.125rem;
+  padding-block: 3.125rem;
   margin: 1.25rem;
   display: flex;
   justify-content: center;
@@ -244,19 +272,135 @@ h2 {
   inset: 0;
 }
 .clipped-container::before {
-  background: aqua;
+  background-color: aqua;
   z-index: -2;
 }
 .clipped-container::after {
-  background: #072431;
+  background-color: #072431;
   z-index: -1;
   clip-path: polygon(0.13rem calc(3rem + 0.13rem * 0.5), calc(3rem + 0.13rem * 0.5) 0.13rem, calc(100% - calc(3rem + 0.13rem * 0.5)) 0.13rem, calc(100% - 0.13rem) calc(3rem + 0.13rem * 0.5), calc(100% - 0.13rem) calc(100% - calc(3rem + 0.13rem * 0.5)), calc(100% - calc(3rem + 0.13rem * 0.5)) calc(100% - 0.13rem), calc(3rem + 0.13rem * 0.5) calc(100% - 0.13rem), 0.13rem calc(100% - calc(3rem + 0.13rem * 0.5)));
 }
 @media (min-width: 768px) {
   .clipped-container {
-    padding-inline: 10%;
-    padding-block: 5%;
+    max-width: 46.875rem;
   }
+}
+.custom-select__wrapper {
+  position: relative;
+  width: 15.625rem;
+  user-select: none;
+}
+.custom-select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-size: 1.375rem;
+}
+.custom-select__trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 3.125rem;
+  text-transform: uppercase;
+  padding-inline: 1.5625rem;
+  cursor: pointer;
+  background-color: #00545c;
+  position: relative;
+  isolation: isolate;
+  border: 0;
+  clip-path: polygon(0% 1.25rem, 1.25rem 0%, 100% 0%, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0% 100%);
+}
+.custom-select__trigger::before, .custom-select__trigger::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.custom-select__trigger::before {
+  background-color: aqua;
+  z-index: -2;
+}
+.custom-select__trigger::after {
+  background-color: #00545c;
+  z-index: -1;
+  clip-path: polygon(0.13rem calc(1.25rem + 0.13rem * 0.5), calc(1.25rem + 0.13rem * 0.5) 0.13rem, calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem), 0.13rem calc(100% - 0.13rem));
+  transition: clip-path 500ms;
+}
+.custom-select__options {
+  width: 12.5rem;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 100%;
+  background-color: #00545c;
+  border: 0.125rem solid aqua;
+  border-top: 0;
+  transition: all 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.custom-select.open .custom-select__options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+.select-option {
+  position: relative;
+  display: block;
+  padding: 0 1.375rem 0 1.375rem;
+  line-height: 3.125rem;
+  cursor: pointer;
+  transition: all 0.5s;
+  text-transform: uppercase;
+}
+.select-option:hover {
+  cursor: pointer;
+  color: #072431;
+  background-color: aqua;
+}
+.select-option.selected {
+  color: #00545c;
+  background-color: aqua;
+}
+.line {
+  width: 15.3125rem;
+  height: 0rem;
+  margin: 0 auto;
+  border-bottom: 0.0313rem solid #72534A;
+}
+.arrow {
+  position: relative;
+  height: 0.9375rem;
+  width: 0.9375rem;
+}
+.arrow::before, .arrow::after {
+  content: "";
+  position: absolute;
+  bottom: 0rem;
+  width: 0.15rem;
+  height: 100%;
+  transition: all 0.5s;
+}
+.arrow::before {
+  left: 0.3125rem;
+  transform: rotate(45deg);
+  background-color: aqua;
+}
+.arrow::after {
+  left: -0.3125rem;
+  transform: rotate(-45deg);
+  background-color: aqua;
+}
+.open .arrow::before {
+  left: 0.3125rem;
+  transform: rotate(-45deg);
+}
+.open .arrow::after {
+  left: -0.3125rem;
+  transform: rotate(45deg);
 }
 form {
   display: flex;
@@ -298,11 +442,11 @@ form .clipped-input::before, form .clipped-input::after {
   inset: 0;
 }
 form .clipped-input::before {
-  background: aqua;
+  background-color: aqua;
   z-index: -2;
 }
 form .clipped-input::after {
-  background: #00545c;
+  background-color: #00545c;
   z-index: -1;
   clip-path: polygon(0.13rem calc(1.25rem + 0.13rem * 0.5), calc(1.25rem + 0.13rem * 0.5) 0.13rem, calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem), 0.13rem calc(100% - 0.13rem));
   transition: clip-path 500ms;
@@ -348,6 +492,7 @@ form input[type="radio"] {
   position: absolute;
   top: 2.5rem;
   right: 2.5rem;
+  background-color: #072431;
   border: 0.13rem solid aqua;
   padding: 1rem;
 }
@@ -419,4 +564,24 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+.user-score {
+  justify-content: flex-start;
+}
+.user-score .score-billboard {
+  width: 80%;
+  max-width: 25rem;
+  font-family: "Orbitron", "Verdana", sans-serif;
+}
+.user-score .score-billboard table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: left;
+}
+.user-score .score-billboard td {
+  padding-block: 0.625rem;
+}
+.user-score .score-billboard td:nth-child(2) {
+  text-align: right;
 }

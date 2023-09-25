@@ -33,12 +33,12 @@ $container-edge-size: 3rem; //48px
     }
 
     &::before {
-        background: $border;
+        background-color: $border;
         z-index: -2;
     }
 
     &::after {
-        background: $card-background;
+        background-color: $card-background;
         z-index: -1;
 
         clip-path: polygon(
@@ -135,12 +135,12 @@ $container-edge-size: 3rem; //48px
     }
 
     &::before {
-        background: $border;
+        background-color: $border;
         z-index: -2;
     }
 
     &::after {
-        background: $body-background;
+        background-color: $body-background;
         z-index: -1;
 
         clip-path: polygon(

@@ -22,7 +22,9 @@ class BuildJsCommand extends Command
             'assets/js/ajax/question/question-ajax.js',
             'assets/js/ajax/game/answer-questions-ajax.js',
             'assets/js/ajax/score/user-score-ajax.js',
-            'assets/js/scripts/partials/navbar.js',
+            'assets/js/scripts/components/category-filters.js',
+            'assets/js/scripts/components/custom-select.js',
+            'assets/js/scripts/templates/partials/navbar.js',
         ];
         
         $minifier = new JS();

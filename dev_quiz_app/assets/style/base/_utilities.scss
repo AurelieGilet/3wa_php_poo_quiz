@@ -1,4 +1,4 @@
-// Text utilities
+/*** Text utilities ***/
 .link {
     text-decoration: underline;
     text-underline-offset: 0.25rem; //4px
@@ -8,7 +8,37 @@
     @include has-link-border;
 }
 
-// Layout utilities
+// Extend link click zone to parent size
+.stretched-link {
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: $base;
+    }
+
+    &:hover {
+        color: $body-background;
+    }
+}
+
+// Class to add to other links that might be covered by the stretched-link and need to stay clickable
+.stretched-link-above {
+    position: relative;
+    z-index: $above-base;
+
+    &:hover {
+        color: $body-background;
+    }
+}
+
+// Class to add to the stretched-link parent whose size it must take
+.stretched-link-container {
+    position: relative;
+}
+
+
+/*** Layout utilities ***/
 .flex-column-container {
     display: flex;
     flex-direction: column;

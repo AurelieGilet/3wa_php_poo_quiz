@@ -3,7 +3,11 @@
     <div>
         <?php foreach ($params['categories'] as $category) : ?>
         <ul>
-            <li><a href="/jeu/categorie/<?= $category->getId() ?>"><?= htmlspecialchars($category->getName()) ?></a></li>
+            <li class="clipped-button">
+                <a href="/jeu/categorie/<?= $category->getId() ?>" class="stretched-link">
+                    <?= htmlspecialchars($category->getName()) ?>
+                </a>
+            </li>
         </ul>
         <?php endforeach; ?>
     </div>

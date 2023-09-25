@@ -1,8 +1,9 @@
 .clipped-container {
-    width: max-content;
+    width: 80%;
+    min-width: max-content;
     height: max-content;
-    padding-inline: 10%; //36px
-    padding-block: 15%; //36px
+    padding-inline: 3.125rem; //50px
+    padding-block: 3.125rem;
     margin: 1.25rem;
 
     @include is-flex-centered;
@@ -12,7 +13,6 @@
     @include four-corners-clipped-border;
 
     @include md {
-        padding-inline: 10%; //36px
-        padding-block: 5%; //36px
+        max-width: 46.875rem; //750px
     }
 }

@@ -22,4 +22,12 @@
     &:hover {
         color: $body-background;
     }
+
+    &.active {
+        color: $body-background;
+
+        &::after {
+            background-color: $primary;
+        }
+    }
 }

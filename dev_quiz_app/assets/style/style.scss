@@ -18,6 +18,7 @@
 // Components
 @import "components/clipped-button";
 @import "components/clipped-containers";
+@import "components/custom-select";
 @import "components/forms";
 
 // Partials
@@ -26,3 +27,4 @@
 
 // Templates
 @import "templates/base";
+@import "templates/user/user-scores";
