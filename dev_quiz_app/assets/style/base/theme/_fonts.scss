@@ -54,11 +54,40 @@ h2 {
     }
 }
 
+h3 {
+    font-family: $family-primary;
+    font-size: 1.5rem; //24px
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: left;
+
+    @include md {
+        font-size: 1.75rem; //28px
+    }
+}
+
 .error-message {
     font-size: 0.875rem; //14px
     font-weight: 300;
-
+    
     @include md {
         font-size: 1rem;
+    }
+}
+
+.flash {
+    font-size: 1.25rem; //20px
+    text-align: center;
+
+    @include md {
+        font-size: 1.5rem; //25px
+    }
+}
+
+.abort-form {
+    font-size: 1.25rem; //20px
+
+    @include md {
+        font-size: 1.5rem; //24px
     }
 }

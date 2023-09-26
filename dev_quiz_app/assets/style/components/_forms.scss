@@ -2,14 +2,14 @@ form {
     @include is-flex-column;
     @include is-flex-centered;
 
-    width: 15.625rem; //250px
+    width: $form-width; //250px
 
     @include sm {
-        width: 21.875rem; //350px
+        width: $form-width-sm; //350px
     }
 
     @include md {
-        width: 31.25rem; //500px
+        width: $form-width-md; //500px
     }
 
     .form-group {
@@ -51,5 +51,35 @@ form {
         height: 20px;
         margin-right: 20px;
         accent-color: $primary;
+    }
+
+    .main-label {
+        font-size: 1.25rem; //20px
+
+        @include md {
+            font-size: 1.5rem;
+        }
+    }
+
+    .error-message li {
+        margin-bottom: .625rem; //10px
+    }
+}
+
+
+.form-instruction {
+    margin-bottom: 1.25rem; //20px
+    max-width: $form-width;
+
+    @include sm {
+        max-width: $form-width-sm;
+    }
+
+    @include md {
+        max-width: $form-width-md;
+    }
+
+    & p {
+        margin-bottom: .625rem;
     }
 }

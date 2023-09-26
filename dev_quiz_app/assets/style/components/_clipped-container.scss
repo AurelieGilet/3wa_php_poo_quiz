@@ -2,7 +2,7 @@
     width: 80%;
     min-width: max-content;
     height: max-content;
-    padding-inline: $clipped-container-padding; //50px
+    padding-inline: $clipped-container-padding; //34px
     padding-block: $clipped-container-padding;
     margin-top: $clipped-container-margin; //20px
     margin-bottom: $clipped-container-margin;
@@ -17,5 +17,7 @@
 
     @include md {
         max-width: 46.875rem; //750px
+        padding-inline: $clipped-container-padding-md; //50px
+        padding-block: $clipped-container-padding-md;
     }
 }
