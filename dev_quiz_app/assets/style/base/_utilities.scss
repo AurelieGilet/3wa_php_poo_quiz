@@ -8,6 +8,10 @@
     @include has-link-border;
 }
 
+.is-centered {
+    text-align: center;
+}
+
 // Extend link click zone to parent size
 .stretched-link {
     &::before {
@@ -45,16 +49,32 @@
     align-items: center;
 }
 
-.is-hidden-tablet {
+/*** Breakpoints utilities ***/
+.is-hidden-sm {
     @include sm {
         display: none !important;
     }
 }
 
-.is-hidden-mobile {
+.is-visible-sm {
     display: none !important;
 
     @include sm {
         display: flex !important;
     }
 }
+
+.is-hidden-lg {
+    @include lg {
+        display: none !important;
+    }
+}
+
+.is-visible-lg {
+    display: none !important;
+
+    @include lg {
+        display: flex !important;
+    }
+}
+

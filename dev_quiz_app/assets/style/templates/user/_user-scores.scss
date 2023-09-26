@@ -1,11 +1,38 @@
 .user-score {
     justify-content: flex-start;
 
+    &__container {
+        @include is-flex-centered;
+
+        flex-direction: column;
+        position: relative;
+
+        @include lg {
+            flex-direction: row;
+        }
+    }
+
+    .canvas {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 14rem; //224px
+        width: 10.625rem; //170px
+    }
+
     .score-billboard {
-        //TODO: fix width issue
-        width: 80%;
+        width: auto;
+        min-height: 15rem; //240px
+        min-width: 15rem; 
         max-width: 25rem; //400px
         font-family: $family-primary;
+        margin-top: 0;
+
+        @include lg {
+            margin-top: $clipped-container-margin;
+            margin-left: 10.625rem;
+            margin-right: 0;
+        }
 
         table {
             width: 100%;
@@ -15,7 +42,7 @@
         }
 
         td {
-            padding-block: .625rem;
+            padding-block: .625rem; //10px
         }
 
         td:nth-child(2) {

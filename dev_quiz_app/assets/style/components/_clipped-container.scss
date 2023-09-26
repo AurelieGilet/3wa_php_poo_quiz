@@ -2,9 +2,12 @@
     width: 80%;
     min-width: max-content;
     height: max-content;
-    padding-inline: 3.125rem; //50px
-    padding-block: 3.125rem;
-    margin: 1.25rem;
+    padding-inline: $clipped-container-padding; //50px
+    padding-block: $clipped-container-padding;
+    margin-top: $clipped-container-margin; //20px
+    margin-bottom: $clipped-container-margin;
+    margin-left: $clipped-container-margin;
+    margin-right: $clipped-container-margin;
 
     @include is-flex-centered;
     @include is-flex-column;

@@ -1,7 +1,13 @@
-//Heights
+// Z-index
+$base: 0;
+$above-base: 1;
+
+// Heights
 $navbar-height: 2.5rem; //40px
 $footer-height: 3.75rem; //60px
 
-//Z-index
-$base: 0;
-$above-base: 1;
+// Margins
+$clipped-container-margin: 1.25rem; //20px
+
+// Paddings
+$clipped-container-padding: 3.125rem; //50px

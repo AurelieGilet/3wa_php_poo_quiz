@@ -1,5 +1,5 @@
 <?php if (count($params['scores']) === 0) : ?>
-<p>Pas encore de score</p>
+<p class="is-centered">Pas encore de score</p>
 <a href="/choisir-sujet" class="clipped-button">Faire un quiz</a>
 <?php endif; ?>
 

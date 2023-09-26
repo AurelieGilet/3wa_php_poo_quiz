@@ -9,7 +9,11 @@
 
     align-items: center;
     position: relative;
-    font-size: 1.375rem; //1.375rem
+    font-size: 1.375rem; //22px
+
+    @include md {
+        font-size: 1.75rem; //28px
+    }
 
     &__trigger {
         position: relative;

@@ -38,3 +38,14 @@
         zoom: 1.5;
     }
 }
+
+.icon-lines{
+    pointer-events: none;
+
+    &:before {
+        content: url("/public/icons/icon-lines.svg");
+        display: flex;
+        height: 4.375rem; //70px
+        width: 10.3125rem; //165px
+    }
+}
