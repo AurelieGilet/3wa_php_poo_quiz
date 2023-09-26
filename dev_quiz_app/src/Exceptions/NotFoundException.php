@@ -16,6 +16,16 @@ class NotFoundException extends Exception
     {
         http_response_code(404);
 
-        require VIEWS . 'errors/404.php';
+        $view = 'errors/404';
+
+        ob_start();
+
+        $view = str_replace('/', DIRECTORY_SEPARATOR, $view);
+
+        require VIEWS . $view . '.php';
+
+        $content = ob_get_clean();
+
+        require VIEWS . 'base.php';
     }
 }

@@ -43,11 +43,6 @@ class Router
 
         $parts = array_diff_assoc($requestUri, $scriptName);
 
-        // FIXME: Check if this early return is useful
-        // if (empty($parts)) {
-        //     return '/';
-        // }
-
         $path = implode('/', $parts);
 
         if (($position = strpos($path, '?')) !== false) {

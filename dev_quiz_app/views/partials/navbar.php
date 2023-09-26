@@ -1,4 +1,4 @@
-<?php if ($_SESSION['path'] !== "") : ?>
+<?php if (!isset($_SESSION) || $_SESSION['path'] !== "") : ?>
 <nav class="nav">
     <ul>
         <li>

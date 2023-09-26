@@ -661,6 +661,11 @@ main {
   display: flex;
   flex-direction: column;
 }
+.error-404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .user-score__container {
   display: flex;
   justify-content: center;
