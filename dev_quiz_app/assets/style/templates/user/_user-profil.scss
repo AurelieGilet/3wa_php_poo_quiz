@@ -1,0 +1,24 @@
+.user-profil {
+    justify-content: flex-start;
+
+    &__container {
+        @include is-flex-column;
+        
+        align-items: flex-start;
+        margin-top: $clipped-container-margin;
+        margin-bottom: $clipped-container-margin;
+
+        & div {
+            margin-block: 1.25rem; //20px
+
+            & p:first-child {
+                font-family: $family-primary;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    & a {
+        margin-block: .625rem; //10px
+    }
+}

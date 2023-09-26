@@ -1,4 +1,4 @@
-<main>
+<main class="user-profil">
     <h1>Mon profil</h1>
 
     <?php if (isset($params['flashes'])) : ?>
@@ -9,21 +9,23 @@
     </ul>
     <?php endif; ?>
 
-    <div>
-        <p>Mon pseudo</p>
-        <p><?= htmlspecialchars($params['user']->getAlias()) ?></p>
-    </div>
-
-    <div>
-        <p>Mon email</p>
-        <p><?= htmlspecialchars($params['user']->getEmail()) ?></p>
-    </div>
+    <div class="user-profil__container">
+        <div>
+            <p>Mon pseudo</p>
+            <p><?= htmlspecialchars($params['user']->getAlias()) ?></p>
+        </div>
     
-    <div>
-        <p>Mon mot de passe</p>
-        <p>********</p>
+        <div>
+            <p>Mon email</p>
+            <p><?= htmlspecialchars($params['user']->getEmail()) ?></p>
+        </div>
+        
+        <div>
+            <p>Mon mot de passe</p>
+            <p>********</p>
+        </div>
     </div>
 
-    <a href="/profil-utilisateur/modifier">Modifier mes infos</a>
-    <a href="/profil-utilisateur/supprimer">Supprimer mon compte</a>
+    <a href="/profil-utilisateur/modifier" class="has-link-border">Modifier mes infos</a>
+    <a href="/profil-utilisateur/supprimer" class="has-link-border">Supprimer mon compte</a>
 </main>
