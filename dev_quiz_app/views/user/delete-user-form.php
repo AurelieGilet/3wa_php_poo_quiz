@@ -41,7 +41,7 @@ if (isset($_SESSION['errors'])) {
             </p>
         </div>
     
-        <form method="POST" action="/profil-utilisateur/supprimer">
+        <form method="POST" action="/profil-utilisateur/supprimer" class="form">
             <div class="form-group">
                 <label for="password">Validez la suppression avec votre mot de passe</label>
     

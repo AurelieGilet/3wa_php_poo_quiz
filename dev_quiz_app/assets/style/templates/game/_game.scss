@@ -1,0 +1,18 @@
+.game {
+    &__question {
+        .form-instruction {
+            align-self: flex-start;
+            font-weight: 600;
+            font-size: 1.125rem;
+
+            @include md {
+                font-size: 1.25rem;
+            }
+        }
+    }
+
+    &__progress {
+        margin-top: 1.25rem; //20px
+        font-family: $family-primary;
+    }
+}

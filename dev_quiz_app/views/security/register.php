@@ -18,7 +18,7 @@ if (isset($_SESSION['errors'])) {
     <div class="clipped-container">
         <h1>Inscription</h1>
         
-        <form method="POST" action="/inscription">
+        <form method="POST" action="/inscription" class="form">
             <div class="form-group">    
                 <div class="clipped-input">
                     <input type="text" id="email" name="email" placeholder="Email">

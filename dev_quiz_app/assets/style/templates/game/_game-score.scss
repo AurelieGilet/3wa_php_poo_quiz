@@ -1,0 +1,36 @@
+.game-score {
+    & p {
+        margin-block: 1.25rem; //20px
+        font-size: 1.5rem; //24px
+
+        @include md {
+            font-size: 1.75rem; //28px
+        }
+    }
+
+    & p:nth-child(2) {
+        font-family: $family-primary;
+        font-weight: 700;
+    }
+
+    &__buttons {
+        display: grid;
+        grid-auto-flow: row;
+        grid-auto-columns: 1fr;
+
+        .clipped-button {
+            margin-block: 1rem;
+        }
+
+        @include md {
+            grid-auto-flow: column;
+            gap: 4rem; //64px
+
+            .clipped-button {
+                margin-block: 2rem;
+            }
+        }
+    }
+
+
+}

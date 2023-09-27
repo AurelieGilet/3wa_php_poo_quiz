@@ -26,7 +26,7 @@ if (isset($_SESSION['errors'])) {
     <?php endif; ?>
 
     <div class="clipped-container">
-        <form method="POST" action="/profil-utilisateur/modifier">
+        <form method="POST" action="/profil-utilisateur/modifier" class="form">
             <div class="form-group">
                 <label for="alias">Modifier mon pseudo</label>
     
@@ -63,7 +63,9 @@ if (isset($_SESSION['errors'])) {
     
             <div class="form-group">
                 <p class="main-label">Modifier mon mot de passe</p>
-                <small class="instruction">Ne remplissez ces champs que si vous souhaitez modifier votre mot de passe</small>
+                <small class="instruction">
+                    Ne remplissez ces champs que si vous souhaitez modifier votre mot de passe
+                </small>
     
                 <div class="form-group">
                     <label for="password">Nouveau mot de passe</label>

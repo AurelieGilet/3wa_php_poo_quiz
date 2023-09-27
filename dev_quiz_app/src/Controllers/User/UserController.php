@@ -58,17 +58,16 @@ class UserController extends AbstractController
 
         $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $activeCategory);
 
-        // echo'<pre>';
-        // var_dump($scores);
-        // echo'</pre>';
         return $this->render('user/user-scores', compact('categories', 'activeCategory', 'scores'));
     }
 
     /**
      * Route: /espace-utilisateur/scores/:id
      */
-    public function ajaxUserScores(int $categoryId)
+    public function ajaxUserScores($categoryId)
     {
+        //TODO: find a way to secure route if a string is added to url
+        
         // User Ajax call (user-score-ajax.js) to render the scores filtered by category
         $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $categoryId);
 

@@ -470,7 +470,7 @@ h3 {
   left: -0.3125rem;
   transform: rotate(45deg);
 }
-form {
+.form {
   display: flex;
   flex-direction: column;
   display: flex;
@@ -479,19 +479,20 @@ form {
   width: 15.625rem;
 }
 @media (min-width: 576px) {
-  form {
+  .form {
     width: 21.875rem;
   }
 }
 @media (min-width: 768px) {
-  form {
+  .form {
     width: 31.25rem;
   }
 }
-form .form-group {
+.form .form-group {
   width: 100%;
 }
-form .clipped-input {
+.form .clipped-input {
+  width: 100%;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
@@ -504,22 +505,25 @@ form .clipped-input {
   border: 0;
   clip-path: polygon(0% 1.25rem, 1.25rem 0%, 100% 0%, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0% 100%);
 }
-form .clipped-input::before, form .clipped-input::after {
+.form .clipped-input::before, .form .clipped-input::after {
   content: "";
   position: absolute;
   inset: 0;
 }
-form .clipped-input::before {
+.form .clipped-input::before {
   background-color: aqua;
   z-index: -2;
 }
-form .clipped-input::after {
+.form .clipped-input::after {
   background-color: #00545c;
   z-index: -1;
   clip-path: polygon(0.13rem calc(1.25rem + 0.13rem * 0.5), calc(1.25rem + 0.13rem * 0.5) 0.13rem, calc(100% - 0.13rem) 0.13rem, calc(100% - 0.13rem) calc(100% - calc(1.25rem + 0.13rem * 0.5)), calc(100% - calc(1.25rem + 0.13rem * 0.5)) calc(100% - 0.13rem), 0.13rem calc(100% - 0.13rem));
   transition: clip-path 500ms;
 }
-form input, form textarea {
+.form label {
+  width: 100%;
+}
+.form input, .form textarea {
   width: 100%;
   height: 100%;
   border: 0;
@@ -527,27 +531,27 @@ form input, form textarea {
   background-color: #00545c;
   color: aqua;
 }
-form input:focus-visible, form textarea:focus-visible {
+.form input:focus-visible, .form textarea:focus-visible {
   outline: 0;
 }
-form input::placeholder, form textarea::placeholder {
+.form input::placeholder, .form textarea::placeholder {
   color: #0cabc0;
 }
-form input[type="radio"] {
+.form input[type="radio"] {
   width: 20px;
   height: 20px;
   margin-right: 20px;
   accent-color: aqua;
 }
-form .main-label {
+.form .main-label {
   font-size: 1.25rem;
 }
 @media (min-width: 768px) {
-  form .main-label {
+  .form .main-label {
     font-size: 1.5rem;
   }
 }
-form .error-message li {
+.form .error-message li {
   margin-bottom: 0.625rem;
 }
 .form-instruction {
@@ -735,4 +739,48 @@ main {
 }
 .user-profil-update .clipped-input {
   margin-top: 0.3125rem;
+}
+.game__question .form-instruction {
+  align-self: flex-start;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+@media (min-width: 768px) {
+  .game__question .form-instruction {
+    font-size: 1.25rem;
+  }
+}
+.game__progress {
+  margin-top: 1.25rem;
+  font-family: "Orbitron", "Verdana", sans-serif;
+}
+.game-score p {
+  margin-block: 1.25rem;
+  font-size: 1.5rem;
+}
+@media (min-width: 768px) {
+  .game-score p {
+    font-size: 1.75rem;
+  }
+}
+.game-score p:nth-child(2) {
+  font-family: "Orbitron", "Verdana", sans-serif;
+  font-weight: 700;
+}
+.game-score__buttons {
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-columns: 1fr;
+}
+.game-score__buttons .clipped-button {
+  margin-block: 1rem;
+}
+@media (min-width: 768px) {
+  .game-score__buttons {
+    grid-auto-flow: column;
+    gap: 4rem;
+  }
+  .game-score__buttons .clipped-button {
+    margin-block: 2rem;
+  }
 }

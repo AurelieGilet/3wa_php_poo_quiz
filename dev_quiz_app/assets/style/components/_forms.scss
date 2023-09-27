@@ -1,4 +1,4 @@
-form {
+.form {
     @include is-flex-column;
     @include is-flex-centered;
 
@@ -17,6 +17,7 @@ form {
     }
 
     .clipped-input {
+        width: 100%;
         margin-top: 20px;
         margin-bottom: 20px;
         padding: 20px;
@@ -26,6 +27,10 @@ form {
 
         @include two-corners-clipped;
         @include two-corners-clipped-border;
+    }
+
+    & label {
+        width: 100%;
     }
 
     & input,
@@ -65,7 +70,6 @@ form {
         margin-bottom: .625rem; //10px
     }
 }
-
 
 .form-instruction {
     margin-bottom: 1.25rem; //20px

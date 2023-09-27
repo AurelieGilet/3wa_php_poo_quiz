@@ -26,7 +26,7 @@ if (isset($_SESSION['errors'])) {
         </ul>
         <?php endif; ?>
         
-        <form method="POST" action="/connexion">
+        <form method="POST" action="/connexion" class="form">
             <div class="form-group">
                 <div class="clipped-input">
                     <input type="email" id="email" name="email" placeholder="Email">
