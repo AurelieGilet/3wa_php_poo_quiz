@@ -21,3 +21,9 @@
         padding-block: $clipped-container-padding-md;
     }
 }
+
+.clipped-container.large {
+    @include md {
+        max-width: 75rem; //1200px
+    }
+}

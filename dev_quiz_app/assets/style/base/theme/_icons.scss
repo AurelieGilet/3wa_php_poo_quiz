@@ -1,9 +1,13 @@
 .icon-home {
     cursor: pointer;
     
-    &:before {
+    @include is-flex-centered;
+    
+    &::before {
         content: url("/public/icons/icon-home.svg");
         zoom: 1.5;
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     &:hover, 
@@ -17,9 +21,13 @@
 .icon-options {
     cursor: pointer;
 
-    &:before {
+    @include is-flex-centered;
+
+    &::before {
         content: url("/public/icons/icon-options.svg");
         zoom: 1.5;
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     &:hover, 
@@ -32,19 +40,63 @@
 
 .icon-options-hover {
     cursor: pointer;
+    display: flex;
 
-    &:before {
+    &::before {
         content: url("/public/icons/icon-options-hover.svg");
         zoom: 1.5;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.icon-pencil {
+    cursor: pointer;
+
+    @include is-flex-centered;
+
+    &::before {
+        content: url("/public/icons/icon-pencil.svg");
+        zoom: 1.5;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    &:hover, 
+    &:focus {
+        &::before{
+            content: url("/public/icons/icon-pencil-hover.svg");
+        }
+    }
+}
+
+.icon-bin {
+    cursor: pointer;
+
+    @include is-flex-centered;
+
+    &::before {
+        content: url("/public/icons/icon-bin.svg");
+        zoom: 1.5;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    &:hover, 
+    &:focus {
+        &::before{
+            content: url("/public/icons/icon-bin-hover.svg");
+        }
     }
 }
 
 .icon-lines{
     pointer-events: none;
 
-    &:before {
+    @include is-flex-centered;
+
+    &::before {
         content: url("/public/icons/icon-lines.svg");
-        display: flex;
         height: 4.375rem; //70px
         width: 10.3125rem; //165px
     }

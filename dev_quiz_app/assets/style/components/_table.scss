@@ -1,0 +1,102 @@
+.table {
+    /* table */
+
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    thead {
+        display: none;
+
+        @include md {
+            display: table-header-group;
+            border-bottom: 2px solid $border;
+        }
+    }
+
+    tbody {
+        width: 100%;
+    }
+
+    tr,
+    th,
+    td {
+        display: block;
+        padding: 0;
+    }
+
+    @include md {
+        tr {
+            display: table-row;
+        }
+
+        th,
+        td {
+            display: table-cell;
+        }
+    }
+
+    th {
+        font-weight: 600;
+        padding: 0.375rem; //6px
+    }
+
+    tr {
+        margin-bottom: 1rem;
+        // padding-inline: 0.5rem; //8px
+        padding-top: 0.5rem; //8px
+
+
+        @include md {
+            text-align: left;
+            border-bottom: 0.0625rem solid $border;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    tr:nth-child(even) {
+        background-color: $card-background;
+    }
+
+    td {
+        padding-block: 0.375rem; //6px
+        padding-inline: 0.375rem; //6px
+        border-bottom: 0.0625rem dashed $border-transparent;
+        text-align: right;
+
+        @include md {
+            padding: 0.375rem; //6px
+            text-align: left;
+
+            .option {
+                text-align: center;
+            }
+        }
+    }
+
+    td[data-title]:before {
+        content: attr(data-title);
+        font-weight: bold;
+        display: inline-block;
+        content: attr(data-title);
+        float: left;
+        margin-right: 0.5em;
+
+        @include md {
+            display: none;
+        }
+    }
+
+    td:last-child {
+        border-bottom: 2px solid $border;
+
+        @include md {
+            border: none;
+        }
+    }
+
+    td:empty {
+        display: none;
+    }
+}

@@ -5,6 +5,7 @@ $surfie-green: hsla(182, 76%, 26%, 1);
 $cerulean: hsla(187, 88%, 40%, 1);
 $cerulean-transparent: hsla(187, 88%, 40%, 0.3);
 $aqua: hsla(180, 100%, 50%, 1);
+$aqua-transparent: hsla(180, 100%, 50%, 0.3);
 $radical-red: hsla(345, 100%, 60%, 1);
 $radical-red-transparent: hsla(345, 100%, 60%, 0.3);
 
@@ -20,6 +21,7 @@ $success-message: $aqua;
 $error-message: $radical-red;
 
 $border: $aqua;
+$border-transparent: $aqua-transparent;
 $shadows: $cerulean-transparent;
 
 body {

@@ -12,7 +12,7 @@ const categoryFilterButtons = document.querySelectorAll('[data-component="catego
 if (categoryFilterButtons.length) {
     categoryFilterButtons.forEach((button) => {
         button.addEventListener('click', () => 
-        changeActiveCategory(button, categoryFilterButtons)
+            changeActiveCategory(button, categoryFilterButtons)
         );
     });
 }

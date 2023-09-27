@@ -24,6 +24,7 @@ class BuildJsCommand extends Command
             'assets/js/ajax/score/user-score-ajax.js',
             'assets/js/scripts/components/category-filters.js',
             'assets/js/scripts/components/custom-select.js',
+            'assets/js/scripts/utilities/text-truncate.js',
             'assets/js/scripts/templates/partials/navbar.js',
         ];
         

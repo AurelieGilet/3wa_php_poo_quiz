@@ -9,33 +9,41 @@
     </ul>
     <?php endif; ?>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Pseudo</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php foreach ($params['users'] as $user) : ?>
-            <tr>
-                <td><?= htmlspecialchars($user->getId()) ?></td>
-                <td><?= htmlspecialchars($user->getAlias()) ?></td>
-                <td><?= htmlspecialchars($user->getEmail()) ?></td>
-                <td><?= htmlspecialchars($user->getRole()) ?></td>
-                <td>
-                    <a href="/admin/utilisateur/modifier/<?= $user->getId() ?>">Modifier</a>
-                </td>
-                <td>
-                    <a href="/admin/utilisateur/supprimer/<?= $user->getId() ?>">Supprimer</a>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <div class="clipped-container large">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Pseudo</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <?php foreach ($params['users'] as $user) : ?>
+                <tr>
+                    <td data-title="Id"><?= htmlspecialchars($user->getId()) ?></td>
+                    <td data-title="Pseudo" data-truncate="true"><?= htmlspecialchars($user->getAlias()) ?></td>
+                    <td data-title="Email" data-truncate="true"><?= htmlspecialchars($user->getEmail()) ?></td>
+                    <td data-title="Role"><?= htmlspecialchars($user->getRole()) ?></td>
+                    <td class="option">
+                        <a href="/admin/utilisateur/modifier/<?= $user->getId() ?>">
+                            <span class="link is-hidden-md">Modifier</span>
+                            <span class="icon-pencil is-visible-md"></span>
+                        </a>
+                    </td>
+                    <td class="option">
+                        <a href="/admin/utilisateur/supprimer/<?= $user->getId() ?>">
+                            <span class="link is-hidden-md">Supprimer</span>
+                            <span class="icon-bin is-visible-md"></span>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </main>
