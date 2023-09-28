@@ -9,6 +9,12 @@
                 font-size: 1.25rem;
             }
         }
+
+        label {
+            font-family: $family-secondary;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
     }
 
     &__progress {

@@ -2,10 +2,12 @@
     <p class="form-instruction"><?= htmlspecialchars($params['question']->getTitle()) ?></p>
 
     <?php foreach ($params['answers'] as $answer) : ?>
-    <div class="clipped-input">
-        <input type="radio" id="answer<?= $answer->getId() ?>" name="answer" 
-            value="<?= $answer->getId() ?>">
-        <label for="answer<?= $answer->getId() ?>"><?= htmlspecialchars($answer->getContent()) ?></label>
+    <div class="form-group">
+        <div class="clipped-input">
+            <input type="radio" id="answer<?= $answer->getId() ?>" name="answer" 
+                value="<?= $answer->getId() ?>">
+            <label for="answer<?= $answer->getId() ?>"><?= htmlspecialchars($answer->getContent()) ?></label>
+        </div>
     </div>
     <?php endforeach; ?>
     <p id="errors" class="error-message"></p>

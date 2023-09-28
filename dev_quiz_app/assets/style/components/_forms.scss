@@ -14,23 +14,25 @@
 
     .form-group {
         width: 100%;
+        margin-top: 1rem; //15px
+        margin-bottom: 1rem;
+
+        @include md {
+            margin-top: 1.25rem; //20px
+            margin-bottom: 1.25rem;
+        }
     }
 
     .clipped-input {
         width: 100%;
-        margin-top: 20px;
-        margin-bottom: 20px;
         padding: 20px;
         display: flex;
         align-items: center;
         background-color: $card-background;
+        cursor: pointer;
 
         @include two-corners-clipped;
         @include two-corners-clipped-border;
-    }
-
-    & label {
-        width: 100%;
     }
 
     & input,
@@ -58,7 +60,22 @@
         accent-color: $primary;
     }
 
+    & select {
+        width: 100%;
+        background-color: $card-background;
+        color: $primary;
+        border: none;
+    }
+
+    & label {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: .625rem;
+        font-family: $family-primary;
+    }
+
     .main-label {
+        font-family: $family-primary;
         font-size: 1.25rem; //20px
 
         @include md {
@@ -67,8 +84,9 @@
     }
 
     .error-message li {
-        margin-bottom: .625rem; //10px
+        margin-top: .5rem; //8px
     }
+    
 }
 
 .form-instruction {
