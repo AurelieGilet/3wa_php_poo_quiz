@@ -12,6 +12,10 @@
     text-align: center;
 }
 
+.is-uppercase {
+    text-transform: uppercase;
+}
+
 // Extend link click zone to parent size
 .stretched-link {
     &::before {

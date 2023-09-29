@@ -65,6 +65,9 @@ a, button {
 .error-message {
   color: #f36;
 }
+.warning {
+  color: #f36;
+}
 .flash-error {
   color: #f36;
 }
@@ -132,6 +135,9 @@ h3 {
   .error-message {
     font-size: 1rem;
   }
+}
+.warning {
+  font-weight: 700;
 }
 .flash {
   font-size: 1.25rem;
@@ -249,6 +255,9 @@ h3 {
 }
 .is-centered {
   text-align: center;
+}
+.is-uppercase {
+  text-transform: uppercase;
 }
 .stretched-link::before {
   content: "";
@@ -903,6 +912,14 @@ main {
 }
 .admin-user-form .form-group:last-of-type {
   margin-top: 2.5rem;
+}
+.admin-category .clipped-button:first-of-type {
+  margin-top: 0;
+}
+@media (min-width: 768px) {
+  .admin-category .clipped-button:first-of-type {
+    margin-bottom: 3rem;
+  }
 }
 .game__question .form-instruction {
   align-self: flex-start;

@@ -39,17 +39,17 @@ if (isset($_SESSION['errors'])) {
             <p>
                 Cela inclus les informations personnelles (alias, email, mot de passe) mais également tous les scores.
             </p>
-            <p>
-                <strong>
-                    Cette action est irréversible, il ne sera pas possible de récupérer les données supprimées !
-                </strong>
+            <p class="warning">
+                Cette action est irréversible, il ne sera pas possible de récupérer les données supprimées !
             </p>
         </div>
 
         <form method="POST" action="/admin/utilisateur/supprimer/<?= $params['user']->getId() ?>"
             class="form">
             <div class="form-group">
-                <label for="adminPassword">Validez la suppression avec le mot de passe administrateur</label>
+                <label for="adminPassword">
+                    Validez la suppression avec le mot de passe administrateur
+                </label>
     
                 <div class="clipped-input">
                     <input type="text" id="adminPassword" name="adminPassword">
@@ -64,9 +64,13 @@ if (isset($_SESSION['errors'])) {
                 <?php endif; ?>
             </div>
     
-            <button type="submit" class="clipped-button">Valider</button>
+            <button type="submit" class="clipped-button">
+                Valider
+            </button>
         </form>
         
-        <a href="/admin/utilisateurs" class="abort-form has-link-border">retour</a>
+        <a href="/admin/utilisateurs" class="abort-form has-link-border">
+            retour
+        </a>
     </div>
 </main>

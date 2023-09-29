@@ -25,20 +25,28 @@
             <tbody>
                 <?php foreach ($params['users'] as $user) : ?>
                 <tr>
-                    <td data-title="Id"><?= htmlspecialchars($user->getId()) ?></td>
-                    <td data-title="Pseudo" data-truncate="true"><?= htmlspecialchars($user->getAlias()) ?></td>
-                    <td data-title="Email" data-truncate="true"><?= htmlspecialchars($user->getEmail()) ?></td>
-                    <td data-title="Role"><?= htmlspecialchars($user->getRole()) ?></td>
+                    <td data-title="Id">
+                        <?= htmlspecialchars($user->getId()) ?>
+                    </td>
+                    <td data-title="Pseudo" data-truncate="true">
+                        <?= htmlspecialchars($user->getAlias()) ?>
+                    </td>
+                    <td data-title="Email" data-truncate="true">
+                        <?= htmlspecialchars($user->getEmail()) ?>
+                    </td>
+                    <td data-title="Role">
+                        <?= htmlspecialchars($user->getRole()) ?>
+                    </td>
                     <td class="option">
                         <a href="/admin/utilisateur/modifier/<?= $user->getId() ?>">
                             <span class="link is-hidden-md">Modifier</span>
-                            <span class="icon-pencil is-visible-md"></span>
+                            <span class="icon-pencil is-visible-md" aria-label="Modifier l'utilisateur"></span>
                         </a>
                     </td>
                     <td class="option">
                         <a href="/admin/utilisateur/supprimer/<?= $user->getId() ?>">
                             <span class="link is-hidden-md">Supprimer</span>
-                            <span class="icon-bin is-visible-md"></span>
+                            <span class="icon-bin is-visible-md" aria-label="Supprimer l'utilisateur"></span>
                         </a>
                     </td>
                 </tr>

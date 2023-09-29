@@ -1,6 +1,6 @@
-// Used to truncate text in the BO data tables
+// Used to truncate text in the BO data tables (width not fixed, css ellipsis doesn't work)
 function isTextToLong(text) {
-    if (text.innerHTML.length > 18) {
+    if (text.innerHTML.trim().length > 18) {
         return true;
     }
 
@@ -8,13 +8,15 @@ function isTextToLong(text) {
 }
 
 function truncateText(text) {
-    const truncatedText = text.innerHTML.substring(0, 18) + "...";
+    const truncatedText = text.innerHTML.trim().substring(0, 18) + "...";
+
+    console.log(truncatedText);
 
     text.innerHTML = truncatedText;
 }
 
 function addTitleAttribute(text) {
-    text.setAttribute("title", text.innerHTML);
+    text.setAttribute("title", text.innerHTML.trim());
 }
 
 const textToTruncate = document.querySelectorAll('[data-truncate="true"]');

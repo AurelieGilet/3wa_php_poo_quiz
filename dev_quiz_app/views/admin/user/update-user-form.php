@@ -15,9 +15,7 @@ if (isset($_SESSION['errors'])) {
 ?>
 
 <main class="admin-user-form">
-    <h1>
-        Modifier un utilisateur
-    </h1>
+    <h1>Modifier un utilisateur</h1>
 
     <?php if (isset($params['flashes'])) : ?>
     <ul>
@@ -31,7 +29,9 @@ if (isset($_SESSION['errors'])) {
         <form method="POST" action="/admin/utilisateur/modifier/<?= $params['user']->getId() ?>"
             class="form">
             <div class="form-group">
-                <label for="alias">Modifier le pseudo</label>
+                <label for="alias">
+                    Modifier le pseudo
+                </label>
     
                 <div class="clipped-input">
                     <input type="text" id="alias" name="alias"
@@ -93,7 +93,9 @@ if (isset($_SESSION['errors'])) {
             </div>
     
             <div class="form-group">
-                <label for="adminPassword">Confirmez les modifications avec votre mot de passe administrateur</label>
+                <label for="adminPassword">
+                    Confirmez les modifications avec votre mot de passe administrateur
+                </label>
 
                 <div class="clipped-input">
                     <input type="password" id="adminPassword" name="adminPassword">
@@ -108,9 +110,13 @@ if (isset($_SESSION['errors'])) {
                 <?php endif; ?>
             </div>
     
-            <button type="submit" class="clipped-button">Valider</button>
+            <button type="submit" class="clipped-button">
+                Valider
+            </button>
         </form>
         
-        <a href="/admin/utilisateurs" class="abort-form has-link-border">retour</a>
+        <a href="/admin/utilisateurs" class="abort-form has-link-border">
+            retour
+        </a>
     </div>
 </main>

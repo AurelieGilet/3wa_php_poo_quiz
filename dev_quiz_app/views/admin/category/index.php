@@ -1,4 +1,4 @@
-<main>
+<main class="admin-category">
     <h1>Gestion des catégories</h1>
 
     <?php if (isset($params['flashes'])) : ?>
@@ -9,16 +9,43 @@
     </ul>
     <?php endif; ?>
 
-    <a href="/admin/categorie/ajouter">Ajouter une catégorie</a>
+    <div class="clipped-container large">
+        <a href="/admin/categorie/ajouter" class="clipped-button">Ajouter une catégorie</a>
+    
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom catégorie</th>
+                    <th>Questions associées</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
 
-    <div>
-        <?php foreach ($params['categories'] as $category) : ?>
-        <ul>
-            <li>Nom de la catégorie : <?= htmlspecialchars($category->getName()) ?></li>
-            <li>Nombre de questions associées :<?= htmlspecialchars($category->getQuestionsCount()) ?></li>
-            <li><a href="/admin/categorie/modifier/<?= $category->getId() ?>">Modifier</a></li>
-            <li><a href="/admin/categorie/supprimer/<?= $category->getId() ?>">Supprimer</a></li>
-        </ul>
-        <?php endforeach; ?>
+            <tbody>
+                <?php foreach ($params['categories'] as $category) : ?>
+                <tr>
+                    <td data-title="Nom de la catégorie" data-truncate="true" class="is-uppercase">
+                        <?= htmlspecialchars($category->getName()) ?>
+                    </td>
+                    <td data-title="Questions associées">
+                        <?= htmlspecialchars($category->getQuestionsCount()) ?>
+                    </td>
+                    <td class="option">
+                        <a href="/admin/categorie/modifier/<?= $category->getId() ?>">
+                            <span class="link is-hidden-md">Modifier</span>
+                            <span class="icon-pencil is-visible-md" aria-label="Modifier la catégorie"></span>
+                        </a>
+                    </td>
+                    <td class="option">
+                        <a href="/admin/categorie/supprimer/<?= $category->getId() ?>">
+                            <span class="link is-hidden-md">Supprimer</span>
+                            <span class="icon-bin is-visible-md" aria-label="Supprimer la catégorie"></span>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </main>

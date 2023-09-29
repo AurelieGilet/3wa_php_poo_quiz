@@ -1,0 +1,9 @@
+.admin-category {
+    .clipped-button:first-of-type {
+        margin-top: 0;
+
+        @include md {
+            margin-bottom: 3rem;
+        }
+    }
+}
