@@ -25,32 +25,48 @@ if (isset($_SESSION['errors'])) {
     </ul>
     <?php endif; ?>
 
-    <p>
-        Êtes-vous sûr de vouloir supprimer cette question ? <br>
-        <strong><?= htmlspecialchars($params['question']->getTitle()) ?></strong> <br>
-        Toutes les réponses associées seront également supprimées : <br>
-        <?php foreach ($params['answers'] as $answer) : ?>
-        <strong><?= htmlspecialchars($answer->getContent()) ?></strong> <br>
-        <?php endforeach; ?>
-    </p>
-
-    <form method="POST" action="/admin/question/supprimer/<?= $params['question']->getId() ?>">
-        <div>
-            <label for="adminPassword">Validez la suppression avec le mot de passe administrateur</label>
-
-            <input type="text" id="adminPassword" name="adminPassword">
-
-            <?php if (isset($formErrors['adminPassword'])) : ?>
-            <ul>
-                <?php foreach ($formErrors['adminPassword'] as $error) : ?>
-                <li><?= $error ?></li>
-                <?php endforeach; ?>
-            </ul>
-            <?php endif; ?>
+    <div class="clipped-container">
+        <div class="form-instruction">
+            <h3>Mise en garde :</h3>
+            <p>
+                Vous vous apprêtez à supprimer la question suivante : <br>
+                <strong><?= htmlspecialchars($params['question']->getTitle()) ?></strong> <br>
+            </p>
+            <p class="warning">
+                Toutes les réponses associées seront également supprimées :
+            </p>
+            <?php foreach ($params['answers'] as $answer) : ?>
+            <p><?= htmlspecialchars($answer->getContent()) ?></p>
+            <?php endforeach; ?>
         </div>
-
-        <button type="submit">Valider</button>
-    </form>
-
-    <a href="/admin/questions">retour</a>
+    
+        <form method="POST" action="/admin/question/supprimer/<?= $params['question']->getId() ?>"
+            class="form">
+            <div class="form-group">
+                <label for="adminPassword">
+                    Validez la suppression avec le mot de passe administrateur
+                </label>
+    
+                <div class="clipped-input">
+                    <input type="text" id="adminPassword" name="adminPassword">
+                </div>
+    
+                <?php if (isset($formErrors['adminPassword'])) : ?>
+                <ul class="error-message">
+                    <?php foreach ($formErrors['adminPassword'] as $error) : ?>
+                    <li><?= $error ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </div>
+    
+            <button type="submit" class="clipped-button">
+                Valider
+            </button>
+        </form>
+    
+        <a href="/admin/questions" class="abort-form has-link-border">
+            retour
+        </a>
+    </div>
 </main>

@@ -1,0 +1,63 @@
+.admin-question {
+    &__container {
+        @include is-flex-centered;
+
+        flex-direction: column;
+        position: relative;
+        margin-top: $clipped-container-margin;
+
+        @include lg {
+            flex-direction: row;
+            max-width: 75rem; //1200px
+        }
+    }
+
+    .canvas {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 14rem; //224px
+        width: 10.625rem; //170px
+    }
+
+    .question-billboard {
+        width: auto;
+        min-height: 15rem; //240px
+        min-width: 18.75rem; //300px
+        margin-top: 0;
+
+        @include lg {
+            margin-top: $clipped-container-margin;
+            margin-left: 10.625rem;
+            margin-right: 0;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            text-align: left;
+            border-spacing: 0 20px;
+            table-layout: auto;
+        }
+
+        tr:nth-child(even) td {
+            padding-top: 0;
+            padding-bottom: 1.25rem;
+        }
+
+        td {
+            padding-block: .625rem; //10px
+        }
+
+        .option {
+            text-align: right;
+            padding-block: 0;
+
+            a {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}

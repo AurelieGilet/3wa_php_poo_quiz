@@ -38,9 +38,7 @@ if (isset($_SESSION['errors'])) {
                 Toutes les questions associées seront également supprimées :
             </p>
                 <?php foreach ($params['questions'] as $question) : ?>
-                <p>
-                    <?= htmlspecialchars($question->getTitle()) ?>
-                </p> 
+                <p><?= htmlspecialchars($question->getTitle()) ?></p> 
                 <?php endforeach; ?>
             <p class="warning">
                 Si vous souhaitez conserver ces questions, 

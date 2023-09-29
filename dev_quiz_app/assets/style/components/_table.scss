@@ -77,11 +77,10 @@
 
     td[data-title]:before {
         content: attr(data-title);
+        text-transform: initial;
         font-weight: bold;
-        display: inline-block;
-        content: attr(data-title);
         float: left;
-        margin-right: 0.5em;
+        margin-right: .5rem; //8px
 
         @include md {
             display: none;

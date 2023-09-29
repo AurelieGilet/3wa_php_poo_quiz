@@ -16,6 +16,15 @@
     text-transform: uppercase;
 }
 
+.is-family-primary {
+    font-family: $family-primary;
+}
+
+.is-light-bold {
+    font-weight: 600;
+}
+
+
 // Extend link click zone to parent size
 .stretched-link {
     &::before {

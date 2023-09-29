@@ -23,9 +23,14 @@
         }
     }
 
+    .checkbox-group {
+        display: flex;
+        margin-top: 0.625rem; //10px
+    }
+
     .clipped-input {
         width: 100%;
-        padding: 20px;
+        padding: 1.25rem; //20px
         display: flex;
         align-items: center;
         background-color: $card-background;
@@ -35,8 +40,8 @@
         @include two-corners-clipped-border;
     }
 
-    & input,
-    & textarea {
+    input,
+    textarea {
         width: 100%;
         height: 100%;
         border: 0;
@@ -53,24 +58,29 @@
         }
     }
 
-    & input[type="radio"] {
-        width: 20px;
-        height: 20px;
-        margin-right: 20px;
+    input[type="radio"],
+    input[type="checkbox"] {
+        width: 1.25rem; //20px
+        height: 1.25rem;
+        margin-right: 1.25rem;
         accent-color: $primary;
     }
 
-    & select {
+    input[type="checkbox"] {
+        margin-right: 0;
+    }
+
+    select {
         width: 100%;
         background-color: $card-background;
         color: $primary;
         border: none;
     }
 
-    & label {
+    label {
         display: inline-block;
         width: 100%;
-        margin-bottom: .625rem;
+        margin-bottom: 0.625rem;
         font-family: $family-primary;
     }
 
@@ -84,9 +94,8 @@
     }
 
     .error-message li {
-        margin-top: .5rem; //8px
+        margin-top: 0.5rem; //8px
     }
-    
 }
 
 .form-instruction {
@@ -102,6 +111,6 @@
     }
 
     & p {
-        margin-bottom: .625rem;
+        margin-bottom: 0.625rem;
     }
 }

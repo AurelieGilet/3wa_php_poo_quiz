@@ -10,7 +10,8 @@
                 </div>
                 <ul class="custom-select__options">
                     <?php foreach ($params['categories'] as $category) : ?>
-                    <li data-controls="user-score-filter" data-category-id="<?= $category->getId() ?>" 
+                    <li data-controls="user-score-filter" 
+                        data-category-id="<?= $category->getId() ?>" 
                         class="select-option <?= $params['activeCategory'] === $category->getId() ? 'selected' :'' ?>">
                         <?= htmlspecialchars($category->getName()) ?>
                     </li>
