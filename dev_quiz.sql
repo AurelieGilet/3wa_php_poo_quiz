@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2023 at 03:51 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Oct 10, 2023 at 02:20 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `answer` (
   `content` varchar(255) NOT NULL,
   `is_good_answer` tinyint(4) NOT NULL DEFAULT 0,
   `question_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `answer`
@@ -505,7 +505,7 @@ INSERT INTO `answer` (`id`, `content`, `is_good_answer`, `question_id`) VALUES
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
@@ -528,7 +528,7 @@ CREATE TABLE `question` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `question`
@@ -540,13 +540,13 @@ INSERT INTO `question` (`id`, `title`, `category_id`) VALUES
 (3, 'Choisissez le bon élément HTML pour le titre le plus grand :', 1),
 (4, 'Quel est l\'élément HTML correct pour insérer un saut de ligne ?', 1),
 (5, 'Quel est le HTML correct pour ajouter une couleur d’arrière-plan ?', 1),
-(6, 'Choisissez le bon élément HTML pour définir le texte important', 1),
-(7, 'Choisissez le bon élément HTML pour définir le texte souligné', 1),
+(6, 'Choisissez le bon élément HTML pour définir le texte important :', 1),
+(7, 'Choisissez le bon élément HTML pour définir le texte souligné :', 1),
 (8, 'Quel est le code HTML correct pour créer un lien hypertexte ?', 1),
 (9, 'Quel caractère est utilisé pour indiquer une balise de fin ?', 1),
 (10, 'Comment ouvrir un lien dans un nouvel onglet/fenêtre de navigateur ?', 1),
 (11, 'Lesquels de ces éléments sont tous des éléments <table> ?', 1),
-(12, 'Les éléments en ligne sont normalement affichés sans commencer une nouvelle ligne', 1),
+(12, 'Les éléments en ligne sont normalement affichés sans commencer une nouvelle ligne :', 1),
 (13, 'Comment faire une liste numérotée ?', 1),
 (14, 'Comment faire une liste à puces ?', 1),
 (15, 'Quel est le code HTML correct pour créer une case à cocher ?', 1),
@@ -556,13 +556,13 @@ INSERT INTO `question` (`id`, `title`, `category_id`) VALUES
 (19, 'Quel est le code HTML correct pour insérer une image ?', 1),
 (20, 'Quel est le HTML correct pour insérer une image d’arrière-plan ?', 1),
 (21, 'Un <iframe> est utilisé pour afficher une page Web dans une page Web', 1),
-(22, 'Les commentaires HTML commencent par <!-- et se terminent par -->', 1),
-(23, 'Les éléments de bloc sont normalement affichés sans commencer une nouvelle ligne', 1),
+(22, 'Les commentaires HTML commencent par <!-- et se terminent par --> :', 1),
+(23, 'Les éléments de bloc sont normalement affichés sans commencer une nouvelle ligne :', 1),
 (24, 'Quel élément HTML définit le titre d\'un document ?', 1),
 (25, 'Quel attribut HTML spécifie un texte alternatif pour une image, si l\'image ne peut pas être affichée ?', 1),
 (26, 'Quel doctype est correct pour HTML5 ?', 1),
 (27, 'Quel élément HTML est utilisé pour spécifier un pied de page pour un document ou une section ?', 1),
-(28, 'En HTML, vous pouvez intégrer des éléments SVG directement dans une page HTML', 1),
+(28, 'En HTML, vous pouvez intégrer des éléments SVG directement dans une page HTML :', 1),
 (29, 'Quel est l\'élément HTML correct pour lire les fichiers vidéo ?', 1),
 (30, 'Quel est l\'élément HTML correct pour lire des fichiers audio ?', 1),
 (31, 'L\'attribut global HTML \"contenteditable\" permet de :', 1),
@@ -686,7 +686,7 @@ CREATE TABLE `score` (
   `result` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `score`
@@ -699,7 +699,18 @@ INSERT INTO `score` (`id`, `created_at`, `result`, `user_id`, `category_id`) VAL
 (11, '2023-09-09 16:52:53', 80, 26, 2),
 (12, '2023-09-09 16:54:17', 90, 26, 3),
 (13, '2023-09-09 16:55:13', 90, 26, 4),
-(14, '2023-09-09 16:56:26', 80, 26, 5);
+(15, '2023-09-25 11:04:51', 20, 26, 1),
+(16, '2023-09-27 10:28:05', 70, 26, 1),
+(17, '2023-09-27 10:53:17', 50, 26, 1),
+(18, '2023-09-27 10:54:02', 80, 26, 1),
+(19, '2023-09-27 10:55:44', 100, 26, 1),
+(20, '2023-09-27 10:56:52', 90, 26, 1),
+(21, '2023-09-27 10:58:05', 90, 26, 1),
+(22, '2023-09-27 10:58:59', 90, 26, 1),
+(23, '2023-09-27 11:10:45', 90, 26, 1),
+(24, '2023-09-28 11:29:50', 100, 26, 1),
+(25, '2023-09-29 09:45:46', 40, 26, 1),
+(26, '2023-09-29 15:09:44', 80, 26, 1);
 
 -- --------------------------------------------------------
 
@@ -713,7 +724,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
@@ -721,7 +732,16 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `email`, `password`, `alias`, `role`) VALUES
 (20, 'admin@mail.com', '$2y$10$Fsxl3iHn7vNH7gInd8mRO.SwZKOFXnsoUKpK2z7ZiImy7CPEgeC72', 'Admin', 'admin'),
-(26, 'user@mail.com', '$2y$10$Rq2pb.uJLTRxX8LmwaR85e5qq6GXtnLAFh6nYLNgXw8BafY/rYvIa', 'User480', 'user');
+(26, 'user@mail.com', '$2y$10$Rq2pb.uJLTRxX8LmwaR85e5qq6GXtnLAFh6nYLNgXw8BafY/rYvIa', 'User480', 'user'),
+(28, 'user2@mail.com', '$2y$10$bUZ/o3K9Q7av.aC8loVqRuTnt4wFywROl.4Lbc15.MpHbXvDAmqTu', 'User9240', 'user'),
+(29, 'user3@mail.com', '$2y$10$.QtgdD/4q9HTOKzdBJAWBO7NWCncZ37ijWQWIhciqNvqqs5IRioSe', 'User1589', 'user'),
+(30, 'user4@mail.com', '$2y$10$MQg8Fxh3nasMa7DQdtxXkeVtUJk/aeRyo46GY2anEIqVEIj0EULbe', 'User6346', 'user'),
+(31, 'user5@mail.com', '$2y$10$hjCMYgKtCimnRgOs2onkhORe.eX.X8NltIm1w1JQeDryMAxsG7MTi', 'User3428', 'user'),
+(32, 'user6@mail.com', '$2y$10$uBOjz838Da7jqkwgBJd6NumfYe92lH8JXUEeE45Y0SLNlFXsw5zwy', 'User6929', 'user'),
+(33, 'user7@mail.com', '$2y$10$O58Jfe0kIJR4FMVEWU8jveAadop6LVBoiEejNa8c94TlZLT.R6D22', 'User1893', 'user'),
+(34, 'user8@mail.com', '$2y$10$ugxYv82JEPVhg9iNDcbw5ei5S1l3aXjifSpGDzx3M.PW/lPAGi67u', 'User381', 'user'),
+(35, 'user9@mail.com', '$2y$10$Gqt48vaklYLPkbfavX3VROIYtumY5Ph2bIU6WAUOh7rpg1kbKWRTO', 'User7165', 'user'),
+(36, 'user10suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuperlongemail@mail.com', '$2y$10$jcyJXBb7bqACmqJnglP8.Oqr3D5RmhOo5Ej7DihwfOWOZ0o2wrYHW', 'Usersuuuuuuuuuuuuuperlongpseudo5211', 'user');
 
 --
 -- Indexes for dumped tables
@@ -787,13 +807,13 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `score`
 --
 ALTER TABLE `score`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Constraints for dumped tables
