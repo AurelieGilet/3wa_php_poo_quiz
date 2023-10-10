@@ -13,3 +13,5 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<?php include('../views/partials/_pagination.php'); ?>

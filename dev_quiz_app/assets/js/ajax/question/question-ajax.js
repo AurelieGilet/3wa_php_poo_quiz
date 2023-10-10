@@ -16,6 +16,7 @@ const questionAjaxCall = () => {
             }
         };
         xhr.open("GET", "/admin/questions/" + categoryId);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.send();
     }
 

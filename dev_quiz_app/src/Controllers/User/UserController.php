@@ -56,22 +56,47 @@ class UserController extends AbstractController
         $categories = $this->categoryModel->getAll();
         $activeCategory = $categories[0]->getId();
 
-        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $activeCategory);
+        $limitIndex = 0;
 
-        return $this->render('user/user-scores', compact('categories', 'activeCategory', 'scores'));
+        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $activeCategory, $limitIndex);
+
+        $totalScores = $this->scoreModel->countUserScoreByCategory($this->user->getId(), $activeCategory);
+        $totalPages = ceil($totalScores / 10);
+
+        $currentPage = 1;
+
+        // echo'<pre>';
+        // var_dump($totalPages);
+        // echo'</pre>';
+
+        return $this->render('user/user-scores', compact('categories', 'activeCategory', 'scores', 'currentPage', 'totalPages'));
     }
 
     /**
      * Route: /espace-utilisateur/scores/:id
      */
-    public function ajaxUserScores($categoryId)
+    public function ajaxUserScores(string $categoryId)
     {
-        //TODO: find a way to secure route if a string is added to url
+        /**
+         * This is used to secure the url against any direct modifications,
+         * adding parameters to it would break the Ajax calls
+         */
+        if ($_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            header('Location: /espace-utilisateur/scores');
+            exit;
+        }
+
+        $currentPage = isset($_GET['page']) ? $_GET['page'] : false;
+
+        $limitIndex = ($currentPage - 1) * 10;
         
         // User Ajax call (user-score-ajax.js) to render the scores filtered by category
-        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $categoryId);
+        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $categoryId, $limitIndex);
+        
+        $totalScores = $this->scoreModel->countUserScoreByCategory($this->user->getId(), $categoryId);
+        $totalPages = ceil($totalScores / 10);
 
-        return $this->renderFragment('user/_category-scores', compact('scores'));
+        return $this->renderFragment('user/_category-scores', compact('scores', 'currentPage', 'totalPages'));
     }
 
     /**

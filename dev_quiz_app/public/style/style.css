@@ -237,6 +237,36 @@ h3 {
   height: 4.375rem;
   width: 10.3125rem;
 }
+.icon-prev {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon-prev::before {
+  content: url("/public/icons/icon-triangle.svg");
+  transform: rotate(-180deg);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.icon-prev:hover::before, .icon-prev:focus::before {
+  content: url("/public/icons/icon-triangle-hover.svg");
+  transform: rotate(-180deg);
+}
+.icon-next {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon-next::before {
+  content: url("/public/icons/icon-triangle.svg");
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.icon-next:hover::before, .icon-next:focus::before {
+  content: url("/public/icons/icon-triangle-hover.svg");
+}
 /*** Text utilities ***/
 .link {
   text-decoration: underline;
@@ -512,7 +542,7 @@ h3 {
   color: #072431;
   background-color: aqua;
 }
-.select-option.selected {
+.select-option.active {
   color: #00545c;
   background-color: aqua;
 }
@@ -831,6 +861,12 @@ footer li:nth-child(-n + 2)::after {
   margin-inline: 0.3125rem;
   display: inline-block;
   text-decoration: none;
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 2rem;
 }
 html, body {
   height: 100%;

@@ -90,7 +90,7 @@
     }
 }
 
-.icon-lines{
+.icon-lines {
     pointer-events: none;
 
     @include is-flex-centered;
@@ -99,5 +99,45 @@
         content: url("/public/icons/icon-lines.svg");
         height: 4.375rem; //70px
         width: 10.3125rem; //165px
+    }
+}
+
+.icon-prev {
+    cursor: pointer;
+
+    @include is-flex-centered;
+
+    &::before {
+        content: url("/public/icons/icon-triangle.svg");
+        transform: rotate(-180deg);
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    &:hover, 
+    &:focus {
+        &::before{
+            content: url("/public/icons/icon-triangle-hover.svg");
+            transform: rotate(-180deg);
+        }
+    }
+}
+
+.icon-next {
+    cursor: pointer;
+
+    @include is-flex-centered;
+
+    &::before {
+        content: url("/public/icons/icon-triangle.svg");
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    &:hover, 
+    &:focus {
+        &::before{
+            content: url("/public/icons/icon-triangle-hover.svg");
+        }
     }
 }

@@ -60,10 +60,21 @@ class QuestionAnswerController extends AbstractController
     /**
      * Route: /admin/questions/:id
      */
-    public function ajaxIndex(int $categoryId)
+    public function ajaxIndex(string $categoryId)
     {
+        /**
+         * This is used to secure the url against any direct modifications
+         * adding parameters to it or would break the Ajax calls
+         */
+        if ($_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            header('Location: /admin/questions');
+            exit;
+        }
+
         // Use Ajax call (question-ajax.js) to render the questions filtered by category
         $questions = $this->questionModel->findByCategory($categoryId);
+
+        //TODO: paginate the results
 
         return $this->renderFragment('admin/question/_category-questions', compact('questions'));
     }
