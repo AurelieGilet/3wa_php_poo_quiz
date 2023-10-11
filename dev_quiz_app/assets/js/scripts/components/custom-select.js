@@ -14,10 +14,10 @@ function handleClickOutsideSelect(event) {
 // Change the text of the selected option
 function changeSelectedOption(option, customSelectOptions) {
     customSelectOptions.forEach((selectOption) => {
-        selectOption.classList.remove("active");
+        selectOption.classList.remove("selected");
     });
 
-    option.classList.add("active");
+    option.classList.add("selected");
 
     const selectTrigger = document.querySelector(".custom-select__trigger span");
     if (selectTrigger) {

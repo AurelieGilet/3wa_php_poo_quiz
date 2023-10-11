@@ -12,7 +12,7 @@
                     <?php foreach ($params['categories'] as $category) : ?>
                     <li data-controls="user-score-filter" 
                         data-category-id="<?= $category->getId() ?>" 
-                        class="select-option <?= $params['activeCategory'] === $category->getId() ? 'active' :'' ?>">
+                        class="select-option <?= $params['activeCategory'] === $category->getId() ? 'selected' :'' ?>">
                         <?= htmlspecialchars($category->getName()) ?>
                     </li>
                     <?php endforeach; ?>

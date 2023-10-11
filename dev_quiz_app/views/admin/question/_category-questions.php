@@ -1,10 +1,11 @@
 <?php if (count($params['questions']) === 0) : ?>
 <p class="is-centered">Pas encore de question pour cette catégorie</p>
+<a href="/admin/question/ajouter" class="clipped-button">Ajouter une question</a>
 <?php endif; ?>
 
 <table>
     <tbody>
-        <?php $i = 1; ?>
+        <?php $i = $params['currentPage'] > 1 ? (($params['currentPage'] - 1) * 10 + 1) : 1; ?>
         <?php foreach ($params['questions'] as $question) : ?>
         <tr>
             <td class="is-family-primary is-light-bold">Question <?= $i ?></td>
@@ -29,3 +30,5 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<?php include('../views/partials/_pagination.php'); ?>

@@ -19,7 +19,7 @@ class BuildJsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sourceFiles = [
-            'assets/js/ajax/question/question-ajax.js',
+            'assets/js/ajax/question/admin-questions-ajax.js',
             'assets/js/ajax/game/answer-questions-ajax.js',
             'assets/js/ajax/score/user-score-ajax.js',
             'assets/js/scripts/components/category-filters.js',

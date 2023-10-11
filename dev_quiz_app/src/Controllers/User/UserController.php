@@ -65,11 +65,13 @@ class UserController extends AbstractController
 
         $currentPage = 1;
 
-        // echo'<pre>';
-        // var_dump($totalPages);
-        // echo'</pre>';
-
-        return $this->render('user/user-scores', compact('categories', 'activeCategory', 'scores', 'currentPage', 'totalPages'));
+        return $this->render('user/user-scores', compact(
+            'categories',
+            'activeCategory',
+            'scores',
+            'currentPage',
+            'totalPages'
+        ));
     }
 
     /**

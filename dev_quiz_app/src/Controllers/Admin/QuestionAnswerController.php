@@ -41,7 +41,6 @@ class QuestionAnswerController extends AbstractController
      */
     public function index()
     {
-        //TODO: paginate the results
         // We erase any previous form data that had been stored in the session
         unset($_SESSION['post']);
 
@@ -50,11 +49,24 @@ class QuestionAnswerController extends AbstractController
         //When arriving on the page, we display the questions of the first category by default
         $activeCategory = $categories[0]->getId();
 
-        $questions = $this->questionModel->findByCategory($activeCategory);
+        $limitIndex = 0;
+
+        $questions = $this->questionModel->filterByCategory($activeCategory, $limitIndex);
+        $totalQuestions = $this->questionModel->countQuestionsByCategory($activeCategory);
+        $totalPages = ceil($totalQuestions / 10);
+
+        $currentPage = 1;
     
         $flashes = $this->flashMessage->getFlashMessages('question');
 
-        return $this->render('admin/question/index', compact('categories', 'activeCategory', 'questions', 'flashes'));
+        return $this->render('admin/question/index', compact(
+            'categories',
+            'activeCategory',
+            'questions',
+            'currentPage',
+            'totalPages',
+            'flashes'
+        ));
     }
 
     /**
@@ -64,19 +76,28 @@ class QuestionAnswerController extends AbstractController
     {
         /**
          * This is used to secure the url against any direct modifications
-         * adding parameters to it or would break the Ajax calls
+         * adding parameters to it would break the Ajax calls
          */
         if ($_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
             header('Location: /admin/questions');
             exit;
         }
 
+        $currentPage = isset($_GET['page']) ? $_GET['page'] : false;
+
+        $limitIndex = ($currentPage - 1) * 10;
+
         // Use Ajax call (question-ajax.js) to render the questions filtered by category
-        $questions = $this->questionModel->findByCategory($categoryId);
+        $questions = $this->questionModel->filterByCategory($categoryId, $limitIndex);
 
-        //TODO: paginate the results
+        $totalQuestions = $this->questionModel->countQuestionsByCategory($categoryId);
+        $totalPages = ceil($totalQuestions / 10);
 
-        return $this->renderFragment('admin/question/_category-questions', compact('questions'));
+        return $this->renderFragment('admin/question/_category-questions', compact(
+            'questions',
+            'currentPage',
+            'totalPages'
+        ));
     }
 
     /**

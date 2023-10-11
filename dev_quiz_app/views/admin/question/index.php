@@ -1,8 +1,3 @@
-<?php
-//TODO: change button style for active category being displayed
-// var_dump('catégorie active', $params['activeCategory']);
-?>
-
 <main class="admin-question">
     <h1>Gestion des questions</h1>
 

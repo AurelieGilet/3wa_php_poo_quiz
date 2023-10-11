@@ -1,4 +1,4 @@
-<?php if ($params['totalPages'] > 0) : ?>
+<?php if ($params['totalPages'] > 1) : ?>
 <div id="pagination" class="pagination">
     <span id="pagination-prev" 
         data-prev-page="<?= $params['currentPage'] <= 1 ? "false" :  $params['currentPage'] - 1 ?>" 

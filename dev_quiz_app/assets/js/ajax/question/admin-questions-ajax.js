@@ -1,8 +1,8 @@
-// Handle the display of the user's game scores, filtered by category
-const userScoreAjaxCall = () => {
-    function filterUserScoresByCategory(button, pageNumber = 1) {
+// Handle the display in the BO of the questions, filterer by category
+const adminQuestionsAjaxCall = () => {
+    function filterQuestionsByCategory(button, pageNumber = 1) {
         const categoryId = button.dataset.categoryId;
-        const scoresBloc = document.getElementById("category-scores");
+        const questionBloc = document.getElementById("category-questions");
 
         if (pageNumber === "false") {
             return;
@@ -12,25 +12,24 @@ const userScoreAjaxCall = () => {
         xhr.onreadystatechange = function () {
             if (this.readyState === 4) {
                 if (this.status === 200) {
-                    scoresBloc.innerHTML = this.responseText;
+                    questionBloc.innerHTML = this.responseText;
                     addPaginationListener();
-
                 } else {
-                    scoresBloc.innerHTML =
+                    questionBloc.innerHTML =
                         "Une erreur s'est produite, merci de contacter l'administrateur du site.";
                 }
             }
         };
-        xhr.open("GET", "/espace-utilisateur/scores/" + categoryId + "?page=" + pageNumber);
+        xhr.open("GET", "/admin/questions/" + categoryId + "?page=" + pageNumber);
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.send();
     }
 
-    const scoreFilters = document.querySelectorAll('[data-controls="user-score-filter"]');
+    const categoriesFilters = document.querySelectorAll('[data-controls="category-filter"]');
 
-    if (scoreFilters.length) {
-        scoreFilters.forEach((button) => {
-            button.addEventListener("click", () => filterUserScoresByCategory(button));
+    if (categoriesFilters.length) {
+        categoriesFilters.forEach((button) => {
+            button.addEventListener("click", () => filterQuestionsByCategory(button));
         });
     }
 
@@ -45,28 +44,28 @@ const userScoreAjaxCall = () => {
         const currentDisplayWidth = window.innerWidth;
 
         // Mobile category select
-        let activeCategory = document.querySelector('.selected[data-controls="user-score-filter"]');
+        let activeCategory = document.querySelector('.selected[data-controls="category-filter"]');
 
         if (currentDisplayWidth > 991) {
             // Desktop category select
-            activeCategory = document.querySelector('.active[data-controls="user-score-filter"]');
+            activeCategory = document.querySelector('.active[data-controls="category-filter"]');
         }
 
-        if (prevButton && scoreFilters.length) {
+        // Make sure it's the admin questions pagination buttons
+        if (prevButton && categoriesFilters.length) {
             const pageNumber = prevButton.dataset.prevPage;
 
-            prevButton.addEventListener('click', () => filterUserScoresByCategory(activeCategory, pageNumber));
+            prevButton.addEventListener('click', () => filterQuestionsByCategory(activeCategory, pageNumber));
         }
 
-        // Make sure it's the user score pagination buttons
-        if (nextButton && scoreFilters.length) {
+        if (nextButton && categoriesFilters.length) {
             const pageNumber = nextButton.dataset.nextPage;
 
-            nextButton.addEventListener('click', () => filterUserScoresByCategory(activeCategory, pageNumber));
+            nextButton.addEventListener('click', () => filterQuestionsByCategory(activeCategory, pageNumber));
         }
     }
 
     addPaginationListener();
 };
 
-userScoreAjaxCall();
+adminQuestionsAjaxCall();
