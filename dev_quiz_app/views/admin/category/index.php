@@ -47,5 +47,19 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+        <?php if ($params['totalPages'] > 1) : ?>
+        <div class="pagination">
+            <a href="/admin/categories?page=<?= $params['currentPage'] <= 1 ? 1 :  $params['currentPage'] - 1 ?>">
+                <span class="icon-prev"></span>
+            </a>
+            <span>
+                <?= $params['currentPage'] ?> sur <?= $params['totalPages'] ?>
+            </span>
+            <a href="/admin/categories?page=<?= $params['currentPage'] >= $params['totalPages'] ? $params['totalPages'] : $params['currentPage'] + 1 ?>">
+                <span class="icon-next"></span>
+            </a>
+        </div>
+        <?php endif; ?>
     </div>
 </main>

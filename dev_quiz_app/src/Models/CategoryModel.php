@@ -36,4 +36,13 @@ class CategoryModel extends AbstractModel
             $entity->setQuestionsCount($result[0]);
         }
     }
+
+    public function getPaginatedCategories($index)
+    {
+        $request = 'SELECT id, name
+        FROM ' . $this->table .
+        ' LIMIT ?, 10';
+
+        return $this->query($request, [$index]);
+    }
 }

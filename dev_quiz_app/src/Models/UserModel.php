@@ -21,4 +21,13 @@ class UserModel extends AbstractModel
 
         return $this->query($request, [$email], true);
     }
+
+    public function getPaginatedUsers($index)
+    {
+        $request = 'SELECT id, email, alias, role
+        FROM ' . $this->table .
+        ' LIMIT ?, 10';
+
+        return $this->query($request, [$index]);
+    }
 }

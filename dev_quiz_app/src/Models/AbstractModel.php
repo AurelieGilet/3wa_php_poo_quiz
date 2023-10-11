@@ -87,6 +87,19 @@ abstract class AbstractModel
 
         return $this->query($request);
     }
+
+    public function countAll()
+    {
+        $request = 'SELECT COUNT(id) FROM ' . $this->table;
+        
+        $pdoStatement = $this->db->getPDO()->prepare($request);
+        $pdoStatement->setFetchMode(PDO::FETCH_NUM);
+        $pdoStatement->execute();
+
+        $result = $pdoStatement->fetch();
+
+        return $result[0];
+    }
     
     public function findById(int $id): bool|AbstractEntity
     {

@@ -32,11 +32,18 @@ class AdminUserController extends AbstractController
      */
     public function index()
     {
-        $users = $this->userModel->getAll();
+        // Pagination
+        $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+        $limitIndex = ($currentPage - 1) * 10;
+
+        $users = $this->userModel->getPaginatedUsers($limitIndex);
+
+        $totalUsers = $this->userModel->countAll();
+        $totalPages = ceil($totalUsers / 10);
 
         $flashes = $this->flashMessage->getFlashMessages('user');
 
-        return $this->render('admin/user/index', compact('users', 'flashes'));
+        return $this->render('admin/user/index', compact('users', 'currentPage', 'totalPages', 'flashes'));
     }
 
     /**

@@ -38,10 +38,18 @@ class CategoryController extends AbstractController
      */
     public function index()
     {
-        $categories = $this->categoryModel->getAll();
+        // Pagination
+        $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+        $limitIndex = ($currentPage - 1) * 10;
+
+        $categories = $this->categoryModel->getPaginatedCategories($limitIndex);
+
+        $totalCategories = $this->categoryModel->countAll();
+        $totalPages = ceil($totalCategories / 10);
+
         $flashes = $this->flashMessage->getFlashMessages('category');
 
-        return $this->render('admin/category/index', compact('categories', 'flashes'));
+        return $this->render('admin/category/index', compact('categories', 'currentPage', 'totalPages', 'flashes'));
     }
 
     /**
