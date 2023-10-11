@@ -44,6 +44,12 @@ class GameController extends AbstractController
     public function playGame(int $id)
     {
         $category = $this->categoryModel->findById($id);
+
+        // Check if category exists and has at least 10 questions
+        if (!$category || $category->getQuestionsCount() < 10) {
+            return header('Location: /choisir-sujet');
+        }
+
         $questions = $this->questionModel->getRandomQuestions($id, 10);
 
         $_SESSION['gameCategory'] = $id;

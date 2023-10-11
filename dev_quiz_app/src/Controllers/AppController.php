@@ -57,6 +57,13 @@ class AppController extends AbstractController
 
         $categories = $this->categoryModel->getAll();
 
+        // Filter categories to display only those that are payable = with at least 10 questions
+        foreach ($categories as $key => $category) {
+            if ($category->getQuestionsCount() < 10) {
+                unset($categories[$key]);
+            }
+        }
+
         return $this->render('app/choose-game-subject', compact('categories'));
     }
 }
