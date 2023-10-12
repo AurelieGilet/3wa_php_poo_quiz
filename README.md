@@ -43,11 +43,12 @@ bin/console build:js
 
 Après avoir téléchargé le dossier, un simple **_composer install_** permettra d'installer les packages nécessaires (il y en a peu).
 
-Concernant la base de données, il vous faudra un serveur local type Xampp.
+Concernant la base de données, il vous faudra un serveur local type Xampp, Wamp, Mamp.
 
 Un fichier **dev_quiz.sql** est disponible sur le repository avec un jeu de données qui permet de faire fonctionner le site.
+Il suffit de créer une base de donnée **dev_quiz** et d'y importer ce fichier.
 
-Il vous suffira de changer les paramètres nécessaires dans le fichier app/database/DBConstants.php pour vous connecter à votre db locale.
+Il vous suffira ensuite de changer les paramètres nécessaires éventuels dans le fichier app/database/DBConstants.php pour vous connecter à votre db locale, selon le serveur que vous utilisez (user et password).
 
 2 utilisateurs sont déjà enregistrés dans le jeu de données, que vous pouvez connecter pour accéder aux différentes parties du site:
 - un administrateur : admin@mail.com / Password1!
