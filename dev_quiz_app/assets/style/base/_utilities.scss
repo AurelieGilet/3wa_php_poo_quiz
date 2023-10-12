@@ -67,6 +67,11 @@
     grid-auto-rows: 1fr;
 }
 
+/*** Position utilities ***/
+.is-relative {
+    position: relative;
+}
+
 /*** Breakpoints utilities ***/
 .is-hidden-sm {
     @include sm {

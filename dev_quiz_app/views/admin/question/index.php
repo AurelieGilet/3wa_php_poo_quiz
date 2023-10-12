@@ -31,27 +31,29 @@
                 </ul>
             </div>
         </div>
-    
-        <!-- Desktop -->
-        <div class="is-visible-lg">
-            <ul>
-                <?php foreach ($params['categories'] as $category) : ?>
-                <li data-component="category-filter" 
-                    data-controls="category-filter" 
-                    data-category-id="<?= $category->getId() ?>"
-                    class="clipped-button <?= $params['activeCategory'] === $category->getId() ? 'active' :'' ?>">
-                        <?= htmlspecialchars($category->getName()) ?>
-                </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
 
         <!-- Mobile lines (svg) -->
         <span class="icon-lines is-hidden-lg"></span>
-
-        <!-- Desktop lines (js canvas) -->
-        <div id="canvas" class="canvas is-visible-lg"></div>
     
+        <!-- Desktop -->
+        <div class="desktop-categories-container is-visible-lg">
+            <div id="desktop-categories" class="is-relative">
+                <ul>
+                    <?php foreach ($params['categories'] as $category) : ?>
+                    <li data-component="category-filter" 
+                        data-controls="category-filter" 
+                        data-category-id="<?= $category->getId() ?>"
+                        class="clipped-button <?= $params['activeCategory'] === $category->getId() ? 'active' :'' ?>">
+                            <?= htmlspecialchars($category->getName()) ?>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+    
+            <!-- Desktop lines (js canvas) -->
+            <canvas id="canvas" class="canvas is-visible-lg"></canvas>
+        </div>
+
         <!-- Questions -->
         <div id="category-questions" class="question-billboard clipped-container">
             <?php include('_category-questions.php'); ?>

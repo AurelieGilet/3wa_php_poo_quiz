@@ -12,11 +12,12 @@
         }
     }
 
+    .desktop-categories-container {
+        display: flex;
+        align-items: stretch;
+    }
+
     .canvas {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 14rem; //224px
         width: 10.625rem; //170px
     }
 
@@ -28,7 +29,7 @@
 
         @include lg {
             margin-top: $clipped-container-margin;
-            margin-left: 10.625rem;
+            margin-left: 0;
             margin-right: 0;
         }
 
