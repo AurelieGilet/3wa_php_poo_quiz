@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2023 at 02:20 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Oct 12, 2023 at 05:05 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `answer` (
   `content` varchar(255) NOT NULL,
   `is_good_answer` tinyint(4) NOT NULL DEFAULT 0,
   `question_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `answer`
@@ -505,7 +505,7 @@ INSERT INTO `answer` (`id`, `content`, `is_good_answer`, `question_id`) VALUES
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
@@ -516,7 +516,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (2, 'css'),
 (3, 'javascript'),
 (4, 'php'),
-(5, 'sql');
+(5, 'sql'),
+(8, 'Test');
 
 -- --------------------------------------------------------
 
@@ -528,7 +529,7 @@ CREATE TABLE `question` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `question`
@@ -686,7 +687,7 @@ CREATE TABLE `score` (
   `result` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `score`
@@ -724,7 +725,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
@@ -741,7 +742,12 @@ INSERT INTO `user` (`id`, `email`, `password`, `alias`, `role`) VALUES
 (33, 'user7@mail.com', '$2y$10$O58Jfe0kIJR4FMVEWU8jveAadop6LVBoiEejNa8c94TlZLT.R6D22', 'User1893', 'user'),
 (34, 'user8@mail.com', '$2y$10$ugxYv82JEPVhg9iNDcbw5ei5S1l3aXjifSpGDzx3M.PW/lPAGi67u', 'User381', 'user'),
 (35, 'user9@mail.com', '$2y$10$Gqt48vaklYLPkbfavX3VROIYtumY5Ph2bIU6WAUOh7rpg1kbKWRTO', 'User7165', 'user'),
-(36, 'user10suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuperlongemail@mail.com', '$2y$10$jcyJXBb7bqACmqJnglP8.Oqr3D5RmhOo5Ej7DihwfOWOZ0o2wrYHW', 'Usersuuuuuuuuuuuuuperlongpseudo5211', 'user');
+(36, 'user10suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuperlongemail@mail.com', '$2y$10$jcyJXBb7bqACmqJnglP8.Oqr3D5RmhOo5Ej7DihwfOWOZ0o2wrYHW', 'Usersuuuuuuuuuuuuuperlongpseudo5211', 'user'),
+(37, 'user11@mail.com', '$2y$10$GEv5rWB8LA7juo/0bdo4g.sJdiToFBpbaFjHEuX0YqqX0XyQnpP2y', 'User9261', 'user'),
+(38, 'user12@mail.com', '$2y$10$7jteyOXonYdtjt.VJHdkruryutmRFA.AYt2EZKcG7iuRtftV5PU4a', 'User1986', 'user'),
+(39, 'user13@mail.com', '$2y$10$QCeN2pCn3BQDh9ggUy8XiuNUsH3mOJ.zfv/FvkkIlX5XowJa36toq', 'User3949', 'user'),
+(40, 'user14@mail.com', '$2y$10$.WY8.p9qoEJZ8Kjel1lE7.DfOqH1JC1SvfpZSAbftgfYXeSGiT96O', 'User1669', 'user'),
+(41, 'user15@mail.com', '$2y$10$UjLpZ8RmVHb.hYbiGKTpEOCTiB1KOs1JxbitAjQZUs1D90.7mdfiC', 'User2390', 'user');
 
 --
 -- Indexes for dumped tables
@@ -795,7 +801,7 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `question`
@@ -807,13 +813,13 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `score`
 --
 ALTER TABLE `score`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Constraints for dumped tables
