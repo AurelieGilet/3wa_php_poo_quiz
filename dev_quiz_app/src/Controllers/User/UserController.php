@@ -54,16 +54,26 @@ class UserController extends AbstractController
         $this->isUser($this->user);
 
         $categories = $this->categoryModel->getAll();
+
+        // Filter categories to display only those that are payable = with at least 10 questions
+        foreach ($categories as $key => $category) {
+            if ($category->getQuestionsCount() < 10) {
+                unset($categories[$key]);
+            }
+        }
+
         $activeCategory = $categories[0]->getId();
 
-        $limitIndex = 0;
+        // Pagination
+        $currentPage = 1;
 
-        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $activeCategory, $limitIndex);
+        $limit = 10;
+        $index = 0;
+
+        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $activeCategory, $index, $limit);
 
         $totalScores = $this->scoreModel->countUserScoreByCategory($this->user->getId(), $activeCategory);
-        $totalPages = ceil($totalScores / 10);
-
-        $currentPage = 1;
+        $totalPages = ceil($totalScores / $limit);
 
         return $this->render('user/user-scores', compact(
             'categories',
@@ -90,13 +100,14 @@ class UserController extends AbstractController
 
         $currentPage = isset($_GET['page']) ? $_GET['page'] : false;
 
-        $limitIndex = ($currentPage - 1) * 10;
+        $limit = 10;
+        $index = ($currentPage - 1) * $limit;
         
         // User Ajax call (user-score-ajax.js) to render the scores filtered by category
-        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $categoryId, $limitIndex);
+        $scores = $this->scoreModel->findUserScoreByCategory($this->user->getId(), $categoryId, $index, $limit);
         
         $totalScores = $this->scoreModel->countUserScoreByCategory($this->user->getId(), $categoryId);
-        $totalPages = ceil($totalScores / 10);
+        $totalPages = ceil($totalScores / $limit);
 
         return $this->renderFragment('user/_category-scores', compact('scores', 'currentPage', 'totalPages'));
     }

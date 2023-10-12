@@ -49,12 +49,13 @@ class QuestionAnswerController extends AbstractController
         //When arriving on the page, we display the questions of the first category by default
         $activeCategory = $categories[0]->getId();
 
-        $limitIndex = 0;
+        $limit = 5;
+        $index = 0;
 
-        $questions = $this->questionModel->filterByCategory($activeCategory, $limitIndex);
+        $questions = $this->questionModel->filterByCategory($activeCategory, $index, $limit);
+
         $totalQuestions = $this->questionModel->countQuestionsByCategory($activeCategory);
-        $totalPages = ceil($totalQuestions / 10);
-
+        $totalPages = ceil($totalQuestions / $limit);
         $currentPage = 1;
     
         $flashes = $this->flashMessage->getFlashMessages('question');
@@ -85,18 +86,20 @@ class QuestionAnswerController extends AbstractController
 
         $currentPage = isset($_GET['page']) ? $_GET['page'] : false;
 
-        $limitIndex = ($currentPage - 1) * 10;
+        $limit = 5;
+        $index = ($currentPage - 1) * $limit;
 
         // Use Ajax call (question-ajax.js) to render the questions filtered by category
-        $questions = $this->questionModel->filterByCategory($categoryId, $limitIndex);
+        $questions = $this->questionModel->filterByCategory($categoryId, $index, $limit);
 
         $totalQuestions = $this->questionModel->countQuestionsByCategory($categoryId);
-        $totalPages = ceil($totalQuestions / 10);
+        $totalPages = ceil($totalQuestions / $limit);
 
         return $this->renderFragment('admin/question/_category-questions', compact(
             'questions',
             'currentPage',
-            'totalPages'
+            'totalPages',
+            'limit',
         ));
     }
 

@@ -16,24 +16,24 @@ class QuestionModel extends AbstractModel
     }
 
     
-    public function findByCategory(int $categoryId)
+    public function findByCategory(int $categoryId): bool|array
     {
         $request = 'SELECT id, title, category_id FROM ' . $this->table . ' WHERE category_id = ?';
 
         return $this->query($request, [$categoryId]);
     }
 
-    public function filterByCategory(int $categoryId, int $index)
+    public function filterByCategory(int $categoryId, int $index, int $limit): bool|array
     {
         $request = 'SELECT id, title, category_id 
         FROM ' . $this->table .
         ' WHERE category_id = ? 
-        LIMIT ?, 10';
+        LIMIT ?, ?';
 
-        return $this->query($request, [$categoryId, $index]);
+        return $this->query($request, [$categoryId, $index, $limit]);
     }
 
-    public function countQuestionsByCategory(int $categoryId)
+    public function countQuestionsByCategory(int $categoryId): int
     {
         $request = 'SELECT COUNT(id) FROM ' . $this->table . ' WHERE category_id = ?';
 

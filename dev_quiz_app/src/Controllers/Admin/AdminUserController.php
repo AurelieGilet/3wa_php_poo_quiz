@@ -34,12 +34,13 @@ class AdminUserController extends AbstractController
     {
         // Pagination
         $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-        $limitIndex = ($currentPage - 1) * 10;
+        $limit = 10;
+        $index = ($currentPage - 1) * $limit;
 
-        $users = $this->userModel->getPaginatedUsers($limitIndex);
+        $users = $this->userModel->getPaginatedUsers($index, $limit);
 
         $totalUsers = $this->userModel->countAll();
-        $totalPages = ceil($totalUsers / 10);
+        $totalPages = ceil($totalUsers / $limit);
 
         $flashes = $this->flashMessage->getFlashMessages('user');
 

@@ -542,7 +542,7 @@ h3 {
   color: #072431;
   background-color: aqua;
 }
-.select-option.active {
+.select-option.selected {
   color: #00545c;
   background-color: aqua;
 }

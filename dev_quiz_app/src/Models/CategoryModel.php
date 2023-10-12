@@ -37,12 +37,12 @@ class CategoryModel extends AbstractModel
         }
     }
 
-    public function getPaginatedCategories($index)
+    public function getPaginatedCategories(int $index, int $limit): bool|array
     {
         $request = 'SELECT id, name
         FROM ' . $this->table .
-        ' LIMIT ?, 10';
+        ' LIMIT ?, ?';
 
-        return $this->query($request, [$index]);
+        return $this->query($request, [$index, $limit]);
     }
 }

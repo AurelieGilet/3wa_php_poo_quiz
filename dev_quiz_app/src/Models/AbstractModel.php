@@ -88,7 +88,7 @@ abstract class AbstractModel
         return $this->query($request);
     }
 
-    public function countAll()
+    public function countAll(): int
     {
         $request = 'SELECT COUNT(id) FROM ' . $this->table;
         

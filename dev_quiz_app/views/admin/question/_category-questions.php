@@ -5,7 +5,10 @@
 
 <table>
     <tbody>
-        <?php $i = $params['currentPage'] > 1 ? (($params['currentPage'] - 1) * 10 + 1) : 1; ?>
+        <?php $i = $params['currentPage'] > 1
+            ? (($params['currentPage'] - 1) * $params['limit'] + 1)
+            : 1;
+        ?>
         <?php foreach ($params['questions'] as $question) : ?>
         <tr>
             <td class="is-family-primary is-light-bold">Question <?= $i ?></td>

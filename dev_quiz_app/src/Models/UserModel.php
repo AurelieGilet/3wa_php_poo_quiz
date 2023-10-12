@@ -22,12 +22,12 @@ class UserModel extends AbstractModel
         return $this->query($request, [$email], true);
     }
 
-    public function getPaginatedUsers($index)
+    public function getPaginatedUsers(int $index, int $limit): bool|array
     {
         $request = 'SELECT id, email, alias, role
         FROM ' . $this->table .
-        ' LIMIT ?, 10';
+        ' LIMIT ?, ?';
 
-        return $this->query($request, [$index]);
+        return $this->query($request, [$index, $limit]);
     }
 }

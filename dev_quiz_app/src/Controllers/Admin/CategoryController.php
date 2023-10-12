@@ -40,12 +40,13 @@ class CategoryController extends AbstractController
     {
         // Pagination
         $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-        $limitIndex = ($currentPage - 1) * 10;
+        $limit = 10;
+        $index = ($currentPage - 1) * $limit;
 
-        $categories = $this->categoryModel->getPaginatedCategories($limitIndex);
+        $categories = $this->categoryModel->getPaginatedCategories($index, $limit);
 
         $totalCategories = $this->categoryModel->countAll();
-        $totalPages = ceil($totalCategories / 10);
+        $totalPages = ceil($totalCategories / $limit);
 
         $flashes = $this->flashMessage->getFlashMessages('category');
 
