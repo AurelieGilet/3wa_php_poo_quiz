@@ -26,8 +26,6 @@ abstract class AbstractModel
 
     public function query(string $request, array $param = null, bool $single = false): bool|array|AbstractEntity
     {
-        //TODO: refactor this function ?
-
         // If $param is null, it's a general query otherwise it's a prepared request
         $method = is_null($param) ? 'query' : 'prepare';
 
@@ -80,7 +78,6 @@ abstract class AbstractModel
         return $this->query($requestEntry, [$resultId[0]], true);
     }
 
-    //TODO: replace all SELECT * requests
     public function getAll(): array
     {
         $request = 'SELECT * FROM ' . $this->table . ' ORDER BY id ASC';

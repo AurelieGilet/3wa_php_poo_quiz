@@ -248,7 +248,6 @@ class UserController extends AbstractController
             exit;
         }
 
-        //TODO: When implemented, delete scores
         $user = $this->userModel->delete($this->user->getId());
 
         if ($user) {

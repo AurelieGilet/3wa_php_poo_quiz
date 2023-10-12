@@ -55,7 +55,7 @@ if (isset($_SESSION['errors'])) {
                 </label>
     
                 <div class="clipped-input">
-                    <input type="text" id="adminPassword" name="adminPassword">
+                    <input type="password" id="adminPassword" name="adminPassword">
                 </div>
     
                 <?php if (isset($formErrors['adminPassword'])) : ?>

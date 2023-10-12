@@ -34,9 +34,8 @@ if (isset($_SESSION['errors'])) {
             </div>
     
             <div class="form-group">   
-                <?php /*TODO: don't forget to change back input type to password*/ ?>
                 <div class="clipped-input">
-                    <input type="text" id="password" name="password" placeholder="Mot de passe">
+                    <input type="password" id="password" name="password" placeholder="Mot de passe">
                 </div>
     
                 <?php if (isset($formErrors['password'])) : ?>
