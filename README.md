@@ -50,6 +50,9 @@ Il suffit de créer une base de donnée **dev_quiz** et d'y importer ce fichier.
 
 Il vous suffira ensuite de changer les paramètres nécessaires éventuels dans le fichier app/database/DBConstants.php pour vous connecter à votre db locale, selon le serveur que vous utilisez (user et password).
 
+Le dossier à servir dans Apache est le dossier parent "dev_quiz_app" et non le dossier public.
+Une rewrite rule a été prévue dans le htaccess pour rediriger vers index.php situé dans le dossier public.
+
 2 utilisateurs sont déjà enregistrés dans le jeu de données, que vous pouvez connecter pour accéder aux différentes parties du site:
 - un administrateur : admin@mail.com / Password1!
 - un utilisateur : user@mail.com / Password1!

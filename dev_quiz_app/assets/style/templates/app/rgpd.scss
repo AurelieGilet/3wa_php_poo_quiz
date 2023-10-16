@@ -1,0 +1,14 @@
+.rgpd {
+    .clipped-container {
+        min-width: min-content;
+        max-width: 75rem; //1200px
+    }
+
+    article {
+        margin-block: .625rem; //10px
+
+        @include md {
+            margin-block: 1.25rem; //20px
+        }
+    }
+}

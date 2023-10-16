@@ -875,7 +875,7 @@ footer li:nth-child(-n + 2)::after {
 html, body {
   height: 100%;
   box-sizing: border-box;
-  min-width: 20rem;
+  min-width: 21.875rem;
 }
 .page-container {
   min-height: 100vh;
@@ -892,75 +892,6 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column;
-}
-.error-404 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.user-score__container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-  margin-top: 1.25rem;
-}
-@media (min-width: 992px) {
-  .user-score__container {
-    flex-direction: row;
-  }
-}
-.user-score .desktop-categories-container {
-  display: flex;
-  align-items: stretch;
-}
-.user-score .canvas {
-  width: 10.625rem;
-}
-.user-score .score-billboard {
-  width: auto;
-  min-height: 15rem;
-  min-width: 15rem;
-  max-width: 25rem;
-  font-family: "Orbitron", "Verdana", sans-serif;
-  margin-top: 0;
-}
-@media (min-width: 992px) {
-  .user-score .score-billboard {
-    margin-top: 1.25rem;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-.user-score .score-billboard table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-  text-align: left;
-}
-.user-score .score-billboard td {
-  padding-block: 0.625rem;
-}
-.user-score .score-billboard td:nth-child(2) {
-  text-align: right;
-}
-.user-profil__container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-.user-profil__container div {
-  margin-block: 1.25rem;
-}
-.user-profil__container div p:first-child {
-  font-family: "Orbitron", "Verdana", sans-serif;
-  text-transform: uppercase;
-}
-.user-profil a {
-  margin-block: 0.625rem;
 }
 .admin-user-form .form-group:last-of-type {
   margin-top: 2.5rem;
@@ -1030,6 +961,23 @@ main {
   display: flex;
   justify-content: flex-end;
 }
+.rgpd .clipped-container {
+  min-width: min-content;
+  max-width: 75rem;
+}
+.rgpd article {
+  margin-block: 0.625rem;
+}
+@media (min-width: 768px) {
+  .rgpd article {
+    margin-block: 1.25rem;
+  }
+}
+.error-404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .game__question .form-instruction {
   align-self: flex-start;
   font-weight: 600;
@@ -1079,4 +1027,68 @@ main {
   .game-score__buttons .clipped-button {
     margin-block: 2rem;
   }
+}
+.user-score__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin-top: 1.25rem;
+}
+@media (min-width: 992px) {
+  .user-score__container {
+    flex-direction: row;
+  }
+}
+.user-score .desktop-categories-container {
+  display: flex;
+  align-items: stretch;
+}
+.user-score .canvas {
+  width: 10.625rem;
+}
+.user-score .score-billboard {
+  width: auto;
+  min-height: 15rem;
+  min-width: 15rem;
+  max-width: 25rem;
+  font-family: "Orbitron", "Verdana", sans-serif;
+  margin-top: 0;
+}
+@media (min-width: 992px) {
+  .user-score .score-billboard {
+    margin-top: 1.25rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+.user-score .score-billboard table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: left;
+}
+.user-score .score-billboard td {
+  padding-block: 0.625rem;
+}
+.user-score .score-billboard td:nth-child(2) {
+  text-align: right;
+}
+.user-profil__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.user-profil__container div {
+  margin-block: 1.25rem;
+}
+.user-profil__container div p:first-child {
+  font-family: "Orbitron", "Verdana", sans-serif;
+  text-transform: uppercase;
+}
+.user-profil a {
+  margin-block: 0.625rem;
 }

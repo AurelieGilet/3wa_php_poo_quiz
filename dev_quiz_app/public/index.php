@@ -14,6 +14,7 @@ $router = new Router($_GET['url']);
 $router->get('/', 'App\Controllers\AppController@home');
 $router->get('/nouveau-jeu', 'App\Controllers\AppController@newGame');
 $router->get('/choisir-sujet', 'App\Controllers\AppController@chooseGameSubject');
+$router->get('/rgpd', 'App\Controllers\AppController@rgpd');
 $router->get('/jeu/categorie/:id', 'App\Controllers\GameController@playGame');
 $router->get('/jeu/categorie/reponse/:id', 'App\Controllers\GameController@ajaxNextQuestion');
 $router->get('/jeu/score', 'App\Controllers\GameController@gameResult');

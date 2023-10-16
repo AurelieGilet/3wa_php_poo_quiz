@@ -66,4 +66,12 @@ class AppController extends AbstractController
 
         return $this->render('app/choose-game-subject', compact('categories'));
     }
+
+    /**
+     * Route: /rgpd
+     */
+    public function rgpd()
+    {
+        return $this->render('app/rgpd');
+    }
 }

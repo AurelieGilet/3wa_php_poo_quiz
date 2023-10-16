@@ -29,11 +29,12 @@
 
 // Templates
 @import "templates/base";
-@import "templates/errors/error-404";
-@import "templates/user/user-scores";
-@import "templates/user/user-profil";
 @import "templates/admin/user/admin-user";
 @import "templates/admin/category/admin-category";
 @import "templates/admin/question/admin-question";
+@import "templates/app/rgpd.scss";
+@import "templates/errors/error-404";
 @import "templates/game/game";
 @import "templates/game/game-score";
+@import "templates/user/user-scores";
+@import "templates/user/user-profil";
