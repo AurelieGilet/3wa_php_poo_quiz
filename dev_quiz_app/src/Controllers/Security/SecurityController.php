@@ -74,8 +74,13 @@ class SecurityController extends AbstractController
      */
     public function login()
     {
-        if ($this->isAuth()) {
-            return header('Location: /');
+        // Check if session with authenticated user exists and redirect accordingly
+        if ($this->isAuth() && $_SESSION['auth'] === 'user') {
+            return header('Location: /espace-utilisateur');
+        }
+
+        if ($this->isAuth() && $_SESSION['auth'] === 'admin') {
+            return header('Location: /espace-admin');
         }
 
         $flashes = $this->flashMessage->getFlashMessages('registration');

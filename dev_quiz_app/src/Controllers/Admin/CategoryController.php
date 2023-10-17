@@ -95,10 +95,7 @@ class CategoryController extends AbstractController
             $this->flashMessagesConstants::FLASH_SUCCESS,
         );
 
-        // FIXME: no return value on insert ??? Why ???
-        // if ($category) {
-            return header('Location: /admin/categories');
-        // }
+        return header('Location: /admin/categories');
     }
 
     /**

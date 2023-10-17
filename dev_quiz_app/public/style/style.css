@@ -697,16 +697,16 @@ h3 {
 }
 .form-instruction {
   margin-bottom: 1.25rem;
-  max-width: 15.625rem;
+  width: 15.625rem;
 }
 @media (min-width: 576px) {
   .form-instruction {
-    max-width: 21.875rem;
+    width: 21.875rem;
   }
 }
 @media (min-width: 768px) {
   .form-instruction {
-    max-width: 31.25rem;
+    width: 31.25rem;
   }
 }
 .form-instruction p {
@@ -987,9 +987,18 @@ main {
   display: flex;
   justify-content: flex-end;
 }
+.admin-message .message {
+  max-width: 200px;
+  min-width: -webkit-fill-available;
+  min-width: -moz-available;
+}
+@media (min-width: 768px) {
+  .admin-message .message {
+    max-width: 300px;
+  }
+}
 .rgpd .clipped-container {
   min-width: min-content;
-  max-width: 75rem;
 }
 .rgpd article {
   margin-block: 0.625rem;

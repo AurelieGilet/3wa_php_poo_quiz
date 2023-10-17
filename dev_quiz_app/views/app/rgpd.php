@@ -1,5 +1,5 @@
 <main class="rgpd">
-    <div class="clipped-container">
+    <div class="clipped-container large">
         <section>
             <h1>CONDITIONS D'UTILISATION ET MENTIONS LÉGALES</h1>
             <div>

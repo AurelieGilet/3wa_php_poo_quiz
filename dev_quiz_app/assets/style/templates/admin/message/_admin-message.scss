@@ -1,0 +1,11 @@
+.admin-message {
+    .message {
+        max-width: 200px;
+        min-width: -webkit-fill-available;
+        min-width: -moz-available;
+
+        @include md {
+            max-width: 300px;
+        }
+    }
+}

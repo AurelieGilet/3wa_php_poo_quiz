@@ -100,14 +100,14 @@
 
 .form-instruction {
     margin-bottom: 1.25rem; //20px
-    max-width: $form-width;
+    width: $form-width;
 
     @include sm {
-        max-width: $form-width-sm;
+        width: $form-width-sm;
     }
 
     @include md {
-        max-width: $form-width-md;
+        width: $form-width-md;
     }
 
     & p {

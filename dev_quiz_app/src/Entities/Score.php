@@ -3,7 +3,6 @@
 namespace App\Entities;
 
 use App\Entities\AbstractEntity;
-use DateTime;
 
 class Score extends AbstractEntity
 {

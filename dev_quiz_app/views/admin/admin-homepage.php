@@ -11,6 +11,9 @@
         <a href="/admin/questions" class="clipped-button">
             Gestion des questions
         </a>
+        <a href="/admin/messagerie" class="clipped-button">
+            Messagerie
+        </a>
     </div>
 </main>
 
