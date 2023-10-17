@@ -34,7 +34,7 @@ if (isset($_SESSION['errors'])) {
             <p>
                 Cela inclus vos informations personnelles (alias, email, mot de passe) mais également tous vos scores.
             </p>
-            <p>
+            <p class="warning">
                 <strong>
                     Cette action est irréversible, il ne nous sera pas possible de récupérer les données supprimées !
                 </strong>
