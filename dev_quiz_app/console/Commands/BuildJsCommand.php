@@ -27,6 +27,7 @@ class BuildJsCommand extends Command
             'assets/js/scripts/components/custom-select.js',
             'assets/js/scripts/components/canvas.js',
             'assets/js/scripts/templates/partials/navbar.js',
+            'assets/js/scripts/templates/partials/caution.js',
         ];
         
         $minifier = new JS();

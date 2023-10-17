@@ -1,5 +1,6 @@
 // HSL Colors
 $firefly: hsla(198, 75%, 11%, 1);
+$firefly-transparent: hsla(198, 75%, 11%, 0.8);
 $deep-teal: hsla(185, 100%, 18%, 1);
 $surfie-green: hsla(182, 76%, 26%, 1);
 $cerulean: hsla(187, 88%, 40%, 1);
@@ -23,6 +24,7 @@ $error-message: $radical-red;
 $border: $aqua;
 $border-transparent: $aqua-transparent;
 $shadows: $cerulean-transparent;
+$overlay: $firefly-transparent;
 
 body {
     background-color: $body-background;

@@ -1,0 +1,33 @@
+.caution {
+    &__overlay {
+        width: 100%;
+        min-width: 21.875rem; //350px
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $overlay;
+        
+        @include is-flex-centered;
+    }
+
+    .clipped-container {
+        min-width: min-content;
+        max-width: 75rem; //1200px
+    }
+
+    &__message {
+        h2 {
+            margin-block: 2rem; //32px
+        }
+
+        p {
+            margin-block: .625rem; //10px
+        }
+
+        ul {
+            list-style-type: disclosure-closed;
+            margin-left: 1.25rem; //20px
+        }
+    }
+}
