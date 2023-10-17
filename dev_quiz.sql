@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2023 at 05:05 PM
+-- Generation Time: Oct 17, 2023 at 04:59 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -64,9 +64,9 @@ INSERT INTO `answer` (`id`, `content`, `is_good_answer`, `question_id`) VALUES
 (23, '<em>', 1, 7),
 (24, '<i>', 0, 7),
 (25, '<a name=\"http://www.w3schools.com\">W3Schools.com</a>', 0, 8),
-(26, '<a>http://www.w3schools.com</a>', 0, 8),
-(27, '<a url=\"http://www.w3schools.com\">W3Schools.com</a>', 0, 8),
-(28, '<a href=\"http://www.w3schools.com\">W3Schools</a>', 1, 8),
+(26, '<a>http://www.mon-site.com</a>', 0, 8),
+(27, '<a url=\"http://www.mon-site.com\">MonSite.com</a>', 0, 8),
+(28, '<a href=\"http://www.mon-site.com\">Mon Site</a>', 1, 8),
 (29, '^', 0, 9),
 (30, '<', 0, 9),
 (31, '*', 0, 9),
@@ -195,10 +195,10 @@ INSERT INTO `answer` (`id`, `content`, `is_good_answer`, `question_id`) VALUES
 (154, 'body:color=black;', 0, 46),
 (155, '{body:color=black;}', 0, 46),
 (156, '{body;color:black;}', 0, 46),
-(157, '// this is a comment //', 0, 47),
-(158, '\' this is a comment', 0, 47),
-(159, '/* this is a comment */', 1, 47),
-(160, '// this is a comment', 0, 47),
+(157, '// ceci est un commentaire //', 0, 47),
+(158, '\' ceci est un commentaire', 0, 47),
+(159, '/* ceci est un commentaire */', 1, 47),
+(160, '// ceci est un commentaire', 0, 47),
 (161, 'color', 0, 48),
 (162, 'background-color', 1, 48),
 (163, 'bgcolor', 0, 48),
@@ -264,9 +264,9 @@ INSERT INTO `answer` (`id`, `content`, `is_good_answer`, `question_id`) VALUES
 (223, 'document.getElement(\"p\").innerHTML = \"Hello World!\";', 0, 66),
 (224, '#demo.innerHTML = \"Hello World!\";', 0, 66),
 (225, 'document.getElementById(\"demo\").innerHTML = \"Hello World!\";', 1, 66),
-(226, 'The <head> section', 0, 67),
-(227, 'The <body> section', 0, 67),
-(228, 'Both the <head> section and the <body> section are correct', 1, 67),
+(226, 'La section <head>', 0, 67),
+(227, 'La section <body>', 0, 67),
+(228, 'A la fois dans les sections <head> et <body>', 1, 67),
 (229, '<script href=\"xxx.js\">', 0, 68),
 (230, '<script src=\"xxx.js\">', 1, 68),
 (231, '<script name=\"xxx.js\">', 0, 68),
@@ -297,9 +297,9 @@ INSERT INTO `answer` (`id`, `content`, `is_good_answer`, `question_id`) VALUES
 (256, 'for (i = 0; i <= 5)', 0, 76),
 (257, 'for (i <= 5; i++)', 0, 76),
 (258, 'for i = 1 to 5', 0, 76),
-(259, '\'This is a comment', 0, 77),
-(260, '<!--This is a comment-->', 0, 77),
-(261, '//This is a comment', 1, 77),
+(259, '\'ceci est un commentaire', 0, 77),
+(260, '<!--ceci est un commentaire-->', 0, 77),
+(261, '// ceci est un commentaire', 1, 77),
 (262, 'let colors = 1 = (\"red\"), 2 = (\"green\"), 3 = (\"blue\")', 0, 78),
 (263, 'let colors = \"red\", \"green\", \"blue\"', 0, 78),
 (264, 'let colors = [\"red\", \"green\", \"blue\"]', 1, 78),
@@ -312,8 +312,8 @@ INSERT INTO `answer` (`id`, `content`, `is_good_answer`, `question_id`) VALUES
 (271, 'Math.ceil(x, y)', 0, 80),
 (272, 'top(x, y)', 0, 80),
 (273, 'Math.max(x, y)', 1, 80),
-(274, 'w2 = window.open(\"http://www.w3schools.com\");', 1, 81),
-(275, 'w2 = window.new(\"http://www.w3schools.com\");', 0, 81),
+(274, 'w2 = window.open(\"http://www.mon-site.com\");', 1, 81),
+(275, 'w2 = window.new(\"http://www.mon-site.com\");', 0, 81),
 (276, 'Vrai', 0, 82),
 (277, 'Faux', 1, 82),
 (278, 'navigator.appName', 1, 83),
@@ -453,9 +453,9 @@ INSERT INTO `answer` (`id`, `content`, `is_good_answer`, `question_id`) VALUES
 (412, '<!-- include file=\"time.inc\" -->', 0, 124),
 (413, '<?php include \"time.inc\"; ?>', 1, 124),
 (414, '<?php include file=\"time.inc\"; ?>', 0, 124),
-(415, 'create myFunction()', 0, 125),
-(416, 'function myFunction()', 1, 125),
-(417, 'new_function myFunction()', 0, 125),
+(415, 'create maFonction()', 0, 125),
+(416, 'function maFonction()', 1, 125),
+(417, 'new_function maFonction()', 0, 125),
 (418, 'open(\"time.txt\");', 0, 126),
 (419, 'fopen(\"time.txt\",\"r+\");', 0, 126),
 (420, 'fopen(\"time.txt\",\"r\");', 1, 126),
@@ -518,6 +518,36 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (4, 'php'),
 (5, 'sql'),
 (8, 'Test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`id`, `content`, `email`, `created_at`) VALUES
+(1, 'Ce site est vraiment génial !', 'anonyme@mail.com', '2023-10-17 12:32:42'),
+(2, 'Vraiment, quel bon travail !', '', '2023-10-17 12:32:58'),
+(3, 'Meilleur site de tous les temps !', 'moi@mail.com', '2023-10-17 12:35:36'),
+(4, 'Dommage qu\'on ne puisse pas voir les bonnes/mauvaise réponses données au quiz.', '', '2023-10-17 12:36:27'),
+(5, 'Ce design est d\'un autre monde !', 'iti@mail.com', '2023-10-17 12:38:16'),
+(6, 'Une des questions n\'a pas été correctement traduite en français.', '', '2023-10-17 12:54:43'),
+(7, 'A quand une catégorie Python ?', 'fakeuser@mail.com', '2023-10-17 15:29:52'),
+(8, 'Si vous n\'obtenez pas le titre professionnel avec ce site, je ne sais pas ce qu\'il leur faut de plus !!!\r\n', '', '2023-10-17 15:30:28'),
+(9, 'Ce serait super cool de pouvoir voir les scores d\'autres joueurs.\r\n', 'user@mail.com', '2023-10-17 15:30:53'),
+(10, 'Ce site est super et en plus il est responsive !', '', '2023-10-17 15:31:29'),
+(11, 'Un système pour pouvoir signaler une erreur dans les question directement dans le quiz serait bien pratique.\r\n', 'user2@mail.com', '2023-10-17 15:32:23');
 
 -- --------------------------------------------------------
 
@@ -711,7 +741,8 @@ INSERT INTO `score` (`id`, `created_at`, `result`, `user_id`, `category_id`) VAL
 (23, '2023-09-27 11:10:45', 90, 26, 1),
 (24, '2023-09-28 11:29:50', 100, 26, 1),
 (25, '2023-09-29 09:45:46', 40, 26, 1),
-(26, '2023-09-29 15:09:44', 80, 26, 1);
+(26, '2023-09-29 15:09:44', 80, 26, 1),
+(29, '2023-10-17 16:43:53', 90, 26, 2);
 
 -- --------------------------------------------------------
 
@@ -767,6 +798,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `question`
 --
 ALTER TABLE `question`
@@ -801,7 +838,13 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `question`
@@ -813,7 +856,7 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `score`
 --
 ALTER TABLE `score`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `user`
