@@ -73,7 +73,7 @@ if (isset($_SESSION['errors'])) {
                 </p>
     
                 <div class="clipped-input">
-                    <select id="role"name="role">
+                    <select id="role" name="role">
                         <option value="user" <?= $params['user']->getRole() === 'user' ? 'selected' : ''  ?>>
                             Utilisateur
                         </option>

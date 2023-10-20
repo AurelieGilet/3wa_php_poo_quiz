@@ -7,7 +7,7 @@
     <meta name="description" content="Dev Quiz est un site de quiz dédié aux langages de programmation. Vous pouvez y tester vos connaissances en HTML, CSS, Javascript, PHP ou encore SQL !">
     <meta name="keywords" content="quiz développeur web, quiz langage de programmation, quiz html, quiz css, quiz javascript, quiz sql, quiz php">
     <title>Dev Quiz !</title>
-    <link rel="stylesheet" href="<?= SCRIPTS . 'style' . DIRECTORY_SEPARATOR . 'style.min.css' ?>">
+    <link rel="stylesheet" href="<?= SCRIPTS . 'style/style.min.css' ?>">
 </head>
 <body>
     <div class="page-container">
@@ -18,6 +18,6 @@
         <?php include('../views/partials/footer.php'); ?>
     </div>
 
-    <script type="text/javascript" src="<?= SCRIPTS . 'js' . DIRECTORY_SEPARATOR . 'main.min.js' ?>"></script>
+    <script src="<?= SCRIPTS . 'js/main.min.js' ?>"></script>
 </body>
 </html>

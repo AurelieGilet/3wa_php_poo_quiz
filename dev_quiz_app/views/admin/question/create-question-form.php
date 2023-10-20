@@ -97,7 +97,7 @@ if (isset($_SESSION['post'])) {
                     <label for="goodAnswer<?= $i ?>">Est-ce la bonne réponse ?</label>
     
                     <input type="checkbox" id="goodAnswer<?= $i ?>" name="answer[<?= $i ?>][goodAnswer]"
-                        <?= isset($answer[$i]['goodAnswer']) && $answer[$i]['goodAnswer'] === 'on' ? 'checked' : '' ?>/>
+                        <?= isset($answer[$i]['goodAnswer']) && $answer[$i]['goodAnswer'] === 'on' ? 'checked' : '' ?>>
                 </div>
             </div>
             <?php endfor; ?>
