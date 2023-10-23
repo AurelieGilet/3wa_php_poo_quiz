@@ -33,7 +33,7 @@ if (isset($_SESSION['errors'])) {
             </p>
             <p>
                 <strong>Reçu le :</strong>  
-                <?= date('m/d/y', strtotime($params['message']->getCreatedAt())) ?>
+                <?= date('d/m/y', strtotime($params['message']->getCreatedAt())) ?>
             </p>
             <p>
                 <strong>Email de contact :</strong>  

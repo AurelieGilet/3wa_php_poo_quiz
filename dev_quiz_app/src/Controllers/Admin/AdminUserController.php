@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\UserModel;
 use Database\DBConnection;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
@@ -10,7 +9,6 @@ use App\Controllers\AbstractController;
 class AdminUserController extends AbstractController
 {
     protected $user;
-    protected $userModel;
 
     public function __construct(DBConnection $db)
     {
@@ -18,10 +16,10 @@ class AdminUserController extends AbstractController
 
         // Check if user is auth and is admin
         if ($this->isAuth()) {
-            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
-            return header('Location: /connexion');
+            header('Location: /connexion');
+            exit;
         }
 
         $this->isAdmin($this->user);
@@ -50,14 +48,17 @@ class AdminUserController extends AbstractController
     /**
      * Route: /admin/utilisateur/modifier/:id
      */
-    public function updateUser(int $id)
+    public function updateUser(mixed $id)
     {
+        // Check if id is really an int and exists in DB (protect against url modifications)
+        $this->redirectIfWrongId($id, 'user', 'userModel', '/admin/utilisateurs');
+
         $user = $this->userModel->findById($id);
 
         return $this->render('admin/user/update-user-form', compact('user'));
     }
 
-    public function updateUserPost(int $id)
+    public function updateUserPost(mixed $id)
     {
         $validator = new Validator($_POST);
 
@@ -84,6 +85,9 @@ class AdminUserController extends AbstractController
 
         // Remove useless $_POST data
         unset($_POST['adminPassword']);
+
+        // Check if id is really an int and exists in DB (protect against form action modifications)
+        $this->redirectIfWrongId($id, 'user', 'userModel', '/admin/utilisateurs');
 
         $user = $this->userModel->findById($id);
 
@@ -112,28 +116,33 @@ class AdminUserController extends AbstractController
 
         if ($user) {
             $this->flashMessage->createFlashMessage(
-                'updateUser',
+                'user',
                 'Les informations de l\'utilisateur ont bien été modifiées',
                 $this->flashMessagesConstants::FLASH_SUCCESS,
             );
 
-            return header('Location: /admin/utilisateurs');
+            header('Location: /admin/utilisateurs');
+            exit;
         } else {
             $this->flashMessage->createFlashMessage(
-                'updateUser',
+                'user',
                 'Les informations de l\'utilisateur n\'ont pas été modifiées, une erreur s\'est produite',
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /admin/utilisateur/modifier/' . $id);
+            header('Location: /admin/utilisateur/modifier/' . $id);
+            exit;
         }
     }
 
     /**
      * Route: /admin/utilisateur/supprimer/:id
      */
-    public function deleteUser(int $id)
+    public function deleteUser(mixed $id)
     {
+        // Check if id is really an int and exists in DB (protect against url modifications)
+        $this->redirectIfWrongId($id, 'user', 'userModel', '/admin/utilisateurs');
+        
         $user = $this->userModel->findById($id);
 
         return $this->render('admin/user/delete-user-form', compact('user'));
@@ -142,7 +151,7 @@ class AdminUserController extends AbstractController
     /**
      * Route: /admin/utilisateur/supprimer/:id
      */
-    public function deleteUserPost(int $id)
+    public function deleteUserPost($id)
     {
         $validator = new Validator($_POST);
 
@@ -165,24 +174,30 @@ class AdminUserController extends AbstractController
             exit;
         }
 
+        // Check if id is really an int and exists in DB (protect against form action modifications)
+        $this->redirectIfWrongId($id, 'user', 'userModel', '/admin/utilisateurs');
+
+        // Delete user
         $user = $this->userModel->delete($id);
 
         if ($user) {
             $this->flashMessage->createFlashMessage(
-                'deleteUser',
+                'user',
                 'Cet utilisateur et toutes les données associées ont bien été supprimés',
                 $this->flashMessagesConstants::FLASH_SUCCESS,
             );
 
-            return header('Location: /admin/utilisateurs');
+            header('Location: /admin/utilisateurs');
+            exit;
         } else {
             $this->flashMessage->createFlashMessage(
-                'deleteUser',
+                'user',
                 'L\'utilisateur n\'a pas été supprimé, une erreur s\'est produite',
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /admin/utilisateur/supprimer/' . $id);
+            header('Location: /admin/utilisateur/supprimer/' . $id);
+            exit;
         }
     }
 }

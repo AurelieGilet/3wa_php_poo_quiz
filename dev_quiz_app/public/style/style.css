@@ -962,6 +962,7 @@ main {
     margin-top: 1.25rem;
     margin-left: 0;
     margin-right: 0;
+    min-width: 28.125rem;
   }
 }
 .admin-question .question-billboard table {

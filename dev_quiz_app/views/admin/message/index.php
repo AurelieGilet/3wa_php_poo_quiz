@@ -25,7 +25,7 @@
                 <?php foreach ($params['messages'] as $message) : ?>
                 <tr>
                     <td data-title="Reçu le">
-                        <?= date('m/d/y à H:m', strtotime($message->getCreatedAt())) ?>
+                        <?= date('d/m/y à H:m', strtotime($message->getCreatedAt())) ?>
                     </td>
                     <td data-title="Email contact" data-truncate="true">
                         <?= !empty($message->getEmail()) ? htmlspecialchars($message->getEmail()) : 'aucun' ?>

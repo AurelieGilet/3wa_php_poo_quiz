@@ -2,37 +2,22 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
-use App\Models\AnswerModel;
-use App\Models\CategoryModel;
-use App\Models\QuestionModel;
 use Database\DBConnection;
 use App\Controllers\AbstractController;
-use App\Models\ScoreModel;
 
 class GameController extends AbstractController
 {
     protected $user;
-    protected $userModel;
-    protected $categoryModel;
-    protected $questionModel;
-    protected $answerModel;
-    protected $scoreModel;
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
 
-        $this->categoryModel = new CategoryModel($this->getDB());
-        $this->questionModel = new QuestionModel($this->getDB());
-        $this->answerModel = new AnswerModel($this->getDB());
-        $this->scoreModel = new ScoreModel($this->getDB());
-
         if ($this->isAuth()) {
-            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
-            return header('Location: /connexion');
+            header('Location: /connexion');
+            exit;
         }
 
         $this->isUser($this->user);
@@ -41,13 +26,20 @@ class GameController extends AbstractController
     /**
      * Route: /jeu/categorie/:id
      */
-    public function playGame(int $id)
+    public function playGame(mixed $id)
     {
+        // Check if id is an int
+        if (!$this->isParameterInt($id)) {
+            header('Location: /choisir-sujet');
+            exit;
+        }
+
         $category = $this->categoryModel->findById($id);
 
         // Check if category exists and has at least 10 questions
         if (!$category || $category->getQuestionsCount() < 10) {
-            return header('Location: /choisir-sujet');
+            header('Location: /choisir-sujet');
+            exit;
         }
 
         $questions = $this->questionModel->getRandomQuestions($id, 10);

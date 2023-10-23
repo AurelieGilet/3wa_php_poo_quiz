@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Security;
 
-use App\Models\UserModel;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
 
@@ -14,7 +13,8 @@ class SecurityController extends AbstractController
     public function register()
     {
         if ($this->isAuth()) {
-            return header('Location: /');
+            header('Location: /');
+            exit;
         }
 
         return $this->render('security/register');
@@ -36,10 +36,8 @@ class SecurityController extends AbstractController
             exit;
         }
 
-        $user = (new UserModel($this->getDB()));
-
         // Backend validation
-        $emailExists = $user->isUnique('email', $_POST['email']);
+        $emailExists = $this->userModel->isUnique('email', $_POST['email']);
 
         if ($emailExists) {
             $errors['email'][] = 'Cet email existe déjà';
@@ -58,7 +56,7 @@ class SecurityController extends AbstractController
         $_POST['alias'] = $userAlias;
 
         // Register User
-        $user->create($_POST);
+        $this->userModel->create($_POST);
 
         $this->flashMessage->createFlashMessage(
             'registration',
@@ -66,7 +64,8 @@ class SecurityController extends AbstractController
             $this->flashMessagesConstants::FLASH_SUCCESS,
         );
 
-        return header('Location: /connexion');
+        header('Location: /connexion');
+        exit;
     }
 
     /**
@@ -76,11 +75,13 @@ class SecurityController extends AbstractController
     {
         // Check if session with authenticated user exists and redirect accordingly
         if ($this->isAuth() && $_SESSION['auth'] === 'user') {
-            return header('Location: /espace-utilisateur');
+            header('Location: /espace-utilisateur');
+            exit;
         }
 
         if ($this->isAuth() && $_SESSION['auth'] === 'admin') {
-            return header('Location: /espace-admin');
+            header('Location: /espace-admin');
+            exit;
         }
 
         $flashes = $this->flashMessage->getFlashMessages('registration');
@@ -103,7 +104,7 @@ class SecurityController extends AbstractController
             exit;
         }
 
-        $user = (new UserModel($this->getDB()))->getByEmail($_POST['email']);
+        $user = $this->userModel->getByEmail($_POST['email']);
 
         if ($user) {
             if (password_verify($_POST['password'], $user->getPassword())) {
@@ -111,14 +112,17 @@ class SecurityController extends AbstractController
                 $_SESSION['user'] = $user->getId();
     
                 if ($user->getRole() === 'user') {
-                    return header('Location: /espace-utilisateur');
+                    header('Location: /espace-utilisateur');
+                    exit;
                 }
                 
                 if ($user->getRole() === 'admin') {
-                    return header('Location: /espace-admin');
+                    header('Location: /espace-admin');
+                    exit;
                 }
     
-                return header('Location: /');
+                header('Location: /');
+                exit;
             } else {
                 $this->flashMessage->createFlashMessage(
                     'login',
@@ -126,7 +130,8 @@ class SecurityController extends AbstractController
                     $this->flashMessagesConstants::FLASH_ERROR,
                 );
     
-                return header('Location: /connexion');
+                header('Location: /connexion');
+                exit;
             }
         }
 
@@ -136,7 +141,8 @@ class SecurityController extends AbstractController
             $this->flashMessagesConstants::FLASH_ERROR,
         );
 
-        return header('Location: /connexion');
+        header('Location: /connexion');
+        exit;
     }
 
     /**
@@ -146,6 +152,7 @@ class SecurityController extends AbstractController
     {
         session_destroy();
 
-        return header('Location: /');
+        header('Location: /');
+        exit;
     }
 }

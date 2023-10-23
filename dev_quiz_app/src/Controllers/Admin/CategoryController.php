@@ -2,9 +2,6 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\UserModel;
-use App\Models\CategoryModel;
-use App\Models\QuestionModel;
 use Database\DBConnection;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
@@ -12,22 +9,16 @@ use App\Controllers\AbstractController;
 class CategoryController extends AbstractController
 {
     protected $user;
-    protected $userModel;
-    protected $categoryModel;
-    protected $questionModel;
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
 
-        $this->categoryModel = new CategoryModel($this->getDB());
-        $this->questionModel = new QuestionModel($this->getDB());
-
         if ($this->isAuth()) {
-            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
-            return header('Location: /connexion');
+            header('Location: /connexion');
+            exit;
         }
 
         $this->isAdmin($this->user);
@@ -95,20 +86,24 @@ class CategoryController extends AbstractController
             $this->flashMessagesConstants::FLASH_SUCCESS,
         );
 
-        return header('Location: /admin/categories');
+        header('Location: /admin/categories');
+        exit;
     }
 
     /**
      * Route: /admin/categorie/modifier/:id
      */
-    public function updateCategory(int $id)
+    public function updateCategory(mixed $id)
     {
+        // Check if id is really an int and exists in DB (protect against url modifications)
+        $this->redirectIfWrongId($id, 'category', 'categoryModel', '/admin/categories');
+
         $category = $this->categoryModel->findById($id);
 
         return $this->render('admin/category/form', compact('category'));
     }
 
-    public function updateCategoryPost(int $id)
+    public function updateCategoryPost(mixed $id)
     {
         $validator = new Validator($_POST);
 
@@ -119,9 +114,12 @@ class CategoryController extends AbstractController
 
         if ($errors) {
             $_SESSION['errors'][] = $errors;
-            header('Location: /admin/categorie/ajouter');
+            header('Location: /admin/categorie/modifier/' . $id);
             exit;
         }
+
+        // Check if id is really an int and exists in DB (protect against form action modifications)
+        $this->redirectIfWrongId($id, 'category', 'categoryModel', '/admin/categories');
 
         // Back end validation
         $categoryExists = $this->categoryModel->isUnique('name', $_POST['name']);
@@ -143,7 +141,8 @@ class CategoryController extends AbstractController
                 $this->flashMessagesConstants::FLASH_SUCCESS,
             );
 
-            return header('Location: /admin/categories');
+            header('Location: /admin/categories');
+            exit;
         } else {
             $this->flashMessage->createFlashMessage(
                 'category',
@@ -151,22 +150,27 @@ class CategoryController extends AbstractController
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /admin/categories');
+            header('Location: /admin/categories');
+            exit;
         }
     }
 
     /**
      * Route: /admin/categorie/supprimer/:id
      */
-    public function deleteCategory(int $id)
+    public function deleteCategory(mixed $id)
     {
+        // Check if id is really an int and exists in DB (protect against url modifications)
+        $this->redirectIfWrongId($id, 'category', 'categoryModel', '/admin/categories');
+
         $category = $this->categoryModel->findById($id);
+
         $questions = $this->questionModel->findByCategory($id);
 
         return $this->render('admin/category/delete-category-form', compact('category', 'questions'));
     }
 
-    public function deleteCategoryPost(int $id)
+    public function deleteCategoryPost(mixed $id)
     {
         $validator = new Validator($_POST);
 
@@ -189,6 +193,9 @@ class CategoryController extends AbstractController
             exit;
         }
 
+        // Check if id is really an int and exists in DB (protect against form action modifications)
+        $this->redirectIfWrongId($id, 'category', 'categoryModel', '/admin/categories');
+
         // Delete category (delete associated questions and answers by cascade)
         $category = $this->categoryModel->delete($id);
 
@@ -199,7 +206,8 @@ class CategoryController extends AbstractController
                 $this->flashMessagesConstants::FLASH_SUCCESS,
             );
 
-            return header('Location: /admin/categories');
+            header('Location: /admin/categories');
+            exit;
         } else {
             $this->flashMessage->createFlashMessage(
                 'category',
@@ -207,7 +215,8 @@ class CategoryController extends AbstractController
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /admin/categories');
+            header('Location: /admin/categories');
+            exit;
         }
     }
 }

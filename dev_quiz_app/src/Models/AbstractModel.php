@@ -36,7 +36,6 @@ abstract class AbstractModel
         ) {
             $pdoStatement = $this->db->getPDO()->$method($request);
             $pdoStatement->setFetchMode(PDO::FETCH_CLASS, $this->entityClass);
-            var_dump('coucou');
             return $pdoStatement->execute($param);
         }
 

@@ -2,26 +2,17 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
 use Database\DBConnection;
-use App\Models\CategoryModel;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
-use App\Models\MessageModel;
 
 class AppController extends AbstractController
 {
     protected $user;
-    protected $userModel;
-    protected $categoryModel;
-    protected $messageModel;
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
-
-        $this->categoryModel = new CategoryModel($this->getDB());
-        $this->messageModel = new MessageModel($this->getDB());
     }
 
     /**
@@ -39,11 +30,13 @@ class AppController extends AbstractController
     {
         // Check if session with authenticated user exists and redirect accordingly
         if ($this->isAuth() && $_SESSION['auth'] === 'user') {
-            return header('Location: /espace-utilisateur');
+            header('Location: /espace-utilisateur');
+            exit;
         }
 
         if ($this->isAuth() && $_SESSION['auth'] === 'admin') {
-            return header('Location: /espace-admin');
+            header('Location: /espace-admin');
+            exit;
         }
 
         return $this->render('app/new-game');
@@ -55,10 +48,10 @@ class AppController extends AbstractController
     public function chooseGameSubject()
     {
         if ($this->isAuth()) {
-            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
-            return header('Location: /connexion');
+            header('Location: /connexion');
+            exit;
         }
 
         $this->isUser($this->user);
@@ -126,6 +119,7 @@ class AppController extends AbstractController
             $this->flashMessagesConstants::FLASH_SUCCESS,
         );
 
-        return header('Location: /contact');
+        header('Location: /contact');
+        exit;
     }
 }

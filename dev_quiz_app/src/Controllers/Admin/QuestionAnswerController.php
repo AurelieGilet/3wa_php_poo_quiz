@@ -2,10 +2,6 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\UserModel;
-use App\Models\AnswerModel;
-use App\Models\CategoryModel;
-use App\Models\QuestionModel;
 use Database\DBConnection;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
@@ -13,24 +9,16 @@ use App\Controllers\AbstractController;
 class QuestionAnswerController extends AbstractController
 {
     protected $user;
-    protected $userModel;
-    protected $categoryModel;
-    protected $questionModel;
-    protected $answerModel;
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
 
-        $this->categoryModel = new CategoryModel($this->getDB());
-        $this->questionModel = new QuestionModel($this->getDB());
-        $this->answerModel = new AnswerModel($this->getDB());
-
         if ($this->isAuth()) {
-            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
-            return header('Location: /connexion');
+            header('Location: /connexion');
+            exit;
         }
 
         $this->isAdmin($this->user);
@@ -186,14 +174,18 @@ class QuestionAnswerController extends AbstractController
             $this->flashMessagesConstants::FLASH_SUCCESS,
         );
 
-        return header('Location: /admin/questions');
+        header('Location: /admin/questions');
+        exit;
     }
 
     /**
      * Route: /admin/question/modifier/:id
      */
-    public function updateQuestion(int $id)
+    public function updateQuestion(mixed $id)
     {
+        // Check if id is really an int and exists in DB (protect against url modifications)
+        $this->redirectIfWrongId($id, 'question', 'questionModel', '/admin/questions');
+
         $categories = $this->categoryModel->getAll();
 
         $question = $this->questionModel->findById($id);
@@ -203,7 +195,7 @@ class QuestionAnswerController extends AbstractController
         return $this->render('admin/question/update-question-form', compact('categories', 'question', 'answers'));
     }
 
-    public function updateQuestionPost(int $id)
+    public function updateQuestionPost(mixed $id)
     {
         $validator = new Validator($_POST);
 
@@ -220,6 +212,9 @@ class QuestionAnswerController extends AbstractController
             header('Location: /admin/question/modifier/' . $id);
             exit;
         }
+
+        // Check if id is really an int and exists in DB (protect against form action modifications)
+        $this->redirectIfWrongId($id, 'question', 'questionModel', '/admin/questions');
 
         // Back end validation
         $categoryExists = false;
@@ -259,7 +254,8 @@ class QuestionAnswerController extends AbstractController
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /admin/question/modifier/' . $id);
+            header('Location: /admin/question/modifier/' . $id);
+            exit;
         }
 
         // Update Answers
@@ -330,21 +326,25 @@ class QuestionAnswerController extends AbstractController
             $this->flashMessagesConstants::FLASH_SUCCESS,
         );
 
-        return header('Location: /admin/questions');
+        header('Location: /admin/questions');
+        exit;
     }
 
     /**
      * Route: /admin/question/supprimer/:id
      */
-    public function deleteQuestion(int $id)
+    public function deleteQuestion(mixed $id)
     {
+        // Check if id is really an int and exists in DB (protect against url modifications)
+        $this->redirectIfWrongId($id, 'question', 'questionModel', '/admin/questions');
+
         $question = $this->questionModel->findById($id);
         $answers = $this->answerModel->findByQuestion($id);
 
         return $this->render('admin/question/delete-question-form', compact('question', 'answers'));
     }
 
-    public function deleteQuestionPost(int $id)
+    public function deleteQuestionPost(mixed $id)
     {
         $validator = new Validator($_POST);
 
@@ -367,6 +367,9 @@ class QuestionAnswerController extends AbstractController
             exit;
         }
 
+        // Check if id is really an int and exists in DB (protect against form action modifications)
+        $this->redirectIfWrongId($id, 'question', 'questionModel', '/admin/questions');
+
         // Delete question (delete answers by cascade)
         $question = $this->questionModel->delete($id);
 
@@ -377,7 +380,8 @@ class QuestionAnswerController extends AbstractController
                 $this->flashMessagesConstants::FLASH_SUCCESS,
             );
 
-            return header('Location: /admin/questions');
+            header('Location: /admin/questions');
+            exit;
         } else {
             $this->flashMessage->createFlashMessage(
                 'deleteQuestion',
@@ -385,7 +389,8 @@ class QuestionAnswerController extends AbstractController
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /admin/question/supprimer/' . $id);
+            header('Location: /admin/question/supprimer/' . $id);
+            exit;
         }
     }
 }

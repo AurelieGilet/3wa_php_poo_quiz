@@ -29,8 +29,9 @@
 
         @include lg {
             margin-top: $clipped-container-margin;
-            margin-left: 0;
+            margin-left: 0; //170px
             margin-right: 0;
+            min-width: 28.125rem; //450px
         }
 
         table {

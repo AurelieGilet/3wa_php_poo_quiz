@@ -2,32 +2,23 @@
 
 namespace App\Controllers\User;
 
-use App\Models\UserModel;
 use Database\DBConnection;
-use App\Models\CategoryModel;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
-use App\Models\ScoreModel;
 
 class UserController extends AbstractController
 {
     protected $user;
-    protected $userModel;
-    protected $categoryModel;
-    protected $scoreModel;
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
 
-        $this->categoryModel = new CategoryModel($this->getDB());
-        $this->scoreModel = new ScoreModel($this->getDB());
-
         if ($this->isAuth()) {
-            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
-            return header('Location: /connexion');
+            header('Location: /connexion');
+            exit;
         }
     }
 
@@ -203,7 +194,8 @@ class UserController extends AbstractController
                 $this->flashMessagesConstants::FLASH_SUCCESS,
             );
 
-            return header('Location: /profil-utilisateur');
+            header('Location: /profil-utilisateur');
+            exit;
         } else {
             $this->flashMessage->createFlashMessage(
                 'updateUser',
@@ -211,7 +203,8 @@ class UserController extends AbstractController
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /profil-utilisateur/modifier');
+            header('Location: /profil-utilisateur/modifier');
+            exit;
         }
     }
 
@@ -259,7 +252,8 @@ class UserController extends AbstractController
 
             unset($_SESSION['auth'], $_SESSION['user']);
 
-            return header('Location: /connexion');
+            header('Location: /connexion');
+            exit;
         } else {
             $this->flashMessage->createFlashMessage(
                 'deleteUser',
@@ -267,7 +261,8 @@ class UserController extends AbstractController
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /profil-utilisateur/supprimer');
+            header('Location: /profil-utilisateur/supprimer');
+            exit;
         }
     }
 }

@@ -2,30 +2,23 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\UserModel;
 use Database\DBConnection;
-use App\Models\MessageModel;
 use App\Services\Validation\Validator;
 use App\Controllers\AbstractController;
 
 class MessageController extends AbstractController
 {
     protected $user;
-    protected $userModel;
-    protected $messageModel;
-
 
     public function __construct(DBConnection $db)
     {
         parent::__construct($db);
 
-        $this->messageModel = new MessageModel($this->getDB());
-
         if ($this->isAuth()) {
-            $this->userModel = new UserModel($this->getDB());
             $this->user = $this->userModel->findById($_SESSION['user']);
         } else {
-            return header('Location: /connexion');
+            header('Location: /connexion');
+            exit;
         }
 
         $this->isAdmin($this->user);
@@ -54,14 +47,17 @@ class MessageController extends AbstractController
     /**
      * Route: /admin/message/supprimer/:id
      */
-    public function deleteMessage(int $id)
+    public function deleteMessage(mixed $id)
     {
+        // Check if id is really an int and exists in DB (protect against url modifications)
+        $this->redirectIfWrongId($id, 'message', 'messageModel', '/admin/messagerie');
+
         $message = $this->messageModel->findById($id);
 
         return $this->render('admin/message/delete-message-form', compact('message'));
     }
 
-    public function deleteMessagePost(int $id)
+    public function deleteMessagePost(mixed $id)
     {
         $validator = new Validator($_POST);
 
@@ -84,6 +80,9 @@ class MessageController extends AbstractController
             exit;
         }
 
+        // Check if id is really an int and exists in DB (protect against form action modifications)
+        $this->redirectIfWrongId($id, 'message', 'messageModel', '/admin/messagerie');
+
         // Delete Message
         $message = $this->messageModel->delete($id);
 
@@ -94,7 +93,8 @@ class MessageController extends AbstractController
                 $this->flashMessagesConstants::FLASH_SUCCESS,
             );
 
-            return header('Location: /admin/messagerie');
+            header('Location: /admin/messagerie');
+            exit;
         } else {
             $this->flashMessage->createFlashMessage(
                 'message',
@@ -102,7 +102,8 @@ class MessageController extends AbstractController
                 $this->flashMessagesConstants::FLASH_ERROR,
             );
 
-            return header('Location: /admin/messagerie');
+            header('Location: /admin/messagerie');
+            exit;
         }
     }
 }
