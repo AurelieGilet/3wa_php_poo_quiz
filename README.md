@@ -56,3 +56,11 @@ Une rewrite rule a été prévue dans le htaccess pour rediriger vers index.php 
 2 utilisateurs sont déjà enregistrés dans le jeu de données, que vous pouvez connecter pour accéder aux différentes parties du site:
 - un administrateur : admin@mail.com / Password1!
 - un utilisateur : user@mail.com / Password1!
+
+## Schéma de la base de données
+![Schéma base de données](https://github.com/AurelieGilet/3wa_php_poo_quiz/assets/75724762/7f01760c-78d0-4950-986c-52c2be8639bf)
+
+## Diagramme de classe
+![Diagramme de classe](https://github.com/AurelieGilet/3wa_php_poo_quiz/assets/75724762/f3c8dc3e-d602-4fda-b678-e17c44320b60)
+
+
