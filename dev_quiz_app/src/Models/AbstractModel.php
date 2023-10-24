@@ -45,12 +45,15 @@ abstract class AbstractModel
         $pdoStatement = $this->db->getPDO()->$method($request);
         $pdoStatement->setFetchMode(PDO::FETCH_CLASS, $this->entityClass);
 
+        // If it's a prepared request (with params)
         if ($method === 'prepare') {
             $pdoStatement->execute($param);
         }
 
+        // Fetch the results
         $results = $pdoStatement->$fetch();
 
+        // Check if the request is a virtual function
         if (is_bool($results)) {
             return $results;
         } elseif (is_array($results)) {
@@ -60,7 +63,6 @@ abstract class AbstractModel
         } else {
             $this->modelQuery($results);
         }
-
 
         return $results;
     }
@@ -117,6 +119,7 @@ abstract class AbstractModel
         $requestValues = '';
         $i = 1;
 
+        // We use the data key as placeholders for the prepared request
         foreach ($data as $key => $value) {
             $separator = $i === count($data) ? '' : ', ';
             $requestArgs .= $key . $separator;
@@ -124,6 +127,7 @@ abstract class AbstractModel
             $i++;
         }
 
+        // Request example : "INSERT INTO question (title, category_id) VALUES(:title, :category_id)"
         $request = 'INSERT INTO ' . $this->table . ' (' . $requestArgs . ') VALUES(' . $requestValues . ')';
 
         return $this->query($request, $data);
