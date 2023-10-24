@@ -233,7 +233,7 @@ class QuestionAnswerController extends AbstractController
 
         $questionExists = $this->questionModel->isUnique('title', $_POST['title']);
 
-        if ($questionExists && $questionExists->getId() !== $id) {
+        if ($questionExists && $questionExists->getId() != $id) {
             $errors['title'][] = 'Cette question existe déjà';
             $_SESSION['errors'][] = $errors;
             $_SESSION['post'] = $_POST;
