@@ -62,5 +62,3 @@ Une rewrite rule a été prévue dans le htaccess pour rediriger vers index.php 
 
 ## Diagramme de classe
 ![Diagramme de classe](https://github.com/AurelieGilet/3wa_php_poo_quiz/assets/75724762/f3c8dc3e-d602-4fda-b678-e17c44320b60)
-
-

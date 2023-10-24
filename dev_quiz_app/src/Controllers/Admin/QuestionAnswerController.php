@@ -122,7 +122,7 @@ class QuestionAnswerController extends AbstractController
         // Back end validation
         $categoryExists = false;
 
-        if (is_numeric($_POST['category'])) {
+        if (ctype_digit($_POST['category'])) {
             $categoryExists = $this->categoryModel->findById($_POST['category']);
         }
 
@@ -219,7 +219,7 @@ class QuestionAnswerController extends AbstractController
         // Back end validation
         $categoryExists = false;
 
-        if (is_numeric($_POST['category'])) {
+        if (ctype_digit($_POST['category'])) {
             $categoryExists = $this->categoryModel->findById($_POST['category']);
         }
 
