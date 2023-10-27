@@ -57,7 +57,7 @@ if (isset($_SESSION['post'])) {
                     le langage et l'intitulé de la question
                 </label>
                 <div class="clipped-input">
-                    <textarea id="content" name="content" placeholder="content"><?=
+                    <textarea id="content" name="content" placeholder="Tapez ici votre message"><?=
                         isset($content) ? htmlspecialchars($content) : '';
                     ?></textarea>
                 </div>
